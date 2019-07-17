@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Hello Framework World!!!</h1>
+	<form action="#" th:action="@{/result}" th:object="${test}" method="post">
+	<table border="1">
+		<!-- 見出し。ここも可変になるように後々はしたい -->
+		<tr>
+			<th class="center"><strong>送信者</strong></th>
+			<th class="center"><strong>件名</strong></th>
+		</tr>
+		<!-- DB内の表示、ここも可変になるように後々はしたい -->
+		<tr th:each="list : ${test}" th:object="${list}">
+			<td th:text="*{sender}"></td>
+			<td th:text="*{subject}"></td>
+			<td>
+			<button type="submit" name="hidden" class="btn btn-default" th:value="*{text}">遷移テスト</button>
+			</td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>
