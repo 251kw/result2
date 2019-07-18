@@ -3,11 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./css/semantic.min.css">
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script src="js/semantic.min.js"></script>
 </head>
 <body>
+	<div class="ui text container">
 	<h1>Hello Framework World!!!</h1>
+	<div class="ui header">
+    <i class="building icon"></i>
+    <div class="content">
+        会社情報
+        <div class="sub header">
+            わたしたちの会社はとてもすばらしい
+        </div>
+    </div>
+</div>
+<div class="ui divider"></div>
 	<form action="#" th:action="@{/result}" th:object="${test}" method="post">
-	<table border="1">
+	<table class="ui celled padded table" border="1">
 		<!-- 見出し。ここも可変になるように後々はしたい -->
 		<tr>
 			<th class="center"><strong>送信者</strong></th>
@@ -22,6 +36,18 @@
 			</td>
 		</tr>
 	</table>
+	<div class="ui card">
+            <a class="image" href="#">
+                <img src="https://semantic-ui.com/images/avatar/large/steve.jpg">
+            </a>
+            <div class="content">
+                <a class="header" href="#">Steve Jobes</a>
+                <div class="meta">
+                    <a>Last Seen 2 days ago</a>
+                </div>
+            </div>
+        </div>
 	</form>
+	</div>
 </body>
 </html>
