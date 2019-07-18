@@ -5,8 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello Framework World!!!</h1>
-	<form action="#" th:action="@{/result}" th:object="${test}" method="post">
+	<h1>Hello Spring boot World!!!</h1>
+	<form th:action="@{/result}" th:object="${test}" method="post">
 	<table border="1">
 		<!-- 見出し。ここも可変になるように後々はしたい -->
 		<tr>
@@ -18,7 +18,7 @@
 			<td th:text="*{sender}"></td>
 			<td th:text="*{subject}"></td>
 			<td>
-			<button type="submit" name="hidden" class="btn btn-default" th:value="*{text}">遷移テスト</button>
+			<button type="submit" name="hidden" class="btn btn-default" th:value="*{text}">本文詳細</button>
 			</td>
 		</tr>
 	</table>
