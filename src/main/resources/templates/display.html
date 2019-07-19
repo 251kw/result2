@@ -6,7 +6,8 @@
 </head>
 <body>
 <form th:action="@{/}" method="get">
-	<p th:text="'これは何？: ' + ${honbun}"></p>
+	<p th:text="'本文詳細'"></p>
+	<p th:text="${text}"></p>
 	<button type="submit">戻る</button>
 </form>
 </body>

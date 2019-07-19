@@ -17,6 +17,7 @@ public class Result2Controller {
 	public String index(Model model) {
 		List<Result2> result2 = r2Repository.findAllOrderByName();
 		model.addAttribute("test", result2);
+		model.addAttribute("honbun", new Result2());
 		return "index";
 	}
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
