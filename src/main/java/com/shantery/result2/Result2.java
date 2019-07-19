@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Result2 {
 	@Id
 	@Column(name="result_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="seqTable")
 	private Long id;
 	private Date date;
 	private String nationality;
