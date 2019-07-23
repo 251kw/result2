@@ -1,5 +1,7 @@
 package com.shantery.result2.sort;
 
+/*import java.util.Collections;
+import java.util.Comparator;*/
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +11,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import com.shantery.result2.Result2;
+import com.shantery.result2.Result2Repository;
 
 
 @Controller
 public class SortController {
 	@Autowired
-	SortRepository r2Repository;
+	Result2Repository r2Repository;
 	@RequestMapping(value = "./ascdate", method = RequestMethod.POST)
 	public String index(Model model) {
 		List<Result2> ascDate = 
-				r2Repository.findAll(new Sort(Sort.Direction.ASC,"date"));
+				r2Repository.findAllOrderByName(/* new Sort(Sort.Direction.ASC,"date") */);
+		
+		/*
+		 * Collections.sort(ascDate, new Comparator<Result2>() {
+		 * 
+		 * @Override public int compare(Result2 result2First, Result2 result2Second) {
+		 * 
+		 * return result2First.getDate().compareTo(result2First.getDate());
+		 * 
+		 * } });
+		 */
+		
 			model.addAttribute("test",ascDate);
 			model.addAttribute("honbun", new Result2());
 			return "index";
