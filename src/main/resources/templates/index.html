@@ -2,51 +2,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Result2</title>
 <link rel="stylesheet" href="./css/semantic.min.css">
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script src="js/semantic.min.js"></script>
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/semantic.min.js"></script>
 </head>
 <body>
 	<div class="ui text container">
-	<h1>Hello Framework World!!!</h1>
 	<div class="ui header">
-    <i class="building icon"></i>
+    <a class="logo" href="index.html"><img src="./img/ShanteryLogo.jpg" alt="シャンテリーロゴ"></a>
     <div class="content">
-        会社情報
+    	メール検索    
         <div class="sub header">
-            わたしたちの会社はとてもすばらしい
+            [案件　要員]
         </div>
     </div>
 </div>
+
+<strong>FreeWord：</strong>
+            <div class="ui input focus">
+  			<input name=freeword type="text" placeholder="Search...">
+			</div>
+            <button type="submit" name="search" class="ui primary button">検索</button>
+
 <div class="ui divider"></div>
 	<form th:action="@{/result}" th:object="${test}" method="post">
-	<table class="ui celled padded table" border="1">
+	<table class="ui single line table" style="font-size: 11pt;">
 		<!-- 見出し。ここも可変になるように後々はしたい -->
+		<thead>
 		<tr>
 			<th class="center"><strong>送信者</strong></th>
 			<th class="center"><strong>件名</strong></th>
+			<th></th>
 		</tr>
+		</thead>
 		<!-- DB内の表示、ここも可変になるように後々はしたい -->
 		<tr th:each="list : ${test}" th:object="${list}">
 			<td th:text="*{sender}"></td>
 			<td th:text="*{subject}"></td>
 			<td>
-			<button type="submit" name="hidden" class="btn btn-default" th:value="*{text}">本文詳細</button>
+			<button type="submit" name="hidden" class="mini ui button" th:value="*{text}">本文詳細</button>
 			</td>
 		</tr>
 	</table>
-	<div class="ui card">
-            <a class="image" href="#">
-                <img src="https://semantic-ui.com/images/avatar/large/steve.jpg">
-            </a>
-            <div class="content">
-                <a class="header" href="#">Steve Jobes</a>
-                <div class="meta">
-                    <a>Last Seen 2 days ago</a>
-                </div>
-            </div>
-        </div>
 	</form>
 	</div>
 </body>
