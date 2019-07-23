@@ -40,7 +40,7 @@ public class Result2Service {
 
 	public int count() {
 		return namedParameterJdbcTemplate.query(
-				"SELECT COUNT(*) FROM result2",
+				"SELECT COUNT(*) FROM result2disp",
 				(rs, i) -> rs.getInt(1)
 		).get(0);
 	}
