@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./css/semantic.min.css">
+<link th:substituteby="common/header :: common_header"/>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script src="js/semantic.min.js"></script>
 </head>
@@ -28,14 +29,32 @@
 			<th class="center"><strong>件名</strong></th>
 		</tr>
 		<!-- DB内の表示、ここも可変になるように後々はしたい -->
-		<tr th:each="list : ${test}" th:object="${list}">
-			<td th:text="*{sender}"></td>
-			<td th:text="*{subject}"></td>
+		<tr th:each="list : ${words}" th:object="${list}">
+			<td th:text="*{list.sender}"></td>
+			<td th:text="*{list.subject}"></td>
 			<td>
-			<button type="submit" name="hidden" class="btn btn-default" th:value="*{text}">本文詳細</button>
+			<button type="submit" name="hidden" class="btn btn-default" th:value="*{list.text}">本文詳細</button>
 			</td>
 		</tr>
 	</table>
+	<div th:fragment='paginationbar'>
+		<ul>
+			<li th:class="${page.first} ? 'disabled':''" style="display:inline">
+				<span th:if="${page.first}">←先頭</span>
+				<a th:if="${not page.first}" th:href="@{${url}(page=0)}">←先頭</a>
+			</li>
+			<li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}' th:class="(${i}==${page.number})? 'active' : ''" style="display:inline">
+				<span th:if='${i}==${page.number}' th:text='${i+1}'>1</span>
+				<a th:if='${i}!=${page.number}' th:href="@{${url}(page=${i})}">
+					<span th:text='${i+1}'>1</span>
+				</a>
+			</li>
+			<li th:class="${page.last} ? 'disabled':''" style="display:inline">
+				<span th:if="${page.last}">末尾➝</span>
+				<a th:if="${not page.last}" th:href="@{${url}(page=(${page.totalPages}-1))}">末尾➝</a>
+			</li>
+		</ul>
+	</div>
 	<div class="ui card">
             <a class="image" href="#">
                 <img src="https://semantic-ui.com/images/avatar/large/steve.jpg">
