@@ -2,13 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>本文詳細</title>
+<link rel="stylesheet" href="./css/semantic.min.css">
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script src="js/semantic.min.js"></script>
 </head>
 <body>
+<div class="ui text container">
 <form th:action="@{/}" method="get">
-	<p th:text="'本文詳細'"></p>
-	<p th:text="${text}"></p>
-	<button type="submit">戻る</button>
+<table class="ui single line table">
+  <thead>
+    <tr>
+      <th><p th:text="'本文詳細'"></p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p th:text="${text}"></p></td>
+    </tr>
+  </tbody>
+</table>
+<button class="ui button" type="submit">戻る</button>
 </form>
+</div>
 </body>
 </html>
