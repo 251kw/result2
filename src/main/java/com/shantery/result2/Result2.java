@@ -1,8 +1,5 @@
 package com.shantery.result2;
 
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="result2disp")
-public class Result2 implements Serializable {
+public class Result2 {
 	@Id
 	@Column(name="result_id")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="seqTable")
@@ -30,24 +27,6 @@ public class Result2 implements Serializable {
 	private String text;
 	private String sender;
 
-	public Result2(long long1, String string, String string2, String string3, String string4, String string5,
-			String string6, String string7, String string8, String string9, String string10) throws ParseException {
-		// TODO 自動生成されたコンストラクター・スタブ
-		id = long1;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm;ss");
-		Date formatDate = sdf.parse(string);
-		date = formatDate;
-		nationality = string2;
-		employment = string3;
-		commercial_distribution = string4;
-		cost = string5;
-		age = string6;
-		closest_station = string7;
-		subject = string8;
-		text = string9;
-		sender = string10;
-
-	}
 	public Long getId() {
 		return id;
 	}
