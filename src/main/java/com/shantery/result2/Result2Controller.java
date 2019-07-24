@@ -17,7 +17,7 @@ public class Result2Controller {
 //	@Autowired
 //	Result2Repository r2Repository;
 
-	private static final int RECORD_PER_PAGE = 2;
+	private static final int RECORD_PER_PAGE = 10;
 	private static final int LENGTH = 5;
 
 	@Autowired

@@ -18,7 +18,10 @@
         </div>
     </div>
 </div>
-
+<p th:text="
+${paging.totalRecordNum} + '件中'
++ ${paging.fromRecordNum} + '～'
++ ${paging.toRecordNum} + '件表示中'">100件中1～10件表示中</p>
 <strong>FreeWord：</strong>
             <div class="ui input focus">
   			<input name=freeword type="text" placeholder="Search...">
@@ -44,6 +47,38 @@
 			<button type="submit" name="hidden" class="mini ui button" th:value="*{text}">本文詳細</button>
 			</td>
 		</tr>
+		<tfoot>
+  <tr>
+    <th colspan="3">
+      <div class="ui pagination small menu">
+        <a class="icon item"
+           th:classappend="!${paging.canGoFirst} ? 'disabled'"
+           th:href="${paging.firstHref}"><i class="angle double left icon"></i></a>
+        <a class="icon item"
+           th:classappend="!${paging.canGoPrevious} ? 'disabled'"
+           th:href="${paging.previousHref}"><i class="angle left icon"></i></a>
+        <a class="item"
+           th:each="element : ${paging.pagingViewElements}"
+           th:href="${element.href}"
+           th:text="${element.name}"
+           th:classappend="${element.name} == ${paging.currentPageNum} ? 'disabled'"
+        >1</a>
+        <!--/*-->
+        <a href="#" class="disabled item">2</a>
+        <a href="#" class="item">3</a>
+        <a href="#" class="item">4</a>
+        <a href="#" class="item">5</a>
+        <!--*/-->
+        <a href="#" class="icon item"
+           th:classappend="!${paging.canGoNext} ? 'disabled'"
+           th:href="${paging.nextHref}"><i class="angle right icon"></i></a>
+        <a class="icon item"
+           th:classappend="!${paging.canGoLast} ? 'disabled'"
+           th:href="${paging.lastHref}"><i class="angle double right icon"></i></a>
+      </div>
+    </th>
+  </tr>
+  </tfoot>
 	</table>
 	</form>
 	</div>
