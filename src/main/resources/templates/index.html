@@ -25,6 +25,12 @@
 			</div>
             <button type="submit" name="search" class="ui primary button">検索</button>
 
+	<form th:action="@{/ascdate}" th:object="${test}" method="post">
+	<button type="submit" name="search" class="ui primary button">日付昇順</button>
+	</form>
+	<form th:action="@{/descdate}" th:object="${test}" method="post">
+	<button type="submit" name="search" class="ui primary button">日付降順</button>
+	</form>
 <div class="ui divider"></div>
 	<form th:action="@{/result}" th:object="${test}" method="post">
 	<table class="ui single line table" style="font-size: 11pt;">

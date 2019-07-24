@@ -25,6 +25,7 @@ public class SortController {
 			model.addAttribute("honbun", new Result2());
 			return "index";
 	}
+	
 	@RequestMapping(value = "./descdate", method = RequestMethod.POST)
 	public String index2(Model model) {
 		List<Result2> descDate = 
