@@ -27,13 +27,18 @@ ${paging.totalRecordNum} + '件中'
   			<input name=freeword type="text" placeholder="Search...">
 			</div>
             <button type="submit" name="search" class="ui primary button">検索</button>
+    <button type="submit" name="search" class="mini ui button">日付昇順</button>
+    <button type="submit" name="search" class="mini ui button">日付降順</button>
 
 <div class="ui divider"></div>
 	<form th:action="@{/result}" th:object="${test}" method="post">
-	<table class="ui single line table" style="font-size: 9.5pt;">
+	<table class="ui compact celled table" style="font-size: 9.5pt;">
 		<!-- 見出し。ここも可変になるように後々はしたい -->
 		<thead>
 		<tr>
+			<th class="center"><strong>日付</strong></th>
+			<th class="center"><strong>単金</strong></th>
+			<th class="center"><strong>年齢</strong></th>
 			<th class="center"><strong>送信者</strong></th>
 			<th class="center"><strong>件名</strong></th>
 			<th></th>
@@ -41,10 +46,13 @@ ${paging.totalRecordNum} + '件中'
 		</thead>
 		<!-- DB内の表示、ここも可変になるように後々はしたい -->
 		<tr th:each="list : ${test}" th:object="${list}">
+			<td th:text="*{date}"></td>
+			<td th:text="*{cost}"></td>
+			<td th:text="*{age}"></td>
 			<td th:text="*{sender}"></td>
 			<td th:text="*{subject}"></td>
-			<td>
-			<button type="submit" name="hidden" class="mini ui button" th:value="*{text}">本文詳細</button>
+			<td style="text-align:center;">
+			<button type="submit" name="hidden" class="mini ui button" th:value="*{text}" >本文詳細</button>
 			</td>
 		</tr>
 		<tfoot>
