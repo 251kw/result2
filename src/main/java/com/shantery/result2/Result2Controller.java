@@ -37,7 +37,7 @@ public class Result2Controller {
 				currentPage = 1;
 			}
 		}
-		model.addAttribute("records", r2Service.find(currentPage, RECORD_PER_PAGE));
+		model.addAttribute("test", r2Service.find(currentPage, RECORD_PER_PAGE));
 		int totalRecordNum = r2Service.count();
 		model.addAttribute(
 				"paging",
