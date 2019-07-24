@@ -17,7 +17,7 @@ import com.shantery.result2.Result2;
 public class SortController {
 	@Autowired
 	SortRepository r2Repository;
-	@RequestMapping(value = "./ascdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/ascdate", method = RequestMethod.POST)
 	public String index(Model model) {
 		List<Result2> ascDate = 
 				r2Repository.findAll(new Sort(Sort.Direction.ASC,"date"));
@@ -25,7 +25,7 @@ public class SortController {
 			model.addAttribute("honbun", new Result2());
 			return "index";
 	}
-	@RequestMapping(value = "./descdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/descdate", method = RequestMethod.POST)
 	public String index2(Model model) {
 		List<Result2> descDate = 
 				r2Repository.findAll(new Sort(Sort.Direction.DESC,"date"));
@@ -33,7 +33,7 @@ public class SortController {
 			model.addAttribute("honbun", new Result2());
 			return "index";
 	}
-	@RequestMapping(value = "./asccost", method = RequestMethod.POST)
+	@RequestMapping(value = "/asccost", method = RequestMethod.POST)
 	public String index3(Model model) {
 		List<Result2> ASCcost = 
 				r2Repository.findAll(new Sort(Sort.Direction.ASC,"cost"));
@@ -41,7 +41,7 @@ public class SortController {
 			model.addAttribute("honbun", new Result2());
 			return "index";
 	}
-	@RequestMapping(value = "./desccost", method = RequestMethod.POST)
+	@RequestMapping(value = "/desccost", method = RequestMethod.POST)
 	public String index4(Model model) {
 			List<Result2> DESCcost = 
 					r2Repository.findAll(new Sort(Sort.Direction.DESC,"cost"));
@@ -49,7 +49,7 @@ public class SortController {
 			model.addAttribute("honbun", new Result2());
 			return "index";
 	}
-	@RequestMapping(value = "./ascage", method = RequestMethod.POST)
+	@RequestMapping(value = "/ascage", method = RequestMethod.POST)
 	public String index5(Model model) {
 			List<Result2> ascAge = 
 			    r2Repository.findAll(new Sort(Sort.Direction.ASC,"age"));
@@ -57,7 +57,7 @@ public class SortController {
 			model.addAttribute("honbun", new Result2());
 			return "index";
 	}
-	@RequestMapping(value = "./descage", method = RequestMethod.POST)
+	@RequestMapping(value = "/descage", method = RequestMethod.POST)
 	public String index6(Model model) {
 			List<Result2> descAge = 
 			    r2Repository.findAll(new Sort(Sort.Direction.DESC,"age"));
