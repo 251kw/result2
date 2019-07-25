@@ -22,7 +22,7 @@ public class Result2Service {
 			put("require", require);
 		}};
 		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp",
+				"SELECT * FROM result2disp WHERE result_id BETWEEN :offset AND :require",
 				conds,
 				(rs,i) -> {
 					try {
