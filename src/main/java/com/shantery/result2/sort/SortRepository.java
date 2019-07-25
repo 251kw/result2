@@ -9,5 +9,7 @@ import com.shantery.result2.Result2;
 
 @Repository
 public interface SortRepository extends JpaRepository<Result2, Long> {
-	public List<Result2> findAll();
+	public List<Result2> findAllOrderByDateASC();
+
+	public List<Result2> findAllOrderByDateDESC();
 }
