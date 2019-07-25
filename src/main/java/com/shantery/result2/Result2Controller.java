@@ -25,10 +25,6 @@ public class Result2Controller {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		/*List<Result2> result2 = r2Service.gselectAll(pageable);
-		model.addAttribute("page", result2);
-		model.addAttribute("words", result2.getContent());
-		model.addAttribute("url", "/");*/
 		int currentPage = 1;
 		if(page != null) {
 			try {
@@ -50,9 +46,32 @@ public class Result2Controller {
 		return "index";
 	}
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
-	public String postdisplay(@RequestParam(name = "hidden") String honbun, Model model){
+	public String postdisplay(@RequestParam(name = "hidden") String honbun, @RequestParam(name = "page") String page, Model model){
 		model.addAttribute("text", honbun);
+		model.addAttribute("page", page);
 		return "display";
+	}
+	@RequestMapping(value = "/", method = RequestMethod.POST)	// displayから戻るとき
+	public String backIndex(@RequestParam(name = "fromdisplay") final String page, Model model) throws ParseException {
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		model.addAttribute("test", r2Service.find(currentPage, RECORD_PER_PAGE));
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "index";
 	}
 
 }

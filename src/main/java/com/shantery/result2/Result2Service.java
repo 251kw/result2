@@ -15,14 +15,14 @@ public class Result2Service {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	public List<Result2> find(int page, int recordPerPage) throws ParseException{
-		int offset = (page-1)* recordPerPage + 1;
-		int require = page * recordPerPage;
+		int offset = (page-1)* recordPerPage;	// 開始位置
+//		int require = page * recordPerPage;
 		Map<String, Integer> conds = new HashMap<String, Integer>() {{
 			put("offset", offset);
-			put("require", require);
+			put("record", recordPerPage);
 		}};
 		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE result_id BETWEEN :offset AND :require",
+				"SELECT * FROM result2disp LIMIT :record OFFSET :offset",
 				conds,
 				(rs,i) -> {
 					try {
@@ -38,7 +38,7 @@ public class Result2Service {
 		);
 	}
 
-	public int count() {
+	public int count() {	// データの総件数を返すメソッド
 		return namedParameterJdbcTemplate.query(
 				"SELECT COUNT(*) FROM result2disp",
 				(rs, i) -> rs.getInt(1)
