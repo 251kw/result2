@@ -47,7 +47,7 @@ public class PagingUtil {
 		pagingView.setPreviousHref(preAppendPageNum + (currentPageNum - 1));
 
 		pagingView.setCanGoNext(currentPageNum != totalPageNum);
-		pagingView.setNextHref(preAppendPageNum + (currentPageNum));
+		pagingView.setNextHref(preAppendPageNum + (currentPageNum + 1));
 
 		pagingView.setPagingViewElements(generatePagingViewElements(currentPageNum, totalPageNum, length, preAppendPageNum));
 
