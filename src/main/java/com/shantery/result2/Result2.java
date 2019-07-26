@@ -27,9 +27,20 @@ public class Result2 implements Serializable {
 	private String subject;
 	private String text;
 	private String sender;
+	private String sub1;
+	private String sub2;
+	private String sub3;
+	private String sub4;
+	private String sub5;
+	private String sub6;
+	private String sub7;
+	private String sub8;
+	private String sub9;
 
 	public Result2(long long1, String string, String string2, String string3, String string4, String string5,
-			String string6, String string7, String string8, String string9, String string10) throws ParseException {
+			String string6, String string7, String string8, String string9, String string10/*, String string11,
+			String string12, String string13, String string14, String string15, String string16,
+			String string17, String string18, String string19*/) throws ParseException {
 		// TODO 自動生成されたコンストラクター・スタブ
 		id = long1;/*
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm;ss");
@@ -44,7 +55,16 @@ public class Result2 implements Serializable {
 		subject = string8;
 		text = string9;
 		sender = string10;
-
+		/*setSub1(string11);
+		setSub2(string12);
+		setSub3(string13);
+		setSub4(string14);
+		setSub5(string15);
+		setSub6(string16);
+		setSub7(string17);
+		setSub8(string18);
+		setSub9(string19);
+*/
 	}
 	public Result2() {
 		// TODO 自動生成されたコンストラクター・スタブ
@@ -114,6 +134,60 @@ public class Result2 implements Serializable {
 	}
 	public void setSender(String sender) {
 		this.sender = sender;
+	}
+	public String getSub1() {
+		return sub1;
+	}
+	public void setSub1(String sub1) {
+		this.sub1 = sub1;
+	}
+	public String getSub2() {
+		return sub2;
+	}
+	public void setSub2(String sub2) {
+		this.sub2 = sub2;
+	}
+	public String getSub3() {
+		return sub3;
+	}
+	public void setSub3(String sub3) {
+		this.sub3 = sub3;
+	}
+	public String getSub4() {
+		return sub4;
+	}
+	public void setSub4(String sub4) {
+		this.sub4 = sub4;
+	}
+	public String getSub5() {
+		return sub5;
+	}
+	public void setSub5(String sub5) {
+		this.sub5 = sub5;
+	}
+	public String getSub6() {
+		return sub6;
+	}
+	public void setSub6(String sub6) {
+		this.sub6 = sub6;
+	}
+	public String getSub7() {
+		return sub7;
+	}
+	public void setSub7(String sub7) {
+		this.sub7 = sub7;
+	}
+	public String getSub8() {
+		return sub8;
+	}
+	public void setSub8(String sub8) {
+		this.sub8 = sub8;
+	}
+	public String getSub9() {
+		return sub9;
+	}
+	public void setSub9(String sub9) {
+		this.sub9 = sub9;
 	}
 
 
