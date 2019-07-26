@@ -17,8 +17,8 @@ public class Result2Controller {
 //	@Autowired
 //	Result2Repository r2Repository;
 
-	private static final int RECORD_PER_PAGE = 10;
-	private static final int LENGTH = 5;
+	private static final int RECORD_PER_PAGE = 10;	// 1ページあたりの表示件数
+	private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
 
 	@Autowired
 	private Result2Service r2Service;
@@ -33,7 +33,7 @@ public class Result2Controller {
 				currentPage = 1;
 			}
 		}
-		model.addAttribute("test", r2Service.find(currentPage, RECORD_PER_PAGE));
+		model.addAttribute("test", r2Service.find(currentPage, RECORD_PER_PAGE));	// ServiceでSQL文の実行している
 		int totalRecordNum = r2Service.count();
 		model.addAttribute(
 				"paging",
@@ -72,6 +72,31 @@ public class Result2Controller {
 						LENGTH,
 						new HashMap<>()));
 		return "index";
+	}
+
+	
+	@RequestMapping(value = "/sresults", method = RequestMethod.POST)
+	public String postsearchResults(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord1 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.search(sWord1));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
 	}
 
 }

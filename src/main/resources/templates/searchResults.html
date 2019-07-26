@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Result2</title>
+<title>Result2 検索結果</title>
 <link rel="stylesheet" href="./css/semantic.min.css">
 <script src="./js/jquery-3.4.1.min.js"></script>
 <script src="./js/semantic.min.js"></script>
@@ -48,7 +48,7 @@ ${paging.totalRecordNum} + '件中'
 		</thead>
 		<!-- DB内の表示、ここも可変になるように後々はしたい -->
 		<tbody>
-		<tr th:each="list : ${test}" th:object="${list}">
+		<tr th:each="list : ${sResults}" th:object="${list}">
 			<td th:text="*{date}"></td>
 			<td th:text="*{cost}"></td>
 			<td th:text="*{age}"></td>
@@ -92,7 +92,6 @@ ${paging.totalRecordNum} + '件中'
   </tr>
   </tfoot>
 	</table>
-			<input type="hidden" name="page" th:value="${paging.currentPageNum}">
 	</form>
 	</div>
 </body>
