@@ -74,11 +74,10 @@ public class Result2Controller {
 		return "index";
 	}
 
-	
+
 	@RequestMapping(value = "/sresults", method = RequestMethod.POST)
 	public String postsearchResults(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
 		String sWord1 = "'%"+ sWord + "%'";
-		model.addAttribute("sResults", r2Service.search(sWord1));
 		int currentPage = 1;
 		if(page != null) {
 			try {
@@ -87,7 +86,9 @@ public class Result2Controller {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count2(sWord1);
+		model.addAttribute("sword", sWord);
+		model.addAttribute("sResults", r2Service.search(sWord1, currentPage, RECORD_PER_PAGE));
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(
@@ -98,5 +99,30 @@ public class Result2Controller {
 						new HashMap<>()));
 		return "searchResults";
 	}
+	@RequestMapping(value = "/sresults", method = RequestMethod.GET)
+	public String postsearchResults2(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		model.addAttribute("sword", sWord);
+		String sWord1 = "'%"+ sWord + "%'";
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count2(sWord1);
+		model.addAttribute("sResults", r2Service.search(sWord1, currentPage, RECORD_PER_PAGE));
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
 
 }

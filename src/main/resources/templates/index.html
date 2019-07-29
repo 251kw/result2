@@ -92,7 +92,12 @@ ${paging.totalRecordNum} + '件中'
   </tr>
   </tfoot>
 	</table>
-			<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+	<div th:if="${paging.currentPageNum == null}">
+	 	<input type="hidden" name="page" th:value="1">
+	</div>
+	<div th:if="${paging.currentPageNum != null}">
+	 	<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+	</div>
 	</form>
 	</div>
 </body>

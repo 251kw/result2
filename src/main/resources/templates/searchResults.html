@@ -25,7 +25,7 @@ ${paging.totalRecordNum} + '件中'
 <strong>FreeWord：</strong>
 <form th:action="@{/sresults}" th:object="${searching}" method="post">
             <div class="ui input focus">
-  			<input name=sWord type="text"  placeholder="Search...">
+  			<input name=sWord type="text" placeholder="Search...">
 			</div>
             <button type="submit" name="search" class="ui primary button">検索</button>
             </form>
@@ -63,6 +63,7 @@ ${paging.totalRecordNum} + '件中'
   <tr>
     <th colspan="6">
       <div class="ui pagination small menu">
+      <input type="hidden" name="sWord" th:value="${sword}">
         <a class="icon item"
            th:classappend="!${paging.canGoFirst} ? 'disabled'"
            th:href="${paging.firstHref}"><i class="angle double left icon"></i></a>
@@ -92,6 +93,12 @@ ${paging.totalRecordNum} + '件中'
   </tr>
   </tfoot>
 	</table>
+	<div th:if="${paging.currentPageNum == null}">
+	 	<input type="hidden" name="page" th:value="1">
+	</div>
+	<div th:if="${paging.currentPageNum != null}">
+	 	<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+	</div>
 	</form>
 	</div>
 </body>
