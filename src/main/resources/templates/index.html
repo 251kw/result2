@@ -63,6 +63,7 @@ ${paging.totalRecordNum} + '件中'
   <tr>
     <th colspan="6">
       <div class="ui pagination small menu">
+      <div th:if="!${paging.canGoFirst}"></div>
         <a class="icon item"
            th:classappend="!${paging.canGoFirst} ? 'disabled'"
            th:href="${paging.firstHref}"><i class="angle double left icon"></i></a>

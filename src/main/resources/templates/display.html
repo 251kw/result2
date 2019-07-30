@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>本文詳細</title>
-<link rel="stylesheet" href="./css/semantic.min.css">
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script src="js/semantic.min.js"></script>
+	<meta charset="UTF-8">
+	<title>本文詳細</title>
+	<link rel="stylesheet" href="./css/semantic.min.css">
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/semantic.min.js"></script>
 </head>
 <body>
 <div class="ui text container">
-<form th:action="@{/}" method="post">
-<table class="ui single line table">
-  <thead>
-    <tr>
-      <th><p th:text="'本文詳細'"></p></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><p th:text="${text}"></p></td>
-    </tr>
-  </tbody>
-</table>
-<button class="ui button" type="submit" name="fromdisplay" th:value="*{page}">戻る</button>
-</form>
+	<form th:action="@{/return}" method="post">
+		<table class="ui single line table">
+			<thead>
+				<tr>
+ 					<th><p th:text="'本文詳細'"></p></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p th:text="${text}"></p></td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="hidden" name="keepword" th:value="${word}">
+		<button class="ui button" type="submit" name="fromdisplay" th:value="*{page}">戻る</button>
+	</form>
 </div>
 </body>
 </html>
