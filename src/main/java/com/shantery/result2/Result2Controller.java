@@ -3,6 +3,8 @@ package com.shantery.result2;
 import java.text.ParseException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,13 @@ public class Result2Controller {
 
 	private static final int RECORD_PER_PAGE = 10;	// 1ページあたりの表示件数
 	private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
+	private static final String SESSION_FORM_ID="searchForm";	// キー
 
 	@Autowired
 	private Result2Service r2Service;
+
+	@Autowired
+	HttpSession session;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -76,7 +82,11 @@ public class Result2Controller {
 
 
 	@RequestMapping(value = "/sresults", method = RequestMethod.POST)
-	public String postsearchResults(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+	public String postsearchResults(@RequestParam(name = "sWord",required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		if(sWord == null) {
+			sWord = "";
+		}
+		session.setAttribute(SESSION_FORM_ID, sWord);
 		String sWord1 = "'%"+ sWord + "%'";
 		int currentPage = 1;
 		if(page != null) {
@@ -100,7 +110,11 @@ public class Result2Controller {
 		return "searchResults";
 	}
 	@RequestMapping(value = "/sresults", method = RequestMethod.GET)
-	public String postsearchResults2(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+	public String postsearchResults2(@RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID);
+		if(sWord == null) {
+			sWord = "";
+		}
 		model.addAttribute("sword", sWord);
 		String sWord1 = "'%"+ sWord + "%'";
 		int currentPage = 1;
