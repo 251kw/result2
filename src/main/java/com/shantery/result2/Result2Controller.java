@@ -74,11 +74,155 @@ public class Result2Controller {
 		return "index";
 	}
 
-	
+
 	@RequestMapping(value = "/sresults", method = RequestMethod.POST)
 	public String postsearchResults(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
 		String sWord1 = "'%"+ sWord + "%'";
 		model.addAttribute("sResults", r2Service.search(sWord1));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
+	@RequestMapping(value = "/resultascdate", method = RequestMethod.POST)
+	public String searchResults1(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord2 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord2));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
+	@RequestMapping(value = "/resultdescdate", method = RequestMethod.POST)
+	public String searchResults2(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord3 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord3));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
+	@RequestMapping(value = "/resultasccost", method = RequestMethod.POST)
+	public String searchResults3(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord4 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord4));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
+	@RequestMapping(value = "/resultdesccost", method = RequestMethod.POST)
+	public String searchResults4(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord5 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord5));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
+	@RequestMapping(value = "/resultascage", method = RequestMethod.POST)
+	public String searchResults5(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord6 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord6));
+		int currentPage = 1;
+		if(page != null) {
+			try {
+				currentPage = Integer.parseInt(page);
+			} catch(NumberFormatException e) {
+				currentPage = 1;
+			}
+		}
+		int totalRecordNum = r2Service.count();
+		model.addAttribute(
+				"paging",
+				PagingUtil.generatePagingView(
+						currentPage,
+						totalRecordNum,
+						RECORD_PER_PAGE,
+						LENGTH,
+						new HashMap<>()));
+		return "searchResults";
+	}
+
+	@RequestMapping(value = "/resultdescage", method = RequestMethod.POST)
+	public String searchResults6(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord7 = "'%"+ sWord + "%'";
+		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord7));
 		int currentPage = 1;
 		if(page != null) {
 			try {
