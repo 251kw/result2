@@ -10,7 +10,7 @@
 <body>
 	<div class="ui text container">
 	<div class="ui header">
-    <a class="logo" href="index.html"><img src="./img/ShanteryLogo.jpg" alt="シャンテリーロゴ"></a>
+    <a class="logo" href="/"><img src="./img/ShanteryLogo.jpg" alt="シャンテリーロゴ"></a>
     <div class="content">
     	メール検索
         <div class="sub header">
@@ -81,6 +81,7 @@ ${paging.totalRecordNum} + '件中'
   <tr>
     <th colspan="6">
       <div class="ui pagination small menu">
+      <div th:if="!${paging.canGoFirst}"></div>
         <a class="icon item"
            th:classappend="!${paging.canGoFirst} ? 'disabled'"
            th:href="${paging.firstHref}"><i class="angle double left icon"></i></a>
@@ -110,7 +111,12 @@ ${paging.totalRecordNum} + '件中'
   </tr>
   </tfoot>
 	</table>
-			<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+	<div th:if="${paging.currentPageNum == null}">
+	 	<input type="hidden" name="page" th:value="1">
+	</div>
+	<div th:if="${paging.currentPageNum != null}">
+	 	<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+	</div>
 	</form>
 	</div>
 </body>

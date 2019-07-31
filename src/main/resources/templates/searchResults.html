@@ -10,7 +10,7 @@
 <body>
 	<div class="ui text container">
 	<div class="ui header">
-    <a class="logo" href="index.html"><img src="./img/ShanteryLogo.jpg" alt="シャンテリーロゴ"></a>
+    <a class="logo" href="/"><img src="./img/ShanteryLogo.jpg" alt="シャンテリーロゴ"></a>
     <div class="content">
     	メール検索
         <div class="sub header">
@@ -115,6 +115,15 @@ ${paging.totalRecordNum} + '件中'
   </tr>
   </tfoot>
 	</table>
+	<div th:if="${paging.currentPageNum == null}">
+	 	<input type="hidden" name="page" th:value="1">
+	</div>
+	<div th:if="${paging.currentPageNum != null}">
+	 	<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+	</div>
+	<div th:if="${sword != null}">
+      <input type="hidden" name="keepword" th:value="${sword}">
+	</div>
 	</form>
 	</div>
 </body>

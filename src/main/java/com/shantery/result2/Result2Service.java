@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings("unused")
 @Service
 public class Result2Service {
 	@Autowired
@@ -46,11 +45,16 @@ public class Result2Service {
 		).get(0);
 	}
 
-	public List<Result2> search(String sWord) throws ParseException{
+	public List<Result2> search(String sWord, int page, int recordPerPage) throws ParseException{
+		int offset = (page-1)* recordPerPage;
+		Map<String, Integer> conds = new HashMap<String, Integer>() {{
+			put("offset", offset);
+			put("record", recordPerPage);
+		}};
 
 		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE " + sWord + "OR SENDER LIKE " + sWord + " OR TEXT LIKE " + sWord +  " OR CLOSEST_STATION LIKE " + sWord,
-
+				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE " + sWord + "OR SENDER LIKE " + sWord + " OR TEXT LIKE " + sWord +  " OR CLOSEST_STATION LIKE " + sWord + " LIMIT :record OFFSET :offset",
+				conds,
 				(rs,i) -> {
 					try {
 						return new Result2(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
@@ -190,5 +194,12 @@ public class Result2Service {
 					return null;
 				}
 		);
+	}
+
+	public int count2(String sWord) {	// データの総件数を返すメソッド
+		return namedParameterJdbcTemplate.query(
+				"SELECT COUNT(*) FROM result2disp WHERE EMPLOYMENT LIKE " + sWord + "OR SENDER LIKE " + sWord + " OR TEXT LIKE " + sWord +  " OR CLOSEST_STATION LIKE " + sWord  ,
+				(rs, i) -> rs.getInt(1)
+		).get(0);
 	}
 }
