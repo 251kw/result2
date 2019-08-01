@@ -97,6 +97,8 @@ public class Result2Service {
 		);
 	}
 
+
+
 	public List<Result2> findAllOrderByDateDESC(String sWord) throws ParseException{
 
 		return namedParameterJdbcTemplate.query(
