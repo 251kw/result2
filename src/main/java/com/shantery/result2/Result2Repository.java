@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Result2Repository extends JpaRepository<Result2, Long> {
 	public List<Result2> findAllOrderByDate(Pageable pageable);
+
+	public List<Result2> findAllOrderByDateASC(String sWord);
 }
+
