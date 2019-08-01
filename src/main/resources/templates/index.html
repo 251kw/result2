@@ -42,10 +42,10 @@ ${paging.totalRecordNum} + '件中'
 			<button type="submit" name="descdate" class="mini ui button">日付降順</button>
 		</form>
 		<form th:action="@{/asccost}" th:object="${ascosting}" method="post">
-			<button type="submit" name="asccost" class="mini ui button">単額昇順</button>
+			<button type="submit" name="asccost" class="mini ui button">単金昇順</button>
 		</form>
 		<form th:action="@{/desccost}" th:object="${descosting}" method="post">
-			<button type="submit" name="desccost" class="mini ui button">単額降順</button>
+			<button type="submit" name="desccost" class="mini ui button">単金降順</button>
 		</form>
 		<form th:action="@{/ascage}" th:object="${ascageing}" method="post">
 			<button type="submit" name="ascage" class="mini ui button">年齢昇順</button>
