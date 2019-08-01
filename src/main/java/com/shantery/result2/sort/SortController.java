@@ -5,6 +5,7 @@ import java.util.HashMap;
 //import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 /*import org.springframework.data.domain.Sort;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +20,15 @@ import com.shantery.result2.util.PagingUtil;
 @Controller
 public class SortController {
 
-	private static final int RECORD_PER_PAGE = 10;
-	private static final int LENGTH = 5;
-
+	@Value("${app.recordperpage}")
+    private int recordPerPage;
+	@Value("${app.paginglength}")
+    private int pagingLength;
 	@Autowired
 	private Result2Service r2Service;
 
-//	@Autowired
-//	SortRepository sR;
+	@Autowired
+	SortRepository sortRep;
 
 	@RequestMapping(value = "/ascdate", method = RequestMethod.POST)
 	public String index(@RequestParam(name = "ascdate")String sWord,@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -34,7 +36,6 @@ public class SortController {
 			sWord =("");
 		}
 
-		String sWord2 = "'%"+ sWord + "%'";
 		int currentPage = 1;
 		if (page != null) {
 			try {
@@ -45,9 +46,9 @@ public class SortController {
 		}
 		int totalRecordNum = r2Service.count();
 		model.addAttribute("paging",
-				PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
+				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
-		model.addAttribute("test",r2Service.findAllOrderByDateASC(sWord2));
+		model.addAttribute("test", sortRep.findAllSortOrderByDateAsc(sWord));
 		model.addAttribute("honbun", new Result2());
 		return "index";
 	}
@@ -68,7 +69,7 @@ public class SortController {
 			}
 			int totalRecordNum = r2Service.count();
 			model.addAttribute("paging",
-					PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
+					PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
 			model.addAttribute("test", r2Service.findAllOrderByDateDESC(sWord3));
@@ -93,7 +94,7 @@ public class SortController {
 		}
 		int totalRecordNum = r2Service.count();
 		model.addAttribute("paging",
-				PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
+				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
 		model.addAttribute("test", r2Service.findAllOrderByCostASC(sWord4));
@@ -117,7 +118,7 @@ public class SortController {
 		}
 		int totalRecordNum = r2Service.count();
 		model.addAttribute("paging",
-				PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
+				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
 		model.addAttribute("test", r2Service.findAllOrderByCostDESC(sWord5));
@@ -142,7 +143,7 @@ public class SortController {
 		}
 		int totalRecordNum = r2Service.count();
 		model.addAttribute("paging",
-				PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
+				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
 		model.addAttribute("test", r2Service.findAllOrderByAgeASC(sWord6));
@@ -167,7 +168,7 @@ public class SortController {
 		}
 		int totalRecordNum = r2Service.count();
 		model.addAttribute("paging",
-				PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
+				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
 		model.addAttribute("test", r2Service.findAllOrderByAgeDESC(sWord7));
