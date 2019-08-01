@@ -34,7 +34,7 @@ public class SortController {
 			sWord =("");
 		}
 
-		String sWord2 = "'%"+ sWord + "%'";
+		String sWORD = "'%"+ sWord + "%'";
 		int currentPage = 1;
 		if (page != null) {
 			try {
@@ -47,7 +47,7 @@ public class SortController {
 		model.addAttribute("paging",
 				PagingUtil.generatePagingView(currentPage, totalRecordNum, RECORD_PER_PAGE, LENGTH, new HashMap<>()));
 
-		model.addAttribute("test",r2Service.findAllOrderByDateASC(sWord2));
+		model.addAttribute("test",r2Service.findAllOrderByDateASC(sWORD));
 		model.addAttribute("honbun", new Result2());
 		return "index";
 	}

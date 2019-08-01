@@ -80,111 +80,25 @@ public class Result2Service {
 		return r2Repository.findAllOrderByDateASC(sWord);
 	}
 
-
-
 	public List<Result2> findAllOrderByDateDESC(String sWord) throws ParseException{
-
-		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE" + sWord + "OR SENDER LIKE" + sWord + "OR TEXT LIKE" + sWord + " OR CLOSEST_STATION LIKE" + sWord
-				+" ORDER BY DATE DESC",
-
-				(rs,i) -> {
-					try {
-						return new Result2(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
-								rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-								rs.getString(10), rs.getString(11));
-					} catch (ParseException e) {
-						// TODO 自動生成された catch ブロック
-
-						e.printStackTrace();
-					}
-					return null;
-				}
-		);
+		return r2Repository.findAllOrderByDateDESC(sWord);
 	}
 
 	public List<Result2> findAllOrderByCostASC(String sWord) throws ParseException{
-
-		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE" + sWord + "OR SENDER LIKE" + sWord + "OR TEXT LIKE" + sWord + " OR CLOSEST_STATION LIKE" + sWord
-				+"ORDER BY LPAD(COST,10,0)ASC;",
-
-				(rs,i) -> {
-					try {
-						return new Result2(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
-								rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-								rs.getString(10), rs.getString(11));
-					} catch (ParseException e) {
-						// TODO 自動生成された catch ブロック
-
-						e.printStackTrace();
-					}
-					return null;
-				}
-		);
+		return r2Repository.findAllOrderByCostASC(sWord);
 	}
 
 	public List<Result2> findAllOrderByCostDESC(String sWord) throws ParseException{
-
-		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE" + sWord + "OR SENDER LIKE" + sWord + "OR TEXT LIKE" + sWord + " OR CLOSEST_STATION LIKE" + sWord
-				+"ORDER BY LPAD(COST,10,0)DESC",
-
-				(rs,i) -> {
-					try {
-						return new Result2(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
-								rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-								rs.getString(10), rs.getString(11));
-					} catch (ParseException e) {
-						// TODO 自動生成された catch ブロック
-
-						e.printStackTrace();
-					}
-					return null;
-				}
-		);
+		return r2Repository.findAllOrderByCostDESC(sWord);
 	}
 
 	public List<Result2> findAllOrderByAgeASC(String sWord) throws ParseException{
-
-		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE" + sWord + "OR SENDER LIKE" + sWord + "OR TEXT LIKE" + sWord + " OR CLOSEST_STATION LIKE" + sWord
-				+" ORDER BY AGE ASC",
-
-				(rs,i) -> {
-					try {
-						return new Result2(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
-								rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-								rs.getString(10), rs.getString(11));
-					} catch (ParseException e) {
-						// TODO 自動生成された catch ブロック
-
-						e.printStackTrace();
-					}
-					return null;
-				}
-		);
+		return r2Repository.findAllOrderByAgeASC(sWord);
 	}
 
 	public List<Result2> findAllOrderByAgeDESC(String sWord) throws ParseException{
 
-		return namedParameterJdbcTemplate.query(
-				"SELECT * FROM result2disp WHERE EMPLOYMENT LIKE" + sWord + "OR SENDER LIKE" + sWord + "OR TEXT LIKE" + sWord + " OR CLOSEST_STATION LIKE" + sWord
-				+" ORDER BY AGE DESC",
-
-				(rs,i) -> {
-					try {
-						return new Result2(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
-								rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-								rs.getString(10), rs.getString(11));
-					} catch (ParseException e) {
-						// TODO 自動生成された catch ブロック
-
-						e.printStackTrace();
-					}
-					return null;
-				}
-		);
+		return r2Repository.findAllOrderByAgeDESC(sWord);
 	}
 
 	public int count2(String sWord) {	// データの総件数を返すメソッド

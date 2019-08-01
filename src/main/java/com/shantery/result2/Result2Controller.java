@@ -208,6 +208,7 @@ public class Result2Controller {
 		String sWord2 = "'%"+ sWord + "%'";
 		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord2));
 		int currentPage = 1;
+
 		if(page != null) {
 			try {
 				currentPage = Integer.parseInt(page);
