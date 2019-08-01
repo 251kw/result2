@@ -18,7 +18,7 @@ public class Result2Service {
 	Result2Repository r2Repository;
 
 	public List<Result2> find(int page, int recordPerPage) throws ParseException{
-		int offset = (page-1)* recordPerPage;	// 開始位置
+		int offset = (page-1)/** recordPerPage*/;	// 開始位置
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage));
 
 
