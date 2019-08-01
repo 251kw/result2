@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="./css/semantic.min.css">
 <script src="./js/jquery-3.4.1.min.js"></script>
 <script src="./js/semantic.min.js"></script>
+<style>
+a.disabled{
+    pointer-events: none;
+}
+</style>
 </head>
 <body>
 	<div class="ui text container">
@@ -63,7 +68,6 @@ ${paging.totalRecordNum} + '件中'
   <tr>
     <th colspan="6">
       <div class="ui pagination small menu">
-      <div th:if="!${paging.canGoFirst}"></div>
         <a class="icon item"
            th:classappend="!${paging.canGoFirst} ? 'disabled'"
            th:href="${paging.firstHref}"><i class="angle double left icon"></i></a>
