@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 //import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 /*import org.springframework.data.domain.Sort;*/
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,12 @@ public class SortController {
 	private static final int RECORD_PER_PAGE = 10;
 	private static final int LENGTH = 5;
 
+
 	@Autowired
 	private Result2Service r2Service;
 
-//	@Autowired
-//	SortRepository sR;
+	@Autowired
+	HttpSession session;
 
 	@RequestMapping(value = "/ascdate", method = RequestMethod.POST)
 	public String index(@RequestParam(name = "ascdate")String sWord,@RequestParam(required = false) final String page, Model model) throws ParseException {
