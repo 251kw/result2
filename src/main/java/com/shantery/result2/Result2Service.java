@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,16 @@ import org.springframework.stereotype.Service;
 public class Result2Service {
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	@Autowired
+	Result2Repository r2Repository;
 
 	public List<Result2> find(int page, int recordPerPage) throws ParseException{
 		int offset = (page-1)* recordPerPage;	// 開始位置
-//		int require = page * recordPerPage;
-		Map<String, Integer> conds = new HashMap<String, Integer>() {{
+		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage));
+
+
+		/** ↓不要であれば消してください↓ **/
+		/*Map<String, Integer> conds = new HashMap<String, Integer>() {{
 			put("offset", offset);
 			put("record", recordPerPage);
 		}};
@@ -35,7 +41,7 @@ public class Result2Service {
 					}
 					return null;
 				}
-		);
+		);*/
 	}
 
 	public int count() {	// データの総件数を返すメソッド
