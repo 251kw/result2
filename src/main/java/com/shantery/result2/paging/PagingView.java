@@ -1,31 +1,31 @@
-package com.shantery.result2.util;
+package com.shantery.result2.paging;
 
 import java.util.List;
 //import lombok.Data;
 
 //@Data
 public class PagingView {
-	private int totalRecordNum;
-	private int fromRecordNum;
-	private int toRecordNum;
+	private int totalRecordNum;	//データの総件数
+	private int fromRecordNum;	// ○件~×件の○の値
+	private int toRecordNum;	// ○件~×件の×の値
 
-	private int currentPageNum;
+	private int currentPageNum;	// 現在のページ番号
 
-	private int recordPerPage;
+	private int recordPerPage;	// 1ページ当たりの表示件数
 
-	private boolean canGoNext;
-	private String nextHref;
+	private boolean canGoNext;	// 次のページに行けるかどうか
+	private String nextHref;	// 次のページ目のURLの文字列
 
-	private boolean canGoPrevious;
-	private String previousHref;
+	private boolean canGoPrevious;	// 前のページに行けるかどうか
+	private String previousHref;	// 前のページ目のURLの文字列
 
-	private boolean canGoLast;
-	private String lastHref;
+	private boolean canGoLast;	// 終端に行けるかどうか
+	private String lastHref;	// 終端のページのURLの文字列
 
-	private boolean canGoFirst;
-	private String firstHref;
+	private boolean canGoFirst;	// 最初に行けるかどうか
+	private String firstHref;	// 最初のページのURLの文字列
 
-	private List<PagingViewElement> pagingViewElements;
+	private List<PagingViewElement> pagingViewElements;	// ページに表示されるデータ
 
 	public int getTotalRecordNum() {
 		return totalRecordNum;

@@ -1,8 +1,8 @@
-package com.shantery.result2.util;
+package com.shantery.result2.paging;
 
 public class PagingViewElement {
-	private String name;
-	private String href;
+	private String name;	// ページ番号の名前
+	private String href;	// ページのURLの文字列
 
 	public PagingViewElement() {
 	}

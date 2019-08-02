@@ -1,4 +1,4 @@
-package com.shantery.result2.util;
+package com.shantery.result2.paging;
 
 import java.util.List;
 import java.util.Map;
@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PagingUtil {
-	//private static final List<PagingViewElement> Intstream = null;
 	/**
-	 *
 	 * @param currentPageNum 表示しようとしているページ番号
 	 * @param totalRecordNum 全件数
 	 * @param recordPerPage 1ページに表示するレコード数
@@ -18,41 +16,43 @@ public class PagingUtil {
 	 */
 
 	public static PagingView generatePagingView(
-			int currentPageNum,
-			int totalRecordNum,
-			int recordPerPage,
-			int length,
-			Map<String, String> params
-			) {
-		String baseQueryString = toQueryString(params);
-		String preAppendPageNum = baseQueryString + "&page=";
+			int currentPageNum,	// 現在のページ番号
+			int totalRecordNum,	// データの総件数
+			int recordPerPage,	// 1ページ当たりの表示件数
+			int length,			// ページバーの表示件数
+			Map<String, String> params) {
+		String baseQueryString = toQueryString(params);	// ?が入る
+		String preAppendPageNum = baseQueryString + "&page=";	// URLの後ろに?&page=を入れる文字列
 
-		PagingView pagingView = new PagingView();
+		PagingView pagingView = new PagingView();	// PagingViewのインスタンス化
 
-		pagingView.setTotalRecordNum(totalRecordNum);
-		pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage + 1);
-		// 終端のページを表示するときはその終端の件数を出す
-		pagingView.setToRecordNum(currentPageNum * recordPerPage < totalRecordNum ? currentPageNum * recordPerPage : totalRecordNum);
-		pagingView.setRecordPerPage(recordPerPage);
-		pagingView.setCurrentPageNum(currentPageNum);
+		pagingView.setTotalRecordNum(totalRecordNum);	// データの総件数
+		pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage + 1);	// ○~×件の○の値
+		// 終端のページを表示するときはその終端の件数を出す。○~×件の×の値
+		pagingView.setToRecordNum(
+				currentPageNum * recordPerPage < totalRecordNum ? currentPageNum * recordPerPage : totalRecordNum);
+		pagingView.setRecordPerPage(recordPerPage);	// 1ページ当たりの表示件数
+		pagingView.setCurrentPageNum(currentPageNum);	// 現在のページ番号
 
-		pagingView.setCanGoFirst(currentPageNum != 1);
-		pagingView.setFirstHref(preAppendPageNum + 1);
+		pagingView.setCanGoFirst(currentPageNum != 1);	// TOPに行けるかどうか(true or false)
+		pagingView.setFirstHref(preAppendPageNum + 1);	// 1ページ目のURLの文字列
 
-		int totalPageNum = (int) Math.ceil((double)totalRecordNum / (double)recordPerPage);
-		pagingView.setCanGoLast(currentPageNum != totalPageNum);
-		pagingView.setLastHref(preAppendPageNum + totalPageNum);
+		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数
+		pagingView.setCanGoLast(currentPageNum != totalPageNum);	// Lastに行けるかどうか(true or false)
+		pagingView.setLastHref(preAppendPageNum + totalPageNum);	// 総ページ目のURLの文字列
 
-		pagingView.setCanGoPrevious(currentPageNum != 1);
-		pagingView.setPreviousHref(preAppendPageNum + (currentPageNum - 1));
+		pagingView.setCanGoPrevious(currentPageNum != 1);	// 1個前に行けるかどうか(true or false)
+		pagingView.setPreviousHref(preAppendPageNum + (currentPageNum - 1));	// 1個前のページ目のURLの文字列
 
-		pagingView.setCanGoNext(currentPageNum != totalPageNum);
-		pagingView.setNextHref(preAppendPageNum + (currentPageNum + 1));
+		pagingView.setCanGoNext(currentPageNum != totalPageNum);	// 1個後ろに行けるかどうか(true or false)
+		pagingView.setNextHref(preAppendPageNum + (currentPageNum + 1));	// 1個後ろのページ目のURLの文字列
 
-		pagingView.setPagingViewElements(generatePagingViewElements(currentPageNum, totalPageNum, length, preAppendPageNum));
+		pagingView.setPagingViewElements(
+				generatePagingViewElements(currentPageNum, totalPageNum, length, preAppendPageNum));
 
 		return pagingView;
 	}
+
 	/**
 	 * Mapをクエリストリングに変換する。
 	 * もしMapが空の場合、"?"のみを返却する。
@@ -60,9 +60,9 @@ public class PagingUtil {
 	 * @return 生成されたクエリストリング
 	 */
 	protected static String toQueryString(Map<String, String> params) {
-		// TODO URLエンコーディング？
 		return "?" + params.entrySet().stream().map(Object::toString).collect(Collectors.joining("&"));
 	}
+
 	/**
 	 * 現在のページがなるべく中央にくるようにページングのリストを生成する。
 	 * @param currentPageNum 現在のページ番号
@@ -75,23 +75,22 @@ public class PagingUtil {
 			int currentPageNum,
 			int totalPageNum,
 			int length,
-			String preAppendPageNum
-	){
+			String preAppendPageNum) {
 		/* 偶数個のリストが要求された場合は現在のページが前寄せになる。
 		 * 例) [] がついているのが現在のページ
 		 *    << < 1 2 [3] 4 5 6 > >>
 		 */
-		int backSpan = (length - 1) / 2;
-		int forthSpan = (length - 1) - backSpan;
+		int backSpan = (length - 1) / 2;	// 左側に何個つけるか
+		int forthSpan = (length - 1) - backSpan;	// 右側に何個つけるか
 
-		int startIndex;
-		int endIndex;
+		int startIndex;	// 一番左の番号
+		int endIndex;	// 一番右の番号
 
-		if(currentPageNum - backSpan < 1) {
+		if (currentPageNum - backSpan < 1) {
 			// 表示幅に従うと存在しないページ(0ページ以下)が生成されるので、1ページから始める
 			startIndex = 1;
 			endIndex = length < totalPageNum ? length : totalPageNum;
-		} else if(currentPageNum + forthSpan > totalPageNum) {
+		} else if (currentPageNum + forthSpan > totalPageNum) {
 			// 表示幅に従うと存在しないページ(最終ページ以降)が生成されるので、表示領域を最終ページから逆算する
 			startIndex = totalPageNum - (length - 1) > 1 ? totalPageNum - (length - 1) : 1;
 			endIndex = totalPageNum;

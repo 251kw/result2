@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shantery.result2.util.PagingUtil;
+import com.shantery.result2.paging.PagingUtil;
 
 @Controller
 public class Result2Controller {
