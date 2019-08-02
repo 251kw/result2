@@ -56,7 +56,7 @@ ${paging.totalRecordNum} + '件中'
 		</div>
 
 		<div class="ui divider"></div>
-	<form th:action="@{/result}" th:object="${test}" method="post">
+	<form th:action="@{/result}" th:object="${sortIndex}" method="post">
 	<table class="ui compact celled table" style="font-size: 9.5pt;">
 		<!-- 見出し。ここも可変になるように後々はしたい -->
 		<thead>
@@ -71,7 +71,7 @@ ${paging.totalRecordNum} + '件中'
 		</thead>
 		<!-- DB内の表示、ここも可変になるように後々はしたい -->
 		<tbody>
-		<tr th:each="list : ${test}" th:object="${list}">
+		<tr th:each="list : ${sortIndex}" th:object="${list}">
 			<td th:text="*{date}"></td>
 			<td th:text="*{cost}"></td>
 			<td th:text="*{age}"></td>

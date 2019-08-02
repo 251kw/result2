@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shantery.result2.Result2;
-import com.shantery.result2.Result2Service;
 import com.shantery.result2.util.PagingUtil;
 
 @Controller
@@ -25,7 +24,7 @@ public class SortController {
 	@Value("${app.paginglength}")
     private int pagingLength;
 	@Autowired
-	private Result2Service r2Service;
+	private SortService sService;
 
 	@Autowired
 	SortRepository sortRep;
@@ -44,7 +43,7 @@ public class SortController {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = sService.count();
 		model.addAttribute("paging",
 				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
@@ -67,12 +66,12 @@ public class SortController {
 					currentPage = 1;
 				}
 			}
-			int totalRecordNum = r2Service.count();
+			int totalRecordNum = sService.count();
 			model.addAttribute("paging",
 					PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
-			model.addAttribute("test", r2Service.findAllOrderByDateDESC(sWord3));
+			model.addAttribute("test", sService.findAllOrderByDateDESC(sWord3));
 			model.addAttribute("honbun", new Result2());
 			return "index";
 		}
@@ -92,12 +91,12 @@ public class SortController {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = sService.count();
 		model.addAttribute("paging",
 				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
-		model.addAttribute("test", r2Service.findAllOrderByCostASC(sWord4));
+		model.addAttribute("test", sService.findAllOrderByCostASC(sWord4));
 		model.addAttribute("honbun", new Result2());
 		return "index";
 	}
@@ -116,12 +115,12 @@ public class SortController {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = sService.count();
 		model.addAttribute("paging",
 				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
-		model.addAttribute("test", r2Service.findAllOrderByCostDESC(sWord5));
+		model.addAttribute("test", sService.findAllOrderByCostDESC(sWord5));
 		model.addAttribute("honbun", new Result2());
 		return "index";
 	}
@@ -141,12 +140,12 @@ public class SortController {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = sService.count();
 		model.addAttribute("paging",
 				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
-		model.addAttribute("test", r2Service.findAllOrderByAgeASC(sWord6));
+		model.addAttribute("test", sService.findAllOrderByAgeASC(sWord6));
 		model.addAttribute("honbun", new Result2());
 		return "index";
 	}
@@ -166,12 +165,12 @@ public class SortController {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = sService.count();
 		model.addAttribute("paging",
 				PagingUtil.generatePagingView(currentPage, totalRecordNum, recordPerPage, pagingLength, new HashMap<>()));
 
 
-		model.addAttribute("test", r2Service.findAllOrderByAgeDESC(sWord7));
+		model.addAttribute("test", sService.findAllOrderByAgeDESC(sWord7));
 		model.addAttribute("honbun", new Result2());
 		return "index";
 	}
