@@ -7,6 +7,7 @@ import java.text.ParseException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class Result2Controller {
+class Result2Controller {
 
-	private static final int RECORD_PER_PAGE = 10;	// 1ページあたりの表示件数
+	@Value("${app.recordperpage}")
+	private int recordPerPage;	// 1ページあたりの表示件数
 	//private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
 
 	@Autowired
@@ -30,7 +32,7 @@ public class Result2Controller {
 			session.removeAttribute(SESSION_FORM_ID);
 		}
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(LIST, r2Service.find(page, RECORD_PER_PAGE));	// ServiceでSQL文の実行している
+		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		String sWord = EMPTY;
 		model.addAttribute(
@@ -51,10 +53,10 @@ public class Result2Controller {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, RECORD_PER_PAGE));
+			model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		} else {	// 検索を行っていないのなら
 			 //testをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(LIST, r2Service.find(page, RECORD_PER_PAGE));
+		model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
@@ -76,11 +78,11 @@ public class Result2Controller {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, r2Service.search(sWord,page, RECORD_PER_PAGE));
+			model.addAttribute(SEARCH_LIST, r2Service.search(sWord,page, recordPerPage));
 		} else {	// 検索を行っていないのなら
 			 //testをキーとしてvalueをList型にしたものを返す
 			sWord = EMPTY;
-			model.addAttribute(LIST, r2Service.find(page, RECORD_PER_PAGE));
+			model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
@@ -99,13 +101,13 @@ public class Result2Controller {
 			sWord = EMPTY;
 		}
 		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
-		if(page != null) {	// もしpageが存在するなら
+		if(page != null) {	// もしpageが存在しないなら
 			model.addAttribute(
 					PAGING,
 					r2Service.r2Paging(sWord,page));
 		}
 		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, RECORD_PER_PAGE));
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
@@ -119,7 +121,7 @@ public class Result2Controller {
 			sWord = EMPTY;
 		}
 		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, RECORD_PER_PAGE));
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
@@ -134,12 +136,12 @@ public class Result2Controller {
 		int currentPage = 1;
 		if(page != null) {
 			try {
-				currentPage = Integer.parseInt(page);
+				currentPage = Integer.parseInt(page);	// 現在いるページ番号を取る
 			} catch(NumberFormatException e) {
-				currentPage = 1;
+				currentPage = 1;	// 失敗したら先頭にする
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count();	// データの総件数を取るための変数
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(
@@ -150,20 +152,21 @@ public class Result2Controller {
 						new HashMap<>()));
 		return "searchResults";
 	}
+
 
 	@RequestMapping(value = "/resultdescdate", method = RequestMethod.POST)
-	public String searchResults2(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		String sWord3 = "'%"+ sWord + "%'";
-		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord3));
-		int currentPage = 1;
-		if(page != null) {
+	public String searchResultsdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord2 = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+		model.addAttribute("sResults", r2Service.findAllOrderByDateDESC(sWord2));	//sResultsをキーとしてvalueをList型にしたものを返す
+		int currentPage = 1;	//現在いるページ番号初期化
+		if(page != null) {	//pageが存在するとき
 			try {
-				currentPage = Integer.parseInt(page);
+				currentPage = Integer.parseInt(page);	// 現在いるページ番号を取る
 			} catch(NumberFormatException e) {
-				currentPage = 1;
+				currentPage = 1;	// 失敗したら先頭にする
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count();	// データの総件数を取るための変数
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(
@@ -174,20 +177,21 @@ public class Result2Controller {
 						new HashMap<>()));
 		return "searchResults";
 	}
+
 
 	@RequestMapping(value = "/resultasccost", method = RequestMethod.POST)
-	public String searchResults3(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		String sWord4 = "'%"+ sWord + "%'";
-		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord4));
-		int currentPage = 1;
-		if(page != null) {
+	public String searchResultsasccost(@RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord3 = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+		model.addAttribute("sResults", r2Service.findAllOrderByCostASC(sWord3));	//sResultsをキーとしてvalueをList型にしたものを返す
+		int currentPage = 1;	//現在いるページ番号初期化
+		if(page != null) {	//pageが存在するとき
 			try {
 				currentPage = Integer.parseInt(page);
 			} catch(NumberFormatException e) {
-				currentPage = 1;
+				currentPage = 1;	// 失敗したら先頭にする
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count();	// データの総件数を取るための変数
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(
@@ -198,20 +202,21 @@ public class Result2Controller {
 						new HashMap<>()));
 		return "searchResults";
 	}
+
 
 	@RequestMapping(value = "/resultdesccost", method = RequestMethod.POST)
-	public String searchResults4(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		String sWord5 = "'%"+ sWord + "%'";
-		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord5));
-		int currentPage = 1;
-		if(page != null) {
+	public String searchResultsdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord4 = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+		model.addAttribute("sResults", r2Service.findAllOrderByCostDESC(sWord4));	//sResultsをキーとしてvalueをList型にしたものを返す
+		int currentPage = 1;	//現在いるページ番号初期化
+		if(page != null) {	//pageが存在するとき
 			try {
 				currentPage = Integer.parseInt(page);
 			} catch(NumberFormatException e) {
-				currentPage = 1;
+				currentPage = 1;	// 失敗したら先頭にする
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count();	// データの総件数を取るための変数
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(
@@ -222,20 +227,22 @@ public class Result2Controller {
 						new HashMap<>()));
 		return "searchResults";
 	}
+
+
 
 	@RequestMapping(value = "/resultascage", method = RequestMethod.POST)
-	public String searchResults5(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		String sWord6 = "'%"+ sWord + "%'";
-		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord6));
-		int currentPage = 1;
-		if(page != null) {
+	public String searchResultsascage(@RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord5 = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+		model.addAttribute("sResults", r2Service.findAllOrderByAgeASC(sWord5));	//sResultsをキーとしてvalueをList型にしたものを返す
+		int currentPage = 1;	//現在いるページ番号初期化
+		if(page != null) {	//pageが存在するとき
 			try {
 				currentPage = Integer.parseInt(page);
 			} catch(NumberFormatException e) {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count();	// データの総件数を取るための変数
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(
@@ -247,19 +254,20 @@ public class Result2Controller {
 		return "searchResults";
 	}
 
+
 	@RequestMapping(value = "/resultdescage", method = RequestMethod.POST)
-	public String searchResults6(@RequestParam(name = "sWord") String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		String sWord7 = "'%"+ sWord + "%'";
-		model.addAttribute("sResults", r2Service.findAllOrderByDateASC(sWord7));
-		int currentPage = 1;
-		if(page != null) {
+	public String searchResultsdescage(@RequestParam(required = false) final String page, Model model) throws ParseException{
+		String sWord6 = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+		model.addAttribute("sResults", r2Service.findAllOrderByAgeDESC(sWord6));	//sResultsをキーとしてvalueをList型にしたものを返す
+		int currentPage = 1;	//現在いるページ番号初期化
+		if(page != null) {	//pageが存在するとき
 			try {
 				currentPage = Integer.parseInt(page);
 			} catch(NumberFormatException e) {
 				currentPage = 1;
 			}
 		}
-		int totalRecordNum = r2Service.count();
+		int totalRecordNum = r2Service.count();	// データの総件数を取るための変数
 		model.addAttribute(
 				"paging",
 				PagingUtil.generatePagingView(

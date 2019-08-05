@@ -26,7 +26,7 @@ public class Result2Constants {
 	/** 本文詳細ページの遷移先 **/
 	public static final String TO_TEXT_DETAILS = "display";
 	/** 検索結果ページの遷移先 **/
-	public static final String TO_SEARCH_RESULTS = "seachResults";
+	public static final String TO_SEARCH_RESULTS = "searchResults";
 
 	// キーを示す変数
 	/** セッションのキー **/
