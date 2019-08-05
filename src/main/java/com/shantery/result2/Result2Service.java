@@ -22,6 +22,7 @@ public class Result2Service {
 	@Value("${app.paginglength}")	// << < (1 2 3 4 5)←これの表示数 > >>
 	private int pagingLength;
 	//private static final String SESSION_FORM_ID="searchForm";	// キー
+
 	@Autowired
 	Result2Repository r2Repository;
 	HttpSession session;
