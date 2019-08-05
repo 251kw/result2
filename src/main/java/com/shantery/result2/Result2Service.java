@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,10 @@ import com.shantery.result2.paging.PagingView;
 @Service
 public class Result2Service {
 
-	private static final int RECORD_PER_PAGE = 10;	// 1ページあたりの表示件数
-	private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
+	@Value("${app.recordperpage}")
+    private int recordPerPage;	// 1ページあたりの表示件数
+	@Value("${app.paginglength}")	// << < (1 2 3 4 5)←これの表示数 > >>
+	private int pagingLength;
 	//private static final String SESSION_FORM_ID="searchForm";	// キー
 	@Autowired
 	Result2Repository r2Repository;
@@ -54,8 +57,8 @@ public class Result2Service {
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
-				RECORD_PER_PAGE,
-				LENGTH,
+				recordPerPage,
+				pagingLength,
 				new HashMap<>());
 	}/*
 	public int count(String sWord) {	// データの総件数を返すメソッド
@@ -80,6 +83,6 @@ public class Result2Service {
 	}
 
 	public int count(String sWord) {	// データの総件数を返すメソッド
-		return r2Repository.count2(sWord);
+		return r2Repository.countAll(sWord);
 	}
 }

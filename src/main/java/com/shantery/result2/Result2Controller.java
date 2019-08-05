@@ -7,6 +7,7 @@ import java.text.ParseException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class Result2Controller {
 
-	private static final int RECORD_PER_PAGE = 10;	// 1ページあたりの表示件数
+	@Value("${app.recordperpage}")
+	private int recordPerPage;	// 1ページあたりの表示件数
 	//private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
 
 	@Autowired
@@ -30,7 +32,7 @@ public class Result2Controller {
 			session.removeAttribute(SESSION_FORM_ID);
 		}
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(LIST, r2Service.find(page, RECORD_PER_PAGE));	// ServiceでSQL文の実行している
+		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		String sWord = EMPTY;
 		model.addAttribute(
@@ -51,10 +53,10 @@ public class Result2Controller {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, RECORD_PER_PAGE));
+			model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		} else {	// 検索を行っていないのなら
 			 //testをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(LIST, r2Service.find(page, RECORD_PER_PAGE));
+		model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
@@ -76,11 +78,11 @@ public class Result2Controller {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, r2Service.search(sWord,page, RECORD_PER_PAGE));
+			model.addAttribute(SEARCH_LIST, r2Service.search(sWord,page, recordPerPage));
 		} else {	// 検索を行っていないのなら
 			 //testをキーとしてvalueをList型にしたものを返す
 			sWord = EMPTY;
-			model.addAttribute(LIST, r2Service.find(page, RECORD_PER_PAGE));
+			model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
@@ -99,13 +101,13 @@ public class Result2Controller {
 			sWord = EMPTY;
 		}
 		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
-		if(page != null) {	// もしpageが存在するなら
+		if(page != null) {	// もしpageが存在しないなら
 			model.addAttribute(
 					PAGING,
 					r2Service.r2Paging(sWord,page));
 		}
 		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, RECORD_PER_PAGE));
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
@@ -119,7 +121,7 @@ public class Result2Controller {
 			sWord = EMPTY;
 		}
 		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, RECORD_PER_PAGE));
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
