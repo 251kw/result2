@@ -1,4 +1,4 @@
-package com.shantery.result2.sort;
+/*package com.shantery.result2.sort;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-/*import org.springframework.data.domain.Sort;*/
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -176,3 +176,4 @@ public class SortController {
 		return "index";
 	}
 }
+*/
