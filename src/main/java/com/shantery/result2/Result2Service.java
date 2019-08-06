@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.shantery.result2.paging.PagingUtil;
 import com.shantery.result2.paging.PagingView;
+import com.shantery.result2.util.Result2Util;
 
 @Service
 public class Result2Service {
@@ -29,61 +30,31 @@ public class Result2Service {
 	PagingUtil pu;
 
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
-
-		int currentPage = 1;	// 現在いるページ番号の初期化
-		if(page != null) {	// pageが存在するとき
-			try {
-				currentPage = Integer.parseInt(page);	// 現在いるページ番号を取る
-			} catch(NumberFormatException e) {
-				currentPage = 1;	// 失敗したら先頭にする
-			}
-		}
-		int offset = currentPage - 1; // 開始位置
-
-		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage));
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int offset = (currentPage - 1); //開始ページの初期化
+		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Repositoryに返す
 		}
 
 	public PagingView r2Paging(String sWord,String page) {
-		int currentPage = 1;	// 現在いるページ番号の初期化
-		if(page != null) {	// pageが存在するとき
-			try {
-				currentPage = Integer.parseInt(page);	// 現在いるページ番号を取る
-			} catch(NumberFormatException e) {
-				currentPage = 1;	// 失敗したら先頭にする
-			}
-		}
-		//int offset = currentPage - 1; // 開始位置
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
 		int totalRecordNum = count(sWord);
-
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
 				recordPerPage,
 				pagingLength,
 				new HashMap<>());
-	}/*
-	public int count(String sWord) {	// データの総件数を返すメソッド
-		return r2Repository.countAll(sWord);
-	}*/
+	}
 
+	//データを検索するメソッド
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
-		int currentPage = 1;	// 現在いるページ番号の初期化
-		if(page != null) {	// pageが存在するとき
-			try {
-				currentPage = Integer.parseInt(page);	// 現在いるページ番号を取る
-			} catch(NumberFormatException e) {
-				currentPage = 1;	// 失敗したら先頭にする
-			}
-		}
-		//int totalRecordNum;	// データの総件数を取るための変数
-		//boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
-			//flag = true;	// フラグを立てる
-			//int totalRecordNum = count2(sWord);	// 検索してヒットしたデータの総件数を取る
-		int offset = (currentPage-1);
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int offset = (currentPage -1);
 		return r2Repository.search(sWord,PageRequest.of(offset, recordPerPage));
 	}
 
-	public int count(String sWord) {	// データの総件数を返すメソッド
+	// データの総件数を返すメソッド
+	public int count(String sWord) {
 		return r2Repository.countAll(sWord);
 	}
 }

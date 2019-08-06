@@ -31,10 +31,10 @@ class SortService {
 	}
 
 	public List<Result2> findAllOrderByDateASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);
-		String word = Result2Util.getSearchWord(sWord);
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);
-		return sRepository.findAllOrderByDateASC(word, PageRequest.of(offset, recordPerPage));
+		return sRepository.findAllOrderByDateASC(word, PageRequest.of(offset, recordPerPage)); //日付を昇順にソートした
 	}
 
 	public List<Result2> findAllOrderByDateDESC(String page, String sWord) throws ParseException {
@@ -71,6 +71,7 @@ class SortService {
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByAgeDESC(word, PageRequest.of(offset, recordPerPage));
 	}
+
 	public PagingView Paging(String sWord,String page) {
 		int currentPage = Result2Util.getCurrentPage(page);
 		int totalRecordNum = count(Result2Util.getSearchWord(sWord));
