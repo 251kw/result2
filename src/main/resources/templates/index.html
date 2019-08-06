@@ -18,42 +18,42 @@ a.disabled {
 		<div class="ui header">
 			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
 				alt="シャンテリーロゴ"></a>
-			<div class="content">
-				<div class="sub header">[案件 要員]</div>
+			<div class="content"><br>
+				<div class="sub header" th:text="#{view.label.casefacter}"></div>
 			</div>
 		</div>
 		<p
 			th:text="
 ${paging.totalRecordNum} + '件中'
 + ${paging.fromRecordNum} + '～'
-+ ${paging.toRecordNum} + '件表示中'">100件中1～10件表示中</p>
-		<strong>FreeWord：</strong>
++ ${paging.toRecordNum} + '件表示中'"></p>
+		<p th:text="#{view.label.freeword}"></th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
-				<input name=sWord type="text" placeholder="Search...">
+				<input name=sWord type="text" placeholder="検索ワードを入力">
 			</div>
-			<button type="submit" name="search" class="ui primary button">検索</button>
+			<button type="submit" name="search" class="ui primary button"><p th:text="#{view.btn.search}"></p></button>
 		</form>
 		<div style="display: inline-flex">
 			<form th:action="@{/ascdate}" th:object="${ascdating}" method="post">
-				<button type="submit" name="ascdate" class="mini ui button">日付昇順</button>
+				<button type="submit" name="ascdate" class="mini ui button"><p th:text="#{view.btn.ascdate}"></p></button>
 			</form>
 			<form th:action="@{/descdate}" th:object="${descdating}"
 				method="post">
-				<button type="submit" name="descdate" class="mini ui button">日付降順</button>
+				<button type="submit" name="descdate" class="mini ui button"><p th:text="#{view.btn.descdate}"></p></button>
 			</form>
 			<form th:action="@{/asccost}" th:object="${ascosting}" method="post">
-				<button type="submit" name="asccost" class="mini ui button">単金昇順</button>
+				<button type="submit" name="asccost" class="mini ui button"><p th:text="#{view.btn.asccost}"></p></button>
 			</form>
 			<form th:action="@{/desccost}" th:object="${descosting}"
 				method="post">
-				<button type="submit" name="desccost" class="mini ui button">単金降順</button>
+				<button type="submit" name="desccost" class="mini ui button"><p th:text="#{view.btn.desccost}"></p></button>
 			</form>
 			<form th:action="@{/ascage}" th:object="${ascageing}" method="post">
-				<button type="submit" name="ascage" class="mini ui button">年齢昇順</button>
+				<button type="submit" name="ascage" class="mini ui button"><p th:text="#{view.btn.ascage}"></p></button>
 			</form>
 			<form th:action="@{/descage}" th:object="${descageing}" method="post">
-				<button type="submit" name="descage" class="mini ui button">年齢降順</button>
+				<button type="submit" name="descage" class="mini ui button"><p th:text="#{view.btn.descage}"></p></button>
 			</form>
 		</div>
 
@@ -63,11 +63,11 @@ ${paging.totalRecordNum} + '件中'
 				<!-- 見出し。ここも可変になるように後々はしたい -->
 				<thead>
 					<tr>
-						<th class="center"><strong>日付</strong></th>
-						<th class="center"><strong>単金</strong></th>
-						<th class="center"><strong>年齢</strong></th>
-						<th class="center"><strong>送信者</strong></th>
-						<th class="center"><strong>件名</strong></th>
+						<th class="center" th:text="#{view.tablelabel.date}"></th>
+						<th class="center" th:text="#{view.tablelabel.cost}"></th>
+						<th class="center" th:text="#{view.tablelabel.age}"></th>
+						<th class="center" th:text="#{view.tablelabel.sender}"></th>
+						<th class="center" th:text="#{view.tablelabel.subject}"></th>
 						<th></th>
 					</tr>
 				</thead>
@@ -81,7 +81,7 @@ ${paging.totalRecordNum} + '件中'
 						<td th:text="*{subject}"></td>
 						<td style="text-align: center;">
 							<button type="submit" name="hidden" class="mini ui button"
-								th:value="*{text}">本文詳細</button>
+								th:value="*{text}"><p th:text="#{view.btn.details}"></p></button>
 						</td>
 					</tr>
 				</tbody>
