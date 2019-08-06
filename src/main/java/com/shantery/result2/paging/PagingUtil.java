@@ -27,7 +27,11 @@ public class PagingUtil {
 		PagingView pagingView = new PagingView();	// PagingViewのインスタンス化
 
 		pagingView.setTotalRecordNum(totalRecordNum);	// データの総件数
-		pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage + 1);	// ○~×件の○の値
+		if(totalRecordNum == 0) {
+			pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage);
+		} else {
+			pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage + 1);	// ○~×件の○の値
+		}
 		// 終端のページを表示するときはその終端の件数を出す。○~×件の×の値
 		pagingView.setToRecordNum(
 				currentPageNum * recordPerPage < totalRecordNum ? currentPageNum * recordPerPage : totalRecordNum);

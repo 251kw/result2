@@ -1,5 +1,7 @@
 package com.shantery.result2.util;
 
+import static com.shantery.result2.util.Result2Constants.*;
+
 import java.util.Optional;
 
 public class Result2Util {
@@ -16,8 +18,19 @@ public class Result2Util {
 	 */
 	public static int getCurrentPage(String page) {
 		// 現在いるページ番号の初期化
-		// pageが存在する
 		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
 		return Integer.parseInt(tmpPage);
+	}
+
+	/**
+	 * 検索ワードを返すメソッド
+	 * もしnullだったら空文字が入るようにする
+	 * @param word 検索ワード
+	 * @return 検索ワード
+	 */
+	public static String getSearchWord(String word) {
+		// 検索ワードの初期化
+		var tmpWord = Optional.ofNullable(word).orElse(EMPTY);
+		return tmpWord;
 	}
 }
