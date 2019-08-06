@@ -35,27 +35,27 @@ ${paging.totalRecordNum} + '件中'
 			<button type="submit" name="search" class="ui primary button">検索</button>
 		</form>
 		<div style="display:inline-flex">
-		<form th:action="@{/resultascdate}" th:object="${ascdating}"
+		<form th:action="@{/ascdate}" th:object="${ascdating}"
 			style="margin: 0px" method="post">
 			<button type="submit" name="ascdate" class="mini ui button">日付昇順</button>
 		</form>
-		<form th:action="@{/resultdescdate}" th:object="${descdating}"
+		<form th:action="@{/descdate}" th:object="${descdating}"
 			 method="post">
 			<button type="submit" name="descdate" class="mini ui button">日付降順</button>
 		</form>
-		<form th:action="@{/resultasccost}" th:object="${ascosting}"
+		<form th:action="@{/asccost}" th:object="${ascosting}"
 			method="post">
 			<button type="submit" name="asccost" class="mini ui button">単金昇順</button>
 		</form>
-		<form th:action="@{/resultdesccost}" th:object="${descosting}"
+		<form th:action="@{/desccost}" th:object="${descosting}"
 			method="post">
 			<button type="submit" name="desccost" class="mini ui button">単金降順</button>
 		</form>
-		<form th:action="@{/resultascage}" th:object="${ascageing}"
+		<form th:action="@{/ascage}" th:object="${ascageing}"
 			method="post">
 			<button type="submit" name="ascage" class="mini ui button">年齢昇順</button>
 		</form>
-		<form th:action="@{/resultdescage}" th:object="${descageing}"
+		<form th:action="@{/descage}" th:object="${descageing}"
 			method="post">
 			<button type="submit" name="descage" class="mini ui button">年齢降順</button>
 		</form>

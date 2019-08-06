@@ -19,6 +19,18 @@ public class Result2Constants {
 	public static final String FROM_BACK_BUTTON = "/return";
 	/** 検索ボタンが押されたときに使う変数 **/
 	public static final String FROM_SEARCH_BUTTON = "/sresults";
+	/** 日付昇順ボタンが押されたとき **/
+	public static final String FROM_DATEASC_BUTTON = "/ascdate";
+	/** 日付降順ボタンが押されたとき **/
+	public static final String FROM_DATEDESC_BUTTON = "/descdate";
+	/** 単価昇順ボタンが押されたとき **/
+	public static final String FROM_COSTASC_BUTTON = "/asccost";
+	/** 単価降順ボタンが押されたとき **/
+	public static final String FROM_COSTDESC_BUTTON = "/desccost";
+	/** 年齢昇順ボタンが押されたとき **/
+	public static final String FROM_AGEASC_BUTTON = "/ascage";
+	/** 年齢降順ボタンが押されたとき **/
+	public static final String FROM_AGEDESC_BUTTON = "/descage";
 
 	// 遷移先を示す変数
 	/** TOPページの遷移先 **/
