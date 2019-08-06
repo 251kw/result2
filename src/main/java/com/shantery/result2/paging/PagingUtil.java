@@ -42,13 +42,21 @@ public class PagingUtil {
 		pagingView.setFirstHref(preAppendPageNum + 1);	// 1ページ目のURLの文字列
 
 		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数
-		pagingView.setCanGoLast(currentPageNum != totalPageNum);	// Lastに行けるかどうか(true or false)
+		if(totalRecordNum == 0) {
+			pagingView.setCanGoLast((currentPageNum - 1) != totalPageNum);	// Lastに行けるかどうか(true or false)
+		} else {
+			pagingView.setCanGoLast(currentPageNum != totalPageNum);	// Lastに行けるかどうか(true or false)
+		}
 		pagingView.setLastHref(preAppendPageNum + totalPageNum);	// 総ページ目のURLの文字列
 
 		pagingView.setCanGoPrevious(currentPageNum != 1);	// 1個前に行けるかどうか(true or false)
 		pagingView.setPreviousHref(preAppendPageNum + (currentPageNum - 1));	// 1個前のページ目のURLの文字列
 
-		pagingView.setCanGoNext(currentPageNum != totalPageNum);	// 1個後ろに行けるかどうか(true or false)
+		if(totalRecordNum == 0) {
+			pagingView.setCanGoNext((currentPageNum - 1) != totalPageNum);	// 1個後ろに行けるかどうか(true or false)
+		} else {
+			pagingView.setCanGoNext(currentPageNum != totalPageNum);	// 1個後ろに行けるかどうか(true or false)
+		}
 		pagingView.setNextHref(preAppendPageNum + (currentPageNum + 1));	// 1個後ろのページ目のURLの文字列
 
 		pagingView.setPagingViewElements(
