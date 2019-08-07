@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shantery.result2.util.Result2Util;
+
 @Controller
 class Result2Controller {
 
@@ -37,7 +39,8 @@ class Result2Controller {
 			session.removeAttribute(SESSION_FORM_ID);
 		}
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
+		//model.addAttribute(LIST, Result2Util.convBeanToList(null));	// ServiceでSQL文の実行している
+		model.addAttribute("head", Result2Util.getColumnName());
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		model.addAttribute(
 				PAGING,r2Service.r2Paging(EMPTY,page));
