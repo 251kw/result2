@@ -18,101 +18,103 @@ import org.springframework.web.bind.annotation.RequestParam;
 class Result2Controller {
 
 	@Value("${app.recordperpage}")
-	private int recordPerPage;	// 1ページあたりの表示件数
-	//private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
+	private int recordPerPage; // 1ページあたりの表示件数
 
 	@Autowired
 	private Result2Service r2Service;
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value = TOP, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
+	@RequestMapping(value = TOP, method = RequestMethod.GET) // アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
 	public String index(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		if(session.getAttribute(SESSION_FORM_ID) != null) {	// もしsessionスコープ内にデータがあるなら削除する
+		if (session.getAttribute(SESSION_FORM_ID) != null) { // もしsessionスコープ内にデータがあるなら削除する
 			session.removeAttribute(SESSION_FORM_ID);
 		}
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
+		model.addAttribute(LIST, r2Service.find(page, recordPerPage)); // ServiceでSQL文の実行している
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		model.addAttribute(
-				PAGING,r2Service.r2Paging(EMPTY,page));
+				PAGING, r2Service.r2Paging(EMPTY, page));
 		return TO_TOP;
 	}
-	@RequestMapping(value = FROM_TEXT_DETAILS_BUTTON, method = RequestMethod.POST)	// 本文詳細ボタンが押されたとき
-	public String postdisplay(@RequestParam(name = HONBUN) String honbun, @RequestParam(name = KEEP_SET_PAGE) String page, Model model){
-		model.addAttribute(TEXT, honbun);	// メールの本文をキーをtextでセットする
-		model.addAttribute(KEEP_SET_PAGE, page);	// 現在のページ番号を覚えておくためにpageをセットする
+
+	@RequestMapping(value = FROM_TEXT_DETAILS_BUTTON, method = RequestMethod.POST) // 本文詳細ボタンが押されたとき
+	public String postdisplay(@RequestParam(name = HONBUN) String honbun,
+			@RequestParam(name = KEEP_SET_PAGE) String page, Model model) {
+		model.addAttribute(TEXT, honbun); // メールの本文をキーをtextでセットする
+		model.addAttribute(KEEP_SET_PAGE, page); // 現在のページ番号を覚えておくためにpageをセットする
 		return TO_TEXT_DETAILS;
 	}
 
-	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.POST)	// displayから戻るとき
+	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.POST) // displayから戻るとき
 	public String backIndex(@RequestParam(name = KEEP_GET_PAGE) final String page, Model model) throws ParseException {
-		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
+		boolean flag = false; // フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);
-		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
-			flag = true;	// フラグを立てる
-			 //sResultsをキーとしてvalueをList型にしたものを返す
+		if (session.getAttribute(SESSION_FORM_ID) != null) { // 検索を行っているなら
+			flag = true; // フラグを立てる
+			//sResultsをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
-		} else {	// 検索を行っていないのなら
-			 //testをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(LIST, r2Service.find(page, recordPerPage));
-		}
-		 //ページングの機能としてキーをpageとしたものをセットする
-		model.addAttribute(
-				PAGING,
-				r2Service.r2Paging(sWord,page));
-		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
-			return TO_TOP;
-		} else {	// そうでなければsearchResultsに戻す
-			return TO_SEARCH_RESULTS;
-		}
-	}
-
-	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.GET)	// displayから戻ってページングを行うとき
-	public String backIndex2(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
-		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
-		/*if(page != null) {	// pageが存在するとき
-		}*/
-		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
-			flag = true;	// フラグを立てる
-			 //sResultsをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, r2Service.search(sWord,page, recordPerPage));
-		} else {	// 検索を行っていないのなら
-			 //testをキーとしてvalueをList型にしたものを返す
+		} else { // 検索を行っていないのなら
+			//testをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
-		 //ページングの機能としてキーをpageとしたものをセットする
+		//ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
-		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
+				r2Service.r2Paging(sWord, page));
+		if (flag == false) { // もしflagが立っていない(=検索を行っていない)のであればindexに戻す
 			return TO_TOP;
-		} else {	// そうでなければsearchResultsに戻す
+		} else { // そうでなければsearchResultsに戻す
 			return TO_SEARCH_RESULTS;
 		}
 	}
 
-	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
-	public String postsearchResults(@RequestParam(name = SEARCH_WORD,required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
-		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
-		 //ページングの機能してキーをpageとしたものをセットする
+	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.GET) // displayから戻ってページングを行うとき
+	public String backIndex2(@RequestParam(required = false) final String page, Model model) throws ParseException {
+		boolean flag = false; // フリーワード検索を行っているどうかのフラグ
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); // 検索されているワードを取る
+		if (session.getAttribute(SESSION_FORM_ID) != null) { // 検索を行っているなら
+			flag = true; // フラグを立てる
+			//sResultsをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
+		} else { // 検索を行っていないのなら
+			//testをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, r2Service.find(page, recordPerPage));
+		}
+		//ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
-		return TO_SEARCH_RESULTS;	// searchResultsに返す
+				r2Service.r2Paging(sWord, page));
+		if (flag == false) { // もしflagが立っていない(=検索を行っていない)のであればindexに戻す
+			return TO_TOP;
+		} else { // そうでなければsearchResultsに戻す
+			return TO_SEARCH_RESULTS;
+		}
 	}
-	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき
-	public String postsearchResults2(@RequestParam(required = false) final String page, Model model) throws ParseException{
-		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 保持した検索ワードを取ってくる
-		 //sResultsをキーとしてvalueをList型にしたものを返す
+
+	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST) // フリーワードの検索ボタンが押されたとき
+	public String postsearchResults(@RequestParam(name = SEARCH_WORD, required = false) String sWord,
+			@RequestParam(required = false) final String page, Model model) throws ParseException {
+		session.setAttribute(SESSION_FORM_ID, sWord); // 検索ワードをsessionスコープに保持
+		//sResultsをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
-		 //ページングの機能してキーをpageとしたものをセットする
+		//ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
-		return TO_SEARCH_RESULTS;	// searchResultsに返す
+				r2Service.r2Paging(sWord, page));
+		return TO_SEARCH_RESULTS; // searchResultsに返す
+	}
+
+	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET) // 検索した結果のページでページングを行うとき
+	public String postsearchResults2(@RequestParam(required = false) final String page, Model model)
+			throws ParseException {
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); // 保持した検索ワードを取ってくる
+		//sResultsをキーとしてvalueをList型にしたものを返す
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
+		//ページングの機能してキーをpageとしたものをセットする
+		model.addAttribute(
+				PAGING,
+				r2Service.r2Paging(sWord, page));
+		return TO_SEARCH_RESULTS; // searchResultsに返す
 	}
 }

@@ -16,48 +16,48 @@ public class PagingUtil {
 	 */
 
 	public static PagingView generatePagingView(
-			int currentPageNum,	// 現在のページ番号
-			int totalRecordNum,	// データの総件数
-			int recordPerPage,	// 1ページ当たりの表示件数
-			int length,			// ページバーの表示件数
+			int currentPageNum, // 現在のページ番号
+			int totalRecordNum, // データの総件数
+			int recordPerPage, // 1ページ当たりの表示件数
+			int length, // ページバーの表示件数
 			Map<String, String> params) {
-		String baseQueryString = toQueryString(params);	// ?が入る
-		String preAppendPageNum = baseQueryString + "&page=";	// URLの後ろに?&page=を入れる文字列
+		String baseQueryString = toQueryString(params); // ?が入る
+		String preAppendPageNum = baseQueryString + "&page="; // URLの後ろに?&page=を入れる文字列
 
-		PagingView pagingView = new PagingView();	// PagingViewのインスタンス化
+		PagingView pagingView = new PagingView(); // PagingViewのインスタンス化
 
-		pagingView.setTotalRecordNum(totalRecordNum);	// データの総件数
-		if(totalRecordNum == 0) {
+		pagingView.setTotalRecordNum(totalRecordNum); // データの総件数
+		if (totalRecordNum == 0) {
 			pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage);
 		} else {
-			pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage + 1);	// ○~×件の○の値
+			pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage + 1); // ○~×件の○の値
 		}
 		// 終端のページを表示するときはその終端の件数を出す。○~×件の×の値
 		pagingView.setToRecordNum(
 				currentPageNum * recordPerPage < totalRecordNum ? currentPageNum * recordPerPage : totalRecordNum);
-		pagingView.setRecordPerPage(recordPerPage);	// 1ページ当たりの表示件数
-		pagingView.setCurrentPageNum(currentPageNum);	// 現在のページ番号
+		pagingView.setRecordPerPage(recordPerPage); // 1ページ当たりの表示件数
+		pagingView.setCurrentPageNum(currentPageNum); // 現在のページ番号
 
-		pagingView.setCanGoFirst(currentPageNum != 1);	// TOPに行けるかどうか(true or false)
-		pagingView.setFirstHref(preAppendPageNum + 1);	// 1ページ目のURLの文字列
+		pagingView.setCanGoFirst(currentPageNum != 1); // TOPに行けるかどうか(true or false)
+		pagingView.setFirstHref(preAppendPageNum + 1); // 1ページ目のURLの文字列
 
-		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数
-		if(totalRecordNum == 0) {
-			pagingView.setCanGoLast((currentPageNum - 1) != totalPageNum);	// Lastに行けるかどうか(true or false)
+		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage); // 総ページ数
+		if (totalRecordNum == 0) {
+			pagingView.setCanGoLast((currentPageNum - 1) != totalPageNum); // Lastに行けるかどうか(true or false)
 		} else {
-			pagingView.setCanGoLast(currentPageNum != totalPageNum);	// Lastに行けるかどうか(true or false)
+			pagingView.setCanGoLast(currentPageNum != totalPageNum); // Lastに行けるかどうか(true or false)
 		}
-		pagingView.setLastHref(preAppendPageNum + totalPageNum);	// 総ページ目のURLの文字列
+		pagingView.setLastHref(preAppendPageNum + totalPageNum); // 総ページ目のURLの文字列
 
-		pagingView.setCanGoPrevious(currentPageNum != 1);	// 1個前に行けるかどうか(true or false)
-		pagingView.setPreviousHref(preAppendPageNum + (currentPageNum - 1));	// 1個前のページ目のURLの文字列
+		pagingView.setCanGoPrevious(currentPageNum != 1); // 1個前に行けるかどうか(true or false)
+		pagingView.setPreviousHref(preAppendPageNum + (currentPageNum - 1)); // 1個前のページ目のURLの文字列
 
-		if(totalRecordNum == 0) {
-			pagingView.setCanGoNext((currentPageNum - 1) != totalPageNum);	// 1個後ろに行けるかどうか(true or false)
+		if (totalRecordNum == 0) {
+			pagingView.setCanGoNext((currentPageNum - 1) != totalPageNum); // 1個後ろに行けるかどうか(true or false)
 		} else {
-			pagingView.setCanGoNext(currentPageNum != totalPageNum);	// 1個後ろに行けるかどうか(true or false)
+			pagingView.setCanGoNext(currentPageNum != totalPageNum); // 1個後ろに行けるかどうか(true or false)
 		}
-		pagingView.setNextHref(preAppendPageNum + (currentPageNum + 1));	// 1個後ろのページ目のURLの文字列
+		pagingView.setNextHref(preAppendPageNum + (currentPageNum + 1)); // 1個後ろのページ目のURLの文字列
 
 		pagingView.setPagingViewElements(
 				generatePagingViewElements(currentPageNum, totalPageNum, length, preAppendPageNum));
@@ -92,11 +92,11 @@ public class PagingUtil {
 		 * 例) [] がついているのが現在のページ
 		 *    << < 1 2 [3] 4 5 6 > >>
 		 */
-		int backSpan = (length - 1) / 2;	// 左側に何個つけるか
-		int forthSpan = (length - 1) - backSpan;	// 右側に何個つけるか
+		int backSpan = (length - 1) / 2; // 左側に何個つけるか
+		int forthSpan = (length - 1) - backSpan; // 右側に何個つけるか
 
-		int startIndex;	// 一番左の番号
-		int endIndex;	// 一番右の番号
+		int startIndex; // 一番左の番号
+		int endIndex; // 一番右の番号
 
 		if (currentPageNum - backSpan < 1) {
 			// 表示幅に従うと存在しないページ(0ページ以下)が生成されるので、1ページから始める
