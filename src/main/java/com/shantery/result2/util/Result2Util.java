@@ -93,7 +93,6 @@ public class Result2Util {
 			Result2 ret = list.get(i);
 			listResult2.add(ret.getResult2List());
 		}
-
 		// 表示内容がすべて入ったリストを返却
 		return listResult2;
 	}
