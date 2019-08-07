@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.shantery.result2.Result2;
 
 /**
@@ -19,6 +21,9 @@ public class Result2Util {
 	private Result2Util() {}
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
+	/** 表の表示列数 **/
+	@Value("${app.columnsize}")
+	private static int columnSize;
 
 	/**
 	 * 現在のページを返却します。
@@ -101,11 +106,9 @@ public class Result2Util {
 		List<String> smpList1 = Arrays.asList(smp1);
 		List<String> smpList2 = Arrays.asList(smp2);
 		List<String> smpList3 = Arrays.asList(smp3);
-
 		listResult2.add(smpList1);
 		listResult2.add(smpList2);
 		listResult2.add(smpList3);
-
 		// 表示内容がすべて入ったリストを返却
 		return listResult2;
 	}
