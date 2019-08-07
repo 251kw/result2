@@ -184,5 +184,4 @@ public class Result2 implements Serializable {
 		this.temp9 = temp9;
 	}
 
-
 }

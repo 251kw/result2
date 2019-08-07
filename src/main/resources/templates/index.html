@@ -99,7 +99,7 @@ ${paging.totalRecordNum} + '件中'
 									th:href="${paging.previousHref}"><i class="angle left icon"></i></a>
 								<a class="item" th:each="element : ${paging.pagingViewElements}"
 									th:href="${element.href}" th:text="${element.name}"
-									th:classappend="${element.name} == ${paging.currentPageNum} ? 'disabled'">1</a>
+									th:classappend="${element.name} == ${paging.currentPageNum} ? 'disabled'"></a>
 								<!--/*-->
 								<a href="#" class="disabled item">2</a> <a href="#" class="item">3</a>
 								<a href="#" class="item">4</a> <a href="#" class="item">5</a>
