@@ -2,8 +2,17 @@ package com.shantery.result2.util;
 
 import static com.shantery.result2.util.Result2Constants.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import com.shantery.result2.Result2;
+
+/**
+ * Result2システムで使用する共通クラス
+ * Result2固有の共通した処理はこのクラスに集約
+ */
 public class Result2Util {
 
 	/** インスタンス生成禁止 **/
@@ -32,5 +41,31 @@ public class Result2Util {
 		// 検索ワードの初期化
 		var tmpWord = Optional.ofNullable(word).orElse(EMPTY);
 		return tmpWord;
+	}
+
+	/**
+	 * DBから取得したListの内容を変換する（Result2型->List型）
+	 * 理由：Thymeleafで項目を可変にする為に実装
+	 * @param list DBから取得したリスト
+	 * @return 変換後のリスト
+	 */
+	public static List<List<String>> convBeanToList(List<Result2> list) {
+
+		List<List<String>> listResult2 = new ArrayList<>(); // 表示内容がすべて入ったリスト
+		List<String>       result2     = new ArrayList<>(); // 1行分の表示内容
+
+		// サンプルデータ
+		String[] smp1 = {"1", "2019-07-08 15:52:32", "JPN", "派遣", "商流", "100", "28", "新宿駅", "件名", "本文", "田中"};
+		String[] smp2 = {"2", "2019-07-16 14:18:58", "USA", "常駐", "商流", "1500", "35", "Grand Central Station", "お腹すいた", "初めまして", "ボンジュール鈴木"};
+		String[] smp3 = {"3", "2019-07-16 14:24:47", "JPN", "フリー", "商流", "5000", "33", "東京駅", "携帯について", "いつもお世話になっております。", "胡桃沢"};
+		List<String> smpList1 = Arrays.asList(smp1);
+		List<String> smpList2 = Arrays.asList(smp2);
+		List<String> smpList3 = Arrays.asList(smp3);
+		listResult2.add(smpList1);
+		listResult2.add(smpList2);
+		listResult2.add(smpList3);
+
+		// 表示内容がすべて入ったリストを返却
+		return listResult2;
 	}
 }
