@@ -26,6 +26,11 @@ class Result2Controller {
 	@Autowired
 	HttpSession session;
 
+	/**
+	 * アプリケーションを起動させたとき、もしくは会社のロゴが押されたときに動く
+	 * @param page 今いるページ
+	 * @return TOPページの遷移先
+	 */
 	@RequestMapping(value = TOP, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
 	public String index(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// もしsessionスコープ内にデータがあるなら削除する
@@ -38,6 +43,13 @@ class Result2Controller {
 				PAGING,r2Service.r2Paging(EMPTY,page));
 		return TO_TOP;
 	}
+
+	/**
+	 * 詳細ボタンが押されたとき
+	 * @param honbun メールの本文
+	 * @param page 今いるページ
+	 * @return 本文詳細ページの遷移先
+	 */
 	@RequestMapping(value = FROM_TEXT_DETAILS_BUTTON, method = RequestMethod.POST)	// 本文詳細ボタンが押されたとき
 	public String postdisplay(@RequestParam(name = HONBUN) String honbun, @RequestParam(name = KEEP_SET_PAGE) String page, Model model){
 		model.addAttribute(TEXT, honbun);	// メールの本文をキーをtextでセットする
@@ -45,8 +57,15 @@ class Result2Controller {
 		return TO_TEXT_DETAILS;
 	}
 
+	/**
+	 *displayのページから戻るとき
+	 * @param page 今いるページ
+	 * @param model
+	 * @return	検索をしていればindex
+	 * @return	検索していればsearchResults
+	 */
 	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.POST)	// displayから戻るとき
-	public String backIndex(@RequestParam(name = KEEP_GET_PAGE) final String page, Model model) throws ParseException {
+	public String postbackIndex(@RequestParam(name = KEEP_GET_PAGE) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
@@ -68,12 +87,16 @@ class Result2Controller {
 		}
 	}
 
+	/**
+	 *displayから戻ってからページング
+	 * @param page	今いるページ
+	 * @return	検索をしていればindex
+	 * @return	検索していればsearchResults
+	 */
 	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.GET)	// displayから戻ってページングを行うとき
-	public String backIndex2(@RequestParam(required = false) final String page, Model model) throws ParseException {
+	public String getbackIndex(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
-		/*if(page != null) {	// pageが存在するとき
-		}*/
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
@@ -93,6 +116,13 @@ class Result2Controller {
 		}
 	}
 
+	/**
+	 * フリーワードの検索ボタンが押されたとき
+	 * @param sWord 検索ワード
+	 * @param page	今いるページ
+	 * @param model
+	 * @return searchResults
+	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
 	public String postsearchResults(@RequestParam(name = SEARCH_WORD,required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
 		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
@@ -104,8 +134,15 @@ class Result2Controller {
 				r2Service.r2Paging(sWord,page));
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
+
+	/**
+	 * 文字を検索し、そのページをページングしたとき
+	 * @param page	今いるページ
+	 * @param model
+	 * @return searchResults
+	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき
-	public String postsearchResults2(@RequestParam(required = false) final String page, Model model) throws ParseException{
+	public String getsearchResults(@RequestParam(required = false) final String page, Model model) throws ParseException{
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 保持した検索ワードを取ってくる
 		 //sResultsをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));

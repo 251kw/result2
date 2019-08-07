@@ -38,7 +38,7 @@ public class PagingUtil {
 		pagingView.setRecordPerPage(recordPerPage);	// 1ページ当たりの表示件数
 		pagingView.setCurrentPageNum(currentPageNum);	// 現在のページ番号
 
-		pagingView.setCanGoFirst(currentPageNum != 1);	// TOPに行けるかどうか(true or false)
+		pagingView.setCanGoFirst(currentPageNum != 1);	// TOPに行ける1かどうか(true or false)
 		pagingView.setFirstHref(preAppendPageNum + 1);	// 1ページ目のURLの文字列
 
 		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数

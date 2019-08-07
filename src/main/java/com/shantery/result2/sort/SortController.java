@@ -25,6 +25,12 @@ class SortController {
 	@Autowired
 	HttpSession session;
 
+	/**
+	 * 日付を昇順にソート(POST送信の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_DATEASC_BUTTON, method = RequestMethod.POST)
 	public String postascdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -38,6 +44,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 日付を降順にソート(POST送信以外の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_DATEASC_BUTTON, method = RequestMethod.GET)
 	public String getascdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -51,6 +63,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 日付を降順にソート(POST送信の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_DATEDESC_BUTTON, method = RequestMethod.POST)
 	public String postdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);
@@ -64,6 +82,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 日付を降順にソート(POST送信以外の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_DATEDESC_BUTTON, method = RequestMethod.GET)
 	public String getdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);
@@ -77,6 +101,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 単金を昇順にソート(POST送信の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_COSTASC_BUTTON, method = RequestMethod.POST)
 	public String postasccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -90,6 +120,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 *単金を昇順にソート(POST送信以外の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_COSTASC_BUTTON, method = RequestMethod.GET)
 	public String getasccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -103,6 +139,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 単金を降順にソート(POST送信以外の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_COSTDESC_BUTTON, method = RequestMethod.POST)
 	public String postdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -116,6 +158,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 単金を昇順にソート(POST送信の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_COSTDESC_BUTTON, method = RequestMethod.GET)
 	public String getdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -129,6 +177,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 年齢を昇順にソート(POST送信の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_AGEASC_BUTTON, method = RequestMethod.POST)
 	public String postascage(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -142,6 +196,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 年齢を昇順にソート(POST送信以外の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_AGEASC_BUTTON, method = RequestMethod.GET)
 	public String getascage(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -155,6 +215,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 年齢を降順にソート(POST送信の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_AGEDESC_BUTTON, method = RequestMethod.POST)
 	public String postdescage(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
@@ -168,6 +234,12 @@ class SortController {
 		}
 	}
 
+	/**
+	 * 年齢を降順にソート(POST送信以外の時)
+	 * @param page	今いるページ
+	 * @param model
+	 * @return	検索結果ページの遷移先
+	 */
 	@RequestMapping(value = FROM_AGEDESC_BUTTON, method = RequestMethod.GET)
 	public String getdescage(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		String word = (String) session.getAttribute(SESSION_FORM_ID);	// 検索ワードを取る
