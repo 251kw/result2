@@ -10,6 +10,7 @@ public class PagingView {
 	private int toRecordNum;	// ○件~×件の×の値
 
 	private int currentPageNum;	// 現在のページ番号
+	private int totalPageNum; //総ページ数
 
 	private int recordPerPage;	// 1ページ当たりの表示件数
 
@@ -137,6 +138,14 @@ public class PagingView {
 
 	public void setPagingViewElements(List<PagingViewElement> pagingViewElements) {
 		this.pagingViewElements = pagingViewElements;
+	}
+
+	public int getTotalPageNum() {
+		return totalPageNum;
+	}
+
+	public void setTotalPageNum(int totalPageNum) {
+		this.totalPageNum = totalPageNum;
 	}
 
 }

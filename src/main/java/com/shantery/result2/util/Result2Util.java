@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.shantery.result2.paging.PagingView;
+
 import com.shantery.result2.Result2;
 
 /**
@@ -51,6 +53,17 @@ public class Result2Util {
 	public static int getCurrentPage(String page) {
 		// 現在いるページ番号の初期化
 		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
+		return Integer.parseInt(tmpPage);
+	}
+
+	public static int getCurrentPageForDatabase(String page) {
+		// 現在いるページ番号の初期化
+		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
+		PagingView pv = new PagingView();
+		int tpn = pv.getTotalPageNum();
+		if(tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
+			tmpPage = "1";
+		}
 		return Integer.parseInt(tmpPage);
 	}
 

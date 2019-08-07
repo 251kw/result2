@@ -36,11 +36,11 @@ class Result2Controller {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// もしsessionスコープ内にデータがあるなら削除する
 			session.removeAttribute(SESSION_FORM_ID);
 		}
-		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		model.addAttribute(
 				PAGING,r2Service.r2Paging(EMPTY,page));
+		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
+		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
 		return TO_TOP;
 	}
 
@@ -68,6 +68,10 @@ class Result2Controller {
 	public String postbackIndex(@RequestParam(name = KEEP_GET_PAGE) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);
+		 //ページングの機能としてキーをpageとしたものをセットする
+		model.addAttribute(
+				PAGING,
+				r2Service.r2Paging(sWord,page));
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
@@ -76,10 +80,6 @@ class Result2Controller {
 			 //testをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
-		 //ページングの機能としてキーをpageとしたものをセットする
-		model.addAttribute(
-				PAGING,
-				r2Service.r2Paging(sWord,page));
 		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
 			return TO_TOP;
 		} else {	// そうでなければsearchResultsに戻す
@@ -97,6 +97,15 @@ class Result2Controller {
 	public String getbackIndex(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+<<<<<<< Upstream, based on origin/master
+=======
+		/*if(page != null) {	// pageが存在するとき
+		}*/
+		 //ページングの機能としてキーをpageとしたものをセットする
+		model.addAttribute(
+				PAGING,
+				r2Service.r2Paging(sWord,page));
+>>>>>>> 2f52ae4 2019/08/07 存在しないページ数をURLに直接入力した場合1ページ目に戻るように修正
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す
@@ -105,10 +114,6 @@ class Result2Controller {
 			 //testをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
-		 //ページングの機能としてキーをpageとしたものをセットする
-		model.addAttribute(
-				PAGING,
-				r2Service.r2Paging(sWord,page));
 		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
 			return TO_TOP;
 		} else {	// そうでなければsearchResultsに戻す
@@ -126,12 +131,12 @@ class Result2Controller {
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
 	public String postsearchResults(@RequestParam(name = SEARCH_WORD,required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
 		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
-		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
 				r2Service.r2Paging(sWord,page));
+		 //sResultsをキーとしてvalueをList型にしたものを返す
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
 
@@ -144,12 +149,12 @@ class Result2Controller {
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき
 	public String getsearchResults(@RequestParam(required = false) final String page, Model model) throws ParseException{
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 保持した検索ワードを取ってくる
-		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
 				r2Service.r2Paging(sWord,page));
+		 //sResultsをキーとしてvalueをList型にしたものを返す
+		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
 }

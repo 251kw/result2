@@ -25,7 +25,11 @@ public class PagingUtil {
 		String preAppendPageNum = baseQueryString + "&page=";	// URLの後ろに?&page=を入れる文字列
 
 		PagingView pagingView = new PagingView();	// PagingViewのインスタンス化
-
+		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数
+		pagingView.setTotalPageNum(totalPageNum);
+		if(currentPageNum > totalPageNum || currentPageNum < 1) {
+			currentPageNum = 1;
+		}
 		pagingView.setTotalRecordNum(totalRecordNum);	// データの総件数
 		if(totalRecordNum == 0) {
 			pagingView.setFromRecordNum((currentPageNum - 1) * recordPerPage);
@@ -41,7 +45,7 @@ public class PagingUtil {
 		pagingView.setCanGoFirst(currentPageNum != 1);	// TOPに行ける1かどうか(true or false)
 		pagingView.setFirstHref(preAppendPageNum + 1);	// 1ページ目のURLの文字列
 
-		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数
+
 		if(totalRecordNum == 0) {
 			pagingView.setCanGoLast((currentPageNum - 1) != totalPageNum);	// Lastに行けるかどうか(true or false)
 		} else {
