@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -101,10 +100,10 @@ public class Result2Util {
 		List<String> smpList1 = Arrays.asList(smp1);
 		List<String> smpList2 = Arrays.asList(smp2);
 		List<String> smpList3 = Arrays.asList(smp3);
-		result2 = list.stream().map(Result2::getTemp9).collect(Collectors.toList());
 
-		listResult2.add(result2);
-		listResult2.add(result2);
+		listResult2.add(smpList1);
+		listResult2.add(smpList2);
+		listResult2.add(smpList3);
 
 		// 表示内容がすべて入ったリストを返却
 		return listResult2;
