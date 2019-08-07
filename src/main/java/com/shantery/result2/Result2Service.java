@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -26,8 +24,6 @@ public class Result2Service {
 
 	@Autowired
 	Result2Repository r2Repository;
-	HttpSession session;
-	PagingUtil pu;
 
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
