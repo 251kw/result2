@@ -64,26 +64,30 @@ ${paging.totalRecordNum} + '件中'
 				<!-- 見出し。ここも可変になるように後々はしたい -->
 				<thead>
 					<tr>
+						<th:block th:each="stat,ok: ${#numbers.sequence(1,5)}"><!--
 						<th class="center" th:text="#{view.tablelabel.date}"></th>
 						<th class="center" th:text="#{view.tablelabel.cost}"></th>
 						<th class="center" th:text="#{view.tablelabel.age}"></th>
 						<th class="center" th:text="#{view.tablelabel.sender}"></th>
 						<th class="center" th:text="#{view.tablelabel.subject}"></th>
-						<th></th>
+						<th></th> -->
+						<th th:if="${ok.index < 3}" th:text="${stat}"></th>
 					</tr>
 				</thead>
 				<!-- DB内の表示、ここも可変になるように後々はしたい -->
 				<tbody>
 					<tr th:each="list : ${test}" th:object="${list}">
-						<td th:text="*{date}"></td>
+						<th:block th:each="nakami, stat: ${list}">
+						<td th:if="${stat.index < 3}" th:text="${nakami}"></td>
+						<!-- <td th:text="*{date}"></td>
 						<td th:text="*{cost}"></td>
 						<td th:text="*{age}"></td>
 						<td th:text="*{sender}"></td>
-						<td th:text="*{subject}"></td>
-						<td style="text-align: center;">
+						<td th:text="*{subject}"></td> -->
+						<!-- <td style="text-align: center;">
 							<button type="submit" name="hidden" class="mini ui button"
 								th:value="*{text}"><p th:text="#{view.btn.details}"></p></button>
-						</td>
+						</td> -->
 					</tr>
 				</tbody>
 				<tfoot>
