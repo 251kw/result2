@@ -34,9 +34,8 @@ class Result2Controller {
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
 		model.addAttribute(LIST, r2Service.find(page, recordPerPage));	// ServiceでSQL文の実行している
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
-		String sWord = EMPTY;
 		model.addAttribute(
-				PAGING,r2Service.r2Paging(sWord,page));
+				PAGING,r2Service.r2Paging(EMPTY,page));
 		return TO_TOP;
 	}
 	@RequestMapping(value = FROM_TEXT_DETAILS_BUTTON, method = RequestMethod.POST)	// 本文詳細ボタンが押されたとき
@@ -81,7 +80,6 @@ class Result2Controller {
 			model.addAttribute(SEARCH_LIST, r2Service.search(sWord,page, recordPerPage));
 		} else {	// 検索を行っていないのなら
 			 //testをキーとしてvalueをList型にしたものを返す
-			sWord = EMPTY;
 			model.addAttribute(LIST, r2Service.find(page, recordPerPage));
 		}
 		 //ページングの機能としてキーをpageとしたものをセットする
@@ -97,15 +95,7 @@ class Result2Controller {
 
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
 	public String postsearchResults(@RequestParam(name = SEARCH_WORD,required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
-		if(sWord == null) {	// もしsWordが取れなければ空文字を入れる
-			sWord = EMPTY;
-		}
 		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
-		if(page != null) {	// もしpageが存在しないなら
-			model.addAttribute(
-					PAGING,
-					r2Service.r2Paging(sWord,page));
-		}
 		 //sResultsをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする
@@ -117,9 +107,6 @@ class Result2Controller {
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき
 	public String postsearchResults2(@RequestParam(required = false) final String page, Model model) throws ParseException{
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 保持した検索ワードを取ってくる
-		if(sWord == null) {	// もしsWordが取れなければ空文字をセットする
-			sWord = EMPTY;
-		}
 		 //sResultsをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(SEARCH_LIST, r2Service.search(sWord, page, recordPerPage));
 		 //ページングの機能してキーをpageとしたものをセットする

@@ -37,7 +37,7 @@ public class Result2Service {
 
 	public PagingView r2Paging(String sWord,String page) {
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
-		int totalRecordNum = count(sWord);
+		int totalRecordNum = count(Result2Util.getSearchWord(sWord));
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
@@ -49,8 +49,9 @@ public class Result2Service {
 	//データを検索するメソッド
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage -1);
-		return r2Repository.search(sWord,PageRequest.of(offset, recordPerPage));
+		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));
 	}
 
 	// データの総件数を返すメソッド
