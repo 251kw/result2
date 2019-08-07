@@ -4,8 +4,12 @@ import static com.shantery.result2.util.Result2Constants.*;
 
 import java.util.Optional;
 
+import com.shantery.result2.paging.PagingView;
+
 public class Result2Util {
 
+	/*@Autowired
+	PagingView pv;*/
 	/** インスタンス生成禁止 **/
 	private Result2Util() {}
 	/** ページ番号の初期値 **/
@@ -19,6 +23,17 @@ public class Result2Util {
 	public static int getCurrentPage(String page) {
 		// 現在いるページ番号の初期化
 		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
+		return Integer.parseInt(tmpPage);
+	}
+
+	public static int getCurrentPageForDatabase(String page) {
+		// 現在いるページ番号の初期化
+		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
+		PagingView pv = new PagingView();
+		int tpn = pv.getTotalPageNum();
+		if(tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
+			tmpPage = "1";
+		}
 		return Integer.parseInt(tmpPage);
 	}
 

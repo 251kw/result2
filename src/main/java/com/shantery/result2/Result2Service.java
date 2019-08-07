@@ -30,7 +30,7 @@ public class Result2Service {
 	PagingUtil pu;
 
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
 		int offset = (currentPage - 1); //開始ページの初期化
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Repositoryに返す
 		}
@@ -48,7 +48,7 @@ public class Result2Service {
 
 	//データを検索するメソッド
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage -1);
 		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));
