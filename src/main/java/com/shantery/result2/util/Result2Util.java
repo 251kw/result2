@@ -20,29 +20,6 @@ public class Result2Util {
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
 
-	/* クラス内定数 */
-	private static final String   DATE                     = "日時";
-	private static final String   NATIONALITY              = "国";
-	private static final String   EMPLOYMENT               = "雇";
-	private static final String   COMMERCIAL_DISTRIBUTION  = "商";
-	private static final String   COST                     = "単金";
-	private static final String   AGE                      = "年齢";
-	private static final String   CLOSEST_STATION          = "最寄駅";
-	private static final String   SUBJECT                  = "L/S";
-	private static final String   TEXT                     = "件名";
-	private static final String   SENDER                   = "送信者";
-	private static final String[] COLUMNS = {
-			DATE,
-			NATIONALITY,
-			EMPLOYMENT,
-			COMMERCIAL_DISTRIBUTION,
-			COST,
-			AGE,
-			CLOSEST_STATION,
-			SUBJECT,
-			TEXT,
-			SENDER
-	};
 	/**
 	 * 現在のページを返却します。
 	 * @param page 遷移先のページ番号
