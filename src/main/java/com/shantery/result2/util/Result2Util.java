@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.shantery.result2.Result2;
 import com.shantery.result2.paging.PagingView;
 
@@ -20,6 +22,9 @@ public class Result2Util {
 	private Result2Util() {}
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
+	/** 表の表示列数 **/
+	@Value("${app.columnsize}")
+	private static int columnSize;
 
 	/**
 	 * 現在のページを返却します。
