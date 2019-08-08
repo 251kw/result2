@@ -29,7 +29,8 @@ class SortController {
 	 * 日付を昇順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateASCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_DATEASC_BUTTON, method = RequestMethod.POST)
 	public String postascdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -48,7 +49,8 @@ class SortController {
 	 * 日付を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateASCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_DATEASC_BUTTON, method = RequestMethod.GET)
 	public String getascdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -67,7 +69,8 @@ class SortController {
 	 * 日付を降順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateDESCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_DATEDESC_BUTTON, method = RequestMethod.POST)
 	public String postdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -86,7 +89,8 @@ class SortController {
 	 * 日付を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateDESCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_DATEDESC_BUTTON, method = RequestMethod.GET)
 	public String getdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -105,7 +109,8 @@ class SortController {
 	 * 単金を昇順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostASCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_COSTASC_BUTTON, method = RequestMethod.POST)
 	public String postasccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -124,7 +129,8 @@ class SortController {
 	 *単金を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostASCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_COSTASC_BUTTON, method = RequestMethod.GET)
 	public String getasccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -143,7 +149,8 @@ class SortController {
 	 * 単金を降順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostDESCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_COSTDESC_BUTTON, method = RequestMethod.POST)
 	public String postdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -162,7 +169,8 @@ class SortController {
 	 * 単金を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostDESCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_COSTDESC_BUTTON, method = RequestMethod.GET)
 	public String getdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -181,7 +189,8 @@ class SortController {
 	 * 年齢を昇順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeASCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_AGEASC_BUTTON, method = RequestMethod.POST)
 	public String postascage(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -200,7 +209,8 @@ class SortController {
 	 * 年齢を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeASCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_AGEASC_BUTTON, method = RequestMethod.GET)
 	public String getascage(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -219,7 +229,8 @@ class SortController {
 	 * 年齢を降順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeDESCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_AGEDESC_BUTTON, method = RequestMethod.POST)
 	public String postdescage(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -238,7 +249,8 @@ class SortController {
 	 * 年齢を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
-	 * @return	検索結果ページの遷移先
+	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeDESCで処理したLISTをindexに返す。
+	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_AGEDESC_BUTTON, method = RequestMethod.GET)
 	public String getdescage(@RequestParam(required = false) final String page, Model model) throws ParseException {

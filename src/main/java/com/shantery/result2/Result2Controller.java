@@ -29,7 +29,7 @@ class Result2Controller {
 	/**
 	 * アプリケーションを起動させたとき、もしくは会社のロゴが押されたときに動く
 	 * @param page 今いるページ
-	 * @return TOPページの遷移先
+	 * @return r2Serviceのfindで処理したLIST、r2Serviceのr2Pagingで処理したページング機能をindexに返す。
 	 */
 	@RequestMapping(value = TOP, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
 	public String index(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -48,7 +48,7 @@ class Result2Controller {
 	 * 詳細ボタンが押されたとき
 	 * @param honbun メールの本文
 	 * @param page 今いるページ
-	 * @return 本文詳細ページの遷移先
+	 * @return メールの本文、ページ番号を覚えておくためのpageをdisplayに返す。
 	 */
 	@RequestMapping(value = FROM_TEXT_DETAILS_BUTTON, method = RequestMethod.POST)	// 本文詳細ボタンが押されたとき
 	public String postdisplay(@RequestParam(name = HONBUN) String honbun, @RequestParam(name = KEEP_SET_PAGE) String page, Model model){
@@ -61,8 +61,8 @@ class Result2Controller {
 	 *displayのページから戻るとき
 	 * @param page 今いるページ
 	 * @param model
-	 * @return	検索をしていればindex
-	 * @return	検索していればsearchResults
+	 * @return	検索を行っていなければr2Serviceのfindで処理したLIST、r2Serviceのr2Pagingで処理したページング機能をindexに返す。
+	 * @return	検索を行っていればr2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearcResultsに返す。
 	 */
 	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.POST)	// displayから戻るとき
 	public String postbackIndex(@RequestParam(name = KEEP_GET_PAGE) final String page, Model model) throws ParseException {
@@ -90,8 +90,8 @@ class Result2Controller {
 	/**
 	 *displayから戻ってからページング
 	 * @param page	今いるページ
-	 * @return	検索をしていればindex
-	 * @return	検索していればsearchResults
+	 * @return	検索を行っていなければr2Serviceのfindで処理したLIST、r2Serviceのr2Pagingで処理したページング機能をindexに返す。
+	 * @return	検索を行っていればr2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearcResultsに返す。
 	 */
 	@RequestMapping(value = FROM_BACK_BUTTON, method = RequestMethod.GET)	// displayから戻ってページングを行うとき
 	public String getbackIndex(@RequestParam(required = false) final String page, Model model) throws ParseException {
@@ -121,7 +121,7 @@ class Result2Controller {
 	 * @param sWord 検索ワード
 	 * @param page	今いるページ
 	 * @param model
-	 * @return searchResults
+	 * @return r2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
 	public String postsearchResults(@RequestParam(name = SEARCH_WORD,required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
@@ -139,7 +139,7 @@ class Result2Controller {
 	 * 文字を検索し、そのページをページングしたとき
 	 * @param page	今いるページ
 	 * @param model
-	 * @return searchResults
+	 * @return r2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき
 	public String getsearchResults(@RequestParam(required = false) final String page, Model model) throws ParseException{

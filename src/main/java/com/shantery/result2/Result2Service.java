@@ -33,19 +33,19 @@ public class Result2Service {
 	 * 日付を昇順にソートした今いるページと開始ページを返すメソッド
 	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
-	 * @return	r2Repository
+	 * @return	r2RepositoryのfindAllOrderByDateのListをResult2Controllerに返す
 	 */
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int offset = (currentPage - 1); //開始ページの初期化
-		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Repositoryに返す
+		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Controllerに返す
 		}
 
 	/**
 	 * ページングの機能を実装
 	 * @param sWord	検索ワード
 	 * @param page 今いるページ
-	 * @return PagingUtil
+	 * @return PagingUtilのgeneratePagingViewのページングの機能をResult2Controllerに返す
 	 */
 	public PagingView r2Paging(String sWord,String page) {
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
@@ -55,7 +55,7 @@ public class Result2Service {
 				totalRecordNum,
 				recordPerPage,
 				pagingLength,
-				new HashMap<>());
+				new HashMap<>());	//Result2Controllerに返す。
 	}
 
 	/**
@@ -63,21 +63,21 @@ public class Result2Service {
 	 * @param sWord	検索ワード
 	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
-	 * @return	r2Repository
+	 * @return	r2Repositoryのsearchメソッドを呼び,ListをResult2Controllerに返す。
 	 */
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage -1);	//開始ページの初期化
-		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));	//searchメソッドを呼び、検索ワードと開始ページ、1ページに表示するレコード数をr2Repositoryに返す。
+		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));	//Result2Controllerに返す。
 	}
 
 	/**
-	 * データの総件数を返すメソッド
+	 * データの総件数を返すメソッドをResult2Controllerに返す。
 	 * @param sWord 検索ワード
-	 * @return	r2Repository
+	 * @return	r2RepositoryのcountAllメソッドを呼び、Result2Controllerにデータの総件数を返す。
 	 */
 	public int count(String sWord) {
-		return r2Repository.countAll(sWord);	//countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。
+		return r2Repository.countAll(sWord);	//Result2Controllerに返す。
 	}
 }
