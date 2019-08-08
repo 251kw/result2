@@ -42,7 +42,7 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByDateASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByDateASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);	//開始ページの初期化
 		return sRepository.findAllOrderByDateASC(word, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
@@ -55,7 +55,7 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByDateDESCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByDateDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);//開始ページの初期化
 		return sRepository.findAllOrderByDateDESC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
@@ -68,7 +68,7 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByCostASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByCostASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);//開始ページの初期化
 		return sRepository.findAllOrderByCostASC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
@@ -81,7 +81,7 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByCostDESCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByCostDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);//開始ページの初期化
 		return sRepository.findAllOrderByCostDESC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
@@ -94,7 +94,7 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByAgeASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByAgeASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);//開始ページの初期化
 		return sRepository.findAllOrderByAgeASC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
@@ -107,7 +107,7 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByAgeDESCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByAgeDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);//開始ページの初期化
 		return sRepository.findAllOrderByAgeDESC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
