@@ -28,8 +28,13 @@ public class Result2Service {
 	/**
 	 * 日付を昇順にソートした今いるページと開始ページを返すメソッド
 	 * @param page 今いるページ
+<<<<<<< Upstream, based on origin/master
 	 * @param recordPerPage	1ページ当たりの表示件数
 	 * @return	r2RepositoryのfindAllOrderByDateのListをResult2Controllerに返す
+=======
+	 * @param recordPerPage	1ページ当たりの表示件数
+	 * @return データベースで取ってきた情報をリストに入れて返す。
+>>>>>>> 441d24b 2019/08/08 12:26
 	 */
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
