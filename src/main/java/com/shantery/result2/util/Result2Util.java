@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import com.shantery.result2.Result2;
 
 /**
@@ -21,9 +19,6 @@ public class Result2Util {
 	private Result2Util() {}
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
-	/** 表の表示列数 **/
-	@Value("${app.columnsize}")
-	private static int columnSize;
 
 	/* クラス内定数 */
 	private static final String   DATE                     = "日時";
@@ -73,16 +68,17 @@ public class Result2Util {
 
 	/**
 	 * 表示する見出しを返却する
-	 * 列数はapplication.propertiesより取得
+	 * 列数名はapplication.propertiesより取得
+	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
 	 * @return 表示する見出し
 	 */
-	public static List<String> getColumnName() {
+	public static List<String> getColumnName(String columns) {
 
 		List<String> columnList = new ArrayList<>();
+		String[] columnArrays = columns.split(",");
 		// 表示する件数分繰り返す
-		for (int i = 0; i < columnSize; i++) {
-			columnList.add(COLUMNS[i]);
-		}
+		Arrays.stream(columnArrays).forEach(columnList::add);
+		// 表示する見出しを返却
 		return columnList;
 	}
 
@@ -90,9 +86,10 @@ public class Result2Util {
 	 * DBから取得したListの内容を変換する（Result2型->List型）
 	 * 理由：Thymeleafで項目を可変にする為に実装
 	 * @param list DBから取得したリスト
+	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
 	 * @return 変換後のリスト
 	 */
-	public static List<List<String>> convBeanToList(List<Result2> list) {
+	public static List<List<String>> convBeanToList(List<Result2> list, String columns) {
 
 		List<List<String>> listResult2 = new ArrayList<>(); // 表示内容がすべて入ったリスト
 		List<String>       result2     = new ArrayList<>(); // 1行分の表示内容
