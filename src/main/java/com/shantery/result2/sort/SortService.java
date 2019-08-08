@@ -31,49 +31,49 @@ class SortService {
 	}
 
 	public List<Result2> findAllOrderByDateASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
 		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByDateASC(word, PageRequest.of(offset, recordPerPage)); //日付を昇順にソートした
 	}
 
 	public List<Result2> findAllOrderByDateDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByDateDESC(word, PageRequest.of(offset, recordPerPage));
 	}
 
 	public List<Result2> findAllOrderByCostASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByCostASC(word, PageRequest.of(offset, recordPerPage));
 	}
 
 	public List<Result2> findAllOrderByCostDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByCostDESC(word, PageRequest.of(offset, recordPerPage));
 	}
 
 	public List<Result2> findAllOrderByAgeASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByAgeASC(word, PageRequest.of(offset, recordPerPage));
 	}
 
 	public List<Result2> findAllOrderByAgeDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage - 1);
 		return sRepository.findAllOrderByAgeDESC(word, PageRequest.of(offset, recordPerPage));
 	}
 
 	public PagingView Paging(String sWord,String page) {
-		int currentPage = Result2Util.getCurrentPage(page);
+		int currentPage = Result2Util.getCurrentPageForDatabase(page);
 		int totalRecordNum = count(Result2Util.getSearchWord(sWord));
 		return PagingUtil.generatePagingView(
 				currentPage,
