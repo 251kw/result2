@@ -62,9 +62,10 @@ public class Result2Util {
 	 */
 	public static List<String> getColumnName(String columns) {
 
-		List<String> columnList   = new ArrayList<>();
 		// プロパティファイルから取得した項目をカンマで分割
 		String[]     columnArrays = columns.split(",");
+		// 表示する見出しリスト
+		List<String> columnList   = new ArrayList<>();
 		// 表示する件数分繰り返す
 		Arrays.stream(columnArrays).forEach(columnList::add);
 		// 表示する見出しを返却
@@ -75,19 +76,13 @@ public class Result2Util {
 	 * DBから取得したListの内容を変換する（Result2型->List型）
 	 * 理由：Thymeleafで項目を可変にする為に実装
 	 * @param list DBから取得したリスト
-	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
 	 * @return 変換後のリスト
 	 */
-	public static List<List<String>> convBeanToList(List<Result2> list, String columns) {
+	public static List<List<String>> convBeanToList(List<Result2> list) {
 
-		List<List<String>> listResult2 = new ArrayList<>();
-		// プロパティファイルから取得した項目をカンマで分割
-		String[] columnArrays = columns.split(",");
 		// Result2の内容をListに変換
-		for (int i = 0; i < columnArrays.length; i++) {
-			Result2 ret = list.get(i);
-			listResult2.add(ret.getResult2List());
-		}
+		List<List<String>> listResult2 = new ArrayList<>();
+		list.stream().map(Result2::getResult2List).forEach(listResult2::add);
 
 		// 表示内容がすべて入ったリストを返却
 		return listResult2;
