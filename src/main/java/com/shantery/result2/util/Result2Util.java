@@ -29,8 +29,7 @@ public class Result2Util {
 	public static int getCurrentPageForDatabase(String page) {
 		// 現在いるページ番号の初期化
 		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
-		PagingView pv = new PagingView();
-		int tpn = pv.getTotalPageNum();
+		int tpn = PagingView.getTotalPageNum();
 		if(tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
 			tmpPage = "1";
 		}

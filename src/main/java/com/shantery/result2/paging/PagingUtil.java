@@ -26,7 +26,7 @@ public class PagingUtil {
 
 		PagingView pagingView = new PagingView();	// PagingViewのインスタンス化
 		int totalPageNum = (int) Math.ceil((double) totalRecordNum / (double) recordPerPage);	// 総ページ数
-		pagingView.setTotalPageNum(totalPageNum);
+		PagingView.setTotalPageNum(totalPageNum);
 		if(currentPageNum > totalPageNum || currentPageNum < 1) {
 			currentPageNum = 1;
 		}
