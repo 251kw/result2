@@ -1,7 +1,8 @@
 package com.shantery.result2;
 
 import java.io.Serializable;
-import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,61 +11,64 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * result2dispデータベースのエンティティクラス
+ */
 @Entity
 @Table(name="result2disp")
 public class Result2 implements Serializable {
+
+	/** ID **/
 	@Id
 	@Column(name="result_id")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="seqTable")
 	private Long id;
+	/** 日時 **/
 	private String date;
+	/** 国 **/
 	private String nationality;
+	/** 雇 **/
 	private String employment;
+	/** 商 **/
 	private String commercial_distribution;
+	/** 単金 **/
 	private String cost;
+	/** 年齢 **/
 	private String age;
+	/** 最寄駅 **/
 	private String closest_station;
+	/** 件名 **/
 	private String subject;
+	/** L/S **/
 	private String text;
+	/** 送信者 **/
 	private String sender;
+	/** テンポラリー１ **/
 	private String temp1;
+	/** テンポラリー２ **/
 	private String temp2;
+	/** テンポラリー３ **/
 	private String temp3;
+	/** テンポラリー４ **/
 	private String temp4;
+	/** テンポラリー５ **/
 	private String temp5;
+	/** テンポラリー６ **/
 	private String temp6;
+	/** テンポラリー７ **/
 	private String temp7;
+	/** テンポラリー８ **/
 	private String temp8;
+	/** テンポラリー９ **/
 	private String temp9;
 
-	public Result2(long long1, String string, String string2, String string3, String string4, String string5,
-			String string6, String string7, String string8, String string9, String string10) throws ParseException {
-		// TODO 自動生成されたコンストラクター・スタブ
-		id = long1;/*
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm;ss");
-		Date formatDate = sdf.parse(string);*/
-		date = string;
-		nationality = string2;
-		employment = string3;
-		commercial_distribution = string4;
-		cost = string5;
-		age = string6;
-		closest_station = string7;
-		subject = string8;
-		text = string9;
-		sender = string10;
-
-	}
-	public Result2() {
-		// TODO 自動生成されたコンストラクター・スタブ
-	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDate() throws ParseException {
+	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
@@ -179,4 +183,31 @@ public class Result2 implements Serializable {
 		this.temp9 = temp9;
 	}
 
+	/**
+	 * DBから取得したエンティティをList型で返却する
+	 * @return エンティティリスト
+	 */
+	public List<String> getResult2List() {
+		List<String> result2List = new ArrayList<>();
+		result2List.add(getDate());
+		result2List.add(getNationality());
+		result2List.add(getEmployment());
+		result2List.add(getCommercial_distribution());
+		result2List.add(getCost());
+		result2List.add(getAge());
+		result2List.add(getClosest_station());
+		result2List.add(getSubject());
+		result2List.add(getSender());
+		result2List.add(getTemp1());
+		result2List.add(getTemp2());
+		result2List.add(getTemp3());
+		result2List.add(getTemp4());
+		result2List.add(getTemp5());
+		result2List.add(getTemp6());
+		result2List.add(getTemp7());
+		result2List.add(getTemp8());
+		result2List.add(getTemp9());
+		result2List.add(getText());
+		return result2List;
+	}
 }
