@@ -29,13 +29,13 @@ public class Result2Service {
 	 * 日付を昇順にソートした今いるページと開始ページを返すメソッド
 	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
-	 * @return	r2Repository
+	 * @return データベースで取ってきた情報をリストに入れて返す。
 	 */
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int offset = (currentPage - 1); //開始ページの初期化
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Repositoryに返す
-		}
+	}
 
 	/**
 	 * ページングの機能を実装
