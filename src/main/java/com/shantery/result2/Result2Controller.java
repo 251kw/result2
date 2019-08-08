@@ -97,15 +97,10 @@ class Result2Controller {
 	public String getbackIndex(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
-<<<<<<< Upstream, based on origin/master
-=======
-		/*if(page != null) {	// pageが存在するとき
-		}*/
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
 				r2Service.r2Paging(sWord,page));
->>>>>>> 2f52ae4 2019/08/07 存在しないページ数をURLに直接入力した場合1ページ目に戻るように修正
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			 //sResultsをキーとしてvalueをList型にしたものを返す

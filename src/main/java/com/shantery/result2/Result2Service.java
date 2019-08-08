@@ -28,10 +28,17 @@ public class Result2Service {
 	Result2Repository r2Repository;
 
 	/**
+<<<<<<< Upstream, based on origin/master
 	 * 日付を昇順にソートした今いるページと開始ページを返すメソッド
 	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
 	 * @return	r2RepositoryのfindAllOrderByDateのListをResult2Controllerに返す
+=======
+	 * 日付昇順にソートした今いるページと開始ページを返すメソッド
+	 * @param page
+	 * @param recordPerPage	1ページ当たりの表示件数
+	 * @return	r2Repositoryに返す
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 	 */
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
@@ -42,12 +49,22 @@ public class Result2Service {
 	/**
 	 * ページングの機能を実装
 	 * @param sWord	検索ワード
+<<<<<<< Upstream, based on origin/master
 	 * @param page 今いるページ
 	 * @return PagingUtilのgeneratePagingViewのページングの機能をResult2Controllerに返す
+=======
+	 * @param page
+	 * @return PagingUtil
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 	 */
 	public PagingView r2Paging(String sWord,String page) {
+<<<<<<< Upstream, based on origin/master
 		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、検索結果の総数が数えられる。
+=======
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、その総数が数えられる。
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
@@ -59,23 +76,43 @@ public class Result2Service {
 	/**
 	 * データを検索するメソッド
 	 * @param sWord	検索ワード
+<<<<<<< Upstream, based on origin/master
 	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
 	 * @return	r2Repositoryのsearchメソッドを呼び,ListをResult2Controllerに返す。
+=======
+	 * @param page
+	 * @param recordPerPage	1ページ当たりの表示件数
+	 * @return	r2Repositoryに返す
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 	 */
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
 		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage -1);	//開始ページの初期化
+<<<<<<< Upstream, based on origin/master
 		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));	//Result2Controllerに返す。
+=======
+		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));	//searchメソッドを呼び、検索ワードと開始ページ、1ページに表示するレコード数をr2Repositoryに返す。
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 	}
 
 	/**
+<<<<<<< Upstream, based on origin/master
 	 * データの総件数を返すメソッドをResult2Controllerに返す。
 	 * @param sWord 検索ワード
 	 * @return	r2RepositoryのcountAllメソッドを呼び、Result2Controllerにデータの総件数を返す。
+=======
+	 * データの総件数を返すメソッド
+	 * @param sWord 検索ワード
+	 * @return	r2Repositoryに返す
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 	 */
 	public int count(String sWord) {
+<<<<<<< Upstream, based on origin/master
 		return r2Repository.countAll(sWord);	//Result2Controllerに返す。
+=======
+		return r2Repository.countAll(sWord);	//countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。
+>>>>>>> 4dcc89c 2019/08/08 14:00 コメント追加と直接URL指定バグを修正
 	}
 }
