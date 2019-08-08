@@ -140,7 +140,7 @@ class SortController {
 	}
 
 	/**
-	 * 単金を降順にソート(POST送信以外の時)
+	 * 単金を降順にソート(POST送信の時)
 	 * @param page	今いるページ
 	 * @param model
 	 * @return	検索結果ページの遷移先
@@ -159,7 +159,7 @@ class SortController {
 	}
 
 	/**
-	 * 単金を昇順にソート(POST送信の時)
+	 * 単金を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model
 	 * @return	検索結果ページの遷移先

@@ -26,13 +26,13 @@ public class Result2Service {
 	Result2Repository r2Repository;
 
 	/**
-	 * 日付昇順にソートした今いるページと開始ページを返すメソッド
-	 * @param page
+	 * 日付を昇順にソートした今いるページと開始ページを返すメソッド
+	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
-	 * @return	r2Repositoryに返す
+	 * @return	r2Repository
 	 */
 	public List<Result2> find(String page, int recordPerPage) throws ParseException{
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int offset = (currentPage - 1); //開始ページの初期化
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Repositoryに返す
 		}
@@ -40,12 +40,12 @@ public class Result2Service {
 	/**
 	 * ページングの機能を実装
 	 * @param sWord	検索ワード
-	 * @param page
+	 * @param page 今いるページ
 	 * @return PagingUtil
 	 */
 	public PagingView r2Paging(String sWord,String page) {
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
-		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、その総数が数えられる。
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、検索結果の総数が数えられる。
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
@@ -57,12 +57,12 @@ public class Result2Service {
 	/**
 	 * データを検索するメソッド
 	 * @param sWord	検索ワード
-	 * @param page
+	 * @param page 今いるページ
 	 * @param recordPerPage	1ページ当たりの表示件数
-	 * @return	r2Repositoryに返す
+	 * @return	r2Repository
 	 */
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);
 		int offset = (currentPage -1);	//開始ページの初期化
 		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));	//searchメソッドを呼び、検索ワードと開始ページ、1ページに表示するレコード数をr2Repositoryに返す。
@@ -71,7 +71,7 @@ public class Result2Service {
 	/**
 	 * データの総件数を返すメソッド
 	 * @param sWord 検索ワード
-	 * @return	r2Repositoryに返す
+	 * @return	r2Repository
 	 */
 	public int count(String sWord) {
 		return r2Repository.countAll(sWord);	//countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。

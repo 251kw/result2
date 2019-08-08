@@ -65,11 +65,6 @@ public class Result2 implements Serializable {
 		this.id = id;
 	}
 	public String getDate() throws ParseException {
-		/*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		Date dt = dateFormat.parse(date);
-		String date2 = sdf.format(dt);
-		return date2;*/	// フォーマット用
 		return date;
 	}
 	public void setDate(String date) {
