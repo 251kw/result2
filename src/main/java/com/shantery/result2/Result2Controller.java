@@ -26,6 +26,9 @@ class Result2Controller {
 	@Autowired
 	HttpSession session;
 
+	@Value("${app.columns}")
+    private String columns;	// 1ページあたりの表示件数
+
 	/**
 	 * アプリケーションを起動させたとき、もしくは会社のロゴが押されたときに動く
 	 * @param page 今いるページ
