@@ -39,7 +39,7 @@ class Result2Controller {
 			session.removeAttribute(SESSION_FORM_ID);
 		}
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		//model.addAttribute(LIST, Result2Util.convBeanToList(null));	// ServiceでSQL文の実行している
+		model.addAttribute(LIST, Result2Util.convBeanToList(null));	// ServiceでSQL文の実行している
 		model.addAttribute("head", Result2Util.getColumnName());
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		model.addAttribute(
