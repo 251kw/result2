@@ -9,8 +9,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import com.shantery.result2.Result2;
-
 /**
  * Result2システムで使用する共通クラス
  * Result2固有の共通した処理はこのクラスに集約
@@ -71,7 +69,7 @@ public class Result2Util {
 	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
 	 * @return 変換後のリスト
 	 */
-	public static List<List<String>> convBeanToList(List<Result2> list, String columns) {
+	public static List<List<String>> convBeanToList(List<String> list, String columns) {
 
 		List<List<String>> listResult2 = new ArrayList<>(); // 表示内容がすべて入ったリスト
 		List<String>       result2     = new ArrayList<>(); // 1行分の表示内容

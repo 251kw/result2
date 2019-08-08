@@ -28,6 +28,9 @@ class Result2Controller {
 	@Autowired
 	HttpSession session;
 
+	@Value("${app.columns}")
+    private String columns;	// 1ページあたりの表示件数
+
 	/**
 	 * アプリケーションを起動させたとき、もしくは会社のロゴが押されたときに動く
 	 * @param page 今いるページ
@@ -39,8 +42,8 @@ class Result2Controller {
 			session.removeAttribute(SESSION_FORM_ID);
 		}
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(LIST, Result2Util.convBeanToList(null));	// ServiceでSQL文の実行している
-		model.addAttribute("head", Result2Util.getColumnName());
+		model.addAttribute(LIST, Result2Util.convBeanToList(Result2Util.getColumnName(columns),columns));	// ServiceでSQL文の実行している
+		model.addAttribute("head", Result2Util.getColumnName(columns));
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		model.addAttribute(
 				PAGING,r2Service.r2Paging(EMPTY,page));
