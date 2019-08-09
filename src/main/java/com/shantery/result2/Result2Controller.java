@@ -45,7 +45,7 @@ class Result2Controller {
 				PAGING,r2Service.r2Paging(EMPTY,page));
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
 		model.addAttribute("head", Result2Util.getColumnName(columns));
-		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage), columns));	// ServiceでSQL文の実行している
+		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));	// ServiceでSQL文の実行している
 		return TO_TOP;
 	}
 
