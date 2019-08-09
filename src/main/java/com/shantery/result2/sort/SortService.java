@@ -17,12 +17,12 @@ import com.shantery.result2.util.Result2Util;
 @Service
 class SortService {
 	@Autowired
-	SortRepository sRepository;
+	SortRepository sRepository; //呼び出すクラス
 
 	@Value("${app.recordperpage}")
 	private int recordPerPage; // 1ページあたりの表示件数
-	@Value("${app.paginglength}") // << < (1 2 3 4 5)←これの表示数 > >>
-	private int pagingLength;
+	@Value("${app.paginglength}")
+	private int pagingLength; // ページの表示数
 
 	/**
 	 * 日付昇順にソートした今いるページと開始ページを返す
@@ -119,7 +119,7 @@ class SortService {
 	 * @param page
 	 * @return PagingUtilのgeneratePagingViewのページングの機能をSortControllerに返す
 	 */
-	public PagingView Paging(String sWord,String page) {
+	public PagingView Paging(String sWord, String page) {
 		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、検索結果の総数が数えられる。
 		return PagingUtil.generatePagingView(

@@ -23,9 +23,9 @@ class Result2Controller {
 	private int recordPerPage;	// 1ページあたりの表示件数
 
 	@Autowired
-	private Result2Service r2Service;
+	private Result2Service r2Service; //呼び出すクラス
 	@Autowired
-	HttpSession session;
+	HttpSession session; //呼び出すクラス
 
 	@Value("${app.columns}")
     private String columns;	// 1ページあたりの表示件数
@@ -33,6 +33,7 @@ class Result2Controller {
 	/**
 	 * アプリケーションを起動させたとき、もしくは会社のロゴが押されたときに動く
 	 * @param page 今いるページ
+	 * @parem model 利用するデータを管理するためのクラス
 	 * @return r2Serviceのfindで処理したLIST、r2Serviceのr2Pagingで処理したページング機能をindexに返す。
 	 */
 	@RequestMapping(value = TOP, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
@@ -54,6 +55,7 @@ class Result2Controller {
 	 * 詳細ボタンが押されたとき
 	 * @param honbun メールの本文
 	 * @param page 今いるページ
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return メールの本文、ページ番号を覚えておくためのpageをdisplayに返す。
 	 */
 	@RequestMapping(value = FROM_TEXT_DETAILS_BUTTON, method = RequestMethod.POST)	// 本文詳細ボタンが押されたとき
@@ -130,7 +132,7 @@ class Result2Controller {
 	 * フリーワードの検索ボタンが押されたとき
 	 * @param sWord 検索ワード
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return r2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき

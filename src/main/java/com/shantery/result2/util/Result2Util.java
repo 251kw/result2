@@ -19,7 +19,9 @@ import com.shantery.result2.paging.PagingView;
 public class Result2Util {
 
 	/** インスタンス生成禁止 **/
-	private Result2Util() {}
+	private Result2Util() {
+	}
+
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
 	/** 表の表示列数 **/
@@ -70,9 +72,9 @@ public class Result2Util {
 	public static List<String> getColumnName(String columns) {
 
 		// プロパティファイルから取得した項目をカンマで分割
-		String[]     columnArrays = columns.split(",");
+		String[] columnArrays = columns.split(",");
 		// 表示する見出しリスト
-		List<String> columnList   = new ArrayList<>();
+		List<String> columnList = new ArrayList<>();
 		// 表示する件数分繰り返す
 		Arrays.stream(columnArrays).forEach(columnList::add);
 		// 表示する見出しを返却
