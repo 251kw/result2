@@ -18,11 +18,11 @@ public class Result2Service {
 
 	@Value("${app.recordperpage}")
 	private int recordPerPage; // 1ページあたりの表示件数
-	@Value("${app.paginglength}") // << < (1 2 3 4 5)←これの表示数 > >>
-	private int pagingLength;
+	@Value("${app.paginglength}")
+	private int pagingLength; //ページの表示数
 
 	@Autowired
-	Result2Repository r2Repository;
+	Result2Repository r2Repository; //呼び出すクラス
 
 	/**
 	 * 日付を昇順にソートした今いるページと開始ページを返すメソッド

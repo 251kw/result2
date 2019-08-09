@@ -19,10 +19,11 @@ import com.shantery.result2.util.Result2Util;
 @Controller
 class SortController {
 	@Autowired
-	private SortService sortService;
-
+	private SortService sortService; //呼び出すクラス
 	@Autowired
-	HttpSession session;
+	SortRepository sortRep; //呼び出すクラス
+	@Autowired
+	HttpSession session; //呼び出すクラス
 
 	@Value("${app.columns}")
     private String columns;	// 1ページあたりの表示件数
@@ -33,7 +34,7 @@ class SortController {
 	/**
 	 * 日付を昇順にソート(POST送信の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateASCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -56,7 +57,7 @@ class SortController {
 	/**
 	 * 日付を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateASCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -78,7 +79,7 @@ class SortController {
 	/**
 	 * 日付を降順にソート(POST送信の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateDESCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -100,7 +101,7 @@ class SortController {
 	/**
 	 * 日付を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateDESCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByDateDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -122,7 +123,7 @@ class SortController {
 	/**
 	 * 単金を昇順にソート(POST送信の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostASCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -144,7 +145,7 @@ class SortController {
 	/**
 	 *単金を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostASCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -166,7 +167,7 @@ class SortController {
 	/**
 	 * 単金を降順にソート(POST送信の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostDESCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -188,7 +189,7 @@ class SortController {
 	/**
 	 * 単金を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByCostDESCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByCostDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -210,7 +211,7 @@ class SortController {
 	/**
 	 * 年齢を昇順にソート(POST送信の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeASCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -232,7 +233,7 @@ class SortController {
 	/**
 	 * 年齢を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeASCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeASCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -254,7 +255,7 @@ class SortController {
 	/**
 	 * 年齢を降順にソート(POST送信の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeDESCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */
@@ -276,7 +277,7 @@ class SortController {
 	/**
 	 * 年齢を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ
-	 * @param model	データを管理するためのクラス
+	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByAgeDESCで処理したLISTをindexに返す。
 	 * @return	検索を行っていれば、sortServiceのfindAllOrderByAgeDESCで処理したSEARCH_LISTをsearchResultsに返す。
 	 */

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.shantery.result2.Result2;
 
-
 /**
  * @author k.teruya
  * sqlを実行し、データ検索を行う

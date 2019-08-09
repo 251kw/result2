@@ -1,9 +1,7 @@
 package com.shantery.result2.paging;
 
 import java.util.List;
-//import lombok.Data;
 
-//@Data
 public class PagingView {
 	private int totalRecordNum;	//データの総件数
 	private int fromRecordNum;	// ○件~×件の○の値
