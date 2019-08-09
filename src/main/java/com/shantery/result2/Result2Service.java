@@ -17,10 +17,9 @@ import com.shantery.result2.util.Result2Util;
 public class Result2Service {
 
 	@Value("${app.recordperpage}")
-    private int recordPerPage;	// 1ページあたりの表示件数
+	private int recordPerPage;	// 1ページあたりの表示件数
 	@Value("${app.paginglength}")	// << < (1 2 3 4 5)←これの表示数 > >>
 	private int pagingLength;
-	//private static final String SESSION_FORM_ID="searchForm";	// キー
 
 	@Autowired
 	Result2Repository r2Repository;
@@ -35,7 +34,7 @@ public class Result2Service {
 		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
 		int offset = (currentPage - 1); //開始ページの初期化
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Controllerに返す
-		}
+	}
 
 	/**
 	 * ページングの機能を実装

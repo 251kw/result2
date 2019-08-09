@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title th:text="#{view.searchResults.title}"></title>
@@ -7,128 +8,140 @@
 <script src="./js/jquery-3.4.1.min.js"></script>
 <script src="./js/semantic.min.js"></script>
 <style>
-a.disabled{
-    pointer-events: none;
+a.disabled {
+	pointer-events: none;
 }
 </style>
 </head>
 <body>
 	<div class="ui text container">
-	<div class="ui header">
-    <a class="logo" href="/"><img src="./img/ShanteryLogo.jpg" alt="シャンテリーロゴ"></a>
-    <div class="content">
-    	<p th:text="#{view.label.searchtitle}">
-        <div class="sub header" th:text="#{view.label.casefacter}">
-        </div>
-    </div>
-</div>
-<p th:text="
+		<div class="ui header">
+			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
+				alt="シャンテリーロゴ"></a>
+			<div class="content">
+				<p th:text="#{view.label.searchtitle}">
+				<div class="sub header" th:text="#{view.label.casefacter}"></div>
+			</div>
+		</div>
+		<p
+			th:text="
 ${paging.totalRecordNum} + '件中'
 + ${paging.fromRecordNum} + '～'
 + ${paging.toRecordNum} + '件表示中'"></p>
-<p th:text="#{view.label.freeword}"></th:text>
+		<p th:text="#{view.label.freeword}">
+			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
 				<input name=sWord type="text" placeholder="検索ワードを入力">
 			</div>
-			<button type="submit" name="search" class="ui primary button"><p th:text="#{view.btn.search}"></button>
+			<button type="submit" name="search" class="ui primary button">
+				<p th:text="#{view.btn.search}">
+			</button>
 		</form>
-		<div style="display:inline-flex">
-		<form th:action="@{/ascdate}" th:object="${ascdating}"
-			style="margin: 0px" method="post">
-			<button type="submit" name="ascdate" class="mini ui button"><p th:text="#{view.btn.ascdate}"></p></button>
-		</form>
-		<form th:action="@{/descdate}" th:object="${descdating}"
-			 method="post">
-			<button type="submit" name="descdate" class="mini ui button"><p th:text="#{view.btn.descdate}"></p></button>
-		</form>
-		<form th:action="@{/asccost}" th:object="${ascosting}"
-			method="post">
-			<button type="submit" name="asccost" class="mini ui button"><p th:text="#{view.btn.asccost}"></p></button>
-		</form>
-		<form th:action="@{/desccost}" th:object="${descosting}"
-			method="post">
-			<button type="submit" name="desccost" class="mini ui button"><p th:text="#{view.btn.desccost}"></p></button>
-		</form>
-		<form th:action="@{/ascage}" th:object="${ascageing}"
-			method="post">
-			<button type="submit" name="ascage" class="mini ui button"><p th:text="#{view.btn.ascage}"></p></button>
-		</form>
-		<form th:action="@{/descage}" th:object="${descageing}"
-			method="post">
-			<button type="submit" name="descage" class="mini ui button"><p th:text="#{view.btn.descage}"></p></button>
-		</form>
+		<div style="display: inline-flex">
+			<form th:action="@{/ascdate}" th:object="${ascdating}"
+				style="margin: 0px" method="post">
+				<button type="submit" name="ascdate" class="mini ui button">
+					<p th:text="#{view.btn.ascdate}"></p>
+				</button>
+			</form>
+			<form th:action="@{/descdate}" th:object="${descdating}"
+				method="post">
+				<button type="submit" name="descdate" class="mini ui button">
+					<p th:text="#{view.btn.descdate}"></p>
+				</button>
+			</form>
+			<form th:action="@{/asccost}" th:object="${ascosting}" method="post">
+				<button type="submit" name="asccost" class="mini ui button">
+					<p th:text="#{view.btn.asccost}"></p>
+				</button>
+			</form>
+			<form th:action="@{/desccost}" th:object="${descosting}"
+				method="post">
+				<button type="submit" name="desccost" class="mini ui button">
+					<p th:text="#{view.btn.desccost}"></p>
+				</button>
+			</form>
+			<form th:action="@{/ascage}" th:object="${ascageing}" method="post">
+				<button type="submit" name="ascage" class="mini ui button">
+					<p th:text="#{view.btn.ascage}"></p>
+				</button>
+			</form>
+			<form th:action="@{/descage}" th:object="${descageing}" method="post">
+				<button type="submit" name="descage" class="mini ui button">
+					<p th:text="#{view.btn.descage}"></p>
+				</button>
+			</form>
 		</div>
 		<div class="ui divider"></div>
-	<form th:action="@{/result}" th:object="${test}" method="post">
-	<table class="ui compact celled table" style="font-size: 9.5pt;">
-		<!-- 見出し。ここも可変になるように後々はしたい -->
-		<thead>
-		<tr>
-			<th class="center" th:text="#{view.tablelabel.date}"></th>
-			<th class="center" th:text="#{view.tablelabel.cost}"></th>
-			<th class="center" th:text="#{view.tablelabel.age}"></th>
-			<th class="center" th:text="#{view.tablelabel.sender}"></th>
-			<th class="center" th:text="#{view.tablelabel.subject}"></th>
-			<th></th>
-		</tr>
-		</thead>
-		<!-- DB内の表示、ここも可変になるように後々はしたい -->
-		<tbody>
-		<tr th:each="list : ${sResults}" th:object="${list}">
-			<td th:text="*{date}"></td>
-			<td th:text="*{cost}"></td>
-			<td th:text="*{age}"></td>
-			<td th:text="*{sender}"></td>
-			<td th:text="*{subject}"></td>
-			<td style="text-align:center;">
-			<button type="submit" name="hidden" class="mini ui button" th:value="*{text}" ><p th:text="#{view.btn.details}"></p></button>
-			</td>
-		</tr>
-		</tbody>
-		<tfoot>
-  <tr>
-    <th colspan="6">
-      <div class="ui pagination small menu">
-        <a class="icon item"
-           th:classappend="!${paging.canGoFirst} ? 'disabled'"
-           th:href="${paging.firstHref}"><i class="angle double left icon"></i></a>
-        <a class="icon item"
-           th:classappend="!${paging.canGoPrevious} ? 'disabled'"
-           th:href="${paging.previousHref}"><i class="angle left icon"></i></a>
-        <a class="item"
-           th:each="element : ${paging.pagingViewElements}"
-           th:href="${element.href}"
-           th:text="${element.name}"
-           th:classappend="${element.name} == ${paging.currentPageNum} ? 'disabled'"
-        >1</a>
-        <!--/*-->
-        <a href="#" class="disabled item">2</a>
-        <a href="#" class="item">3</a>
-        <a href="#" class="item">4</a>
-        <a href="#" class="item">5</a>
-        <!--*/-->
-        <a href="#" class="icon item"
-           th:classappend="!${paging.canGoNext} ? 'disabled'"
-           th:href="${paging.nextHref}"><i class="angle right icon"></i></a>
-        <a class="icon item"
-           th:classappend="!${paging.canGoLast} ? 'disabled'"
-           th:href="${paging.lastHref}"><i class="angle double right icon"></i></a>
-      </div>
-    </th>
-  </tr>
-  </tfoot>
-	</table>
-	<div th:if="${paging.currentPageNum == null}">
-	 	<input type="hidden" name="page" th:value="1">
-	</div>
-	<div th:if="${paging.currentPageNum != null}">
-	 	<input type="hidden" name="page" th:value="${paging.currentPageNum}">
-	</div>
-	<div th:if="${sword != null}">
-      <input type="hidden" name="keepword" th:value="${sword}">
-	</div>
-	</form>
+		<form th:action="@{/result}" th:object="${test}" method="post">
+			<table class="ui compact celled table" style="font-size: 9.5pt;">
+				<!-- 見出し。ここも可変になるように後々はしたい -->
+				<thead>
+					<tr>
+						<th class="center" th:text="#{view.tablelabel.date}"></th>
+						<th class="center" th:text="#{view.tablelabel.cost}"></th>
+						<th class="center" th:text="#{view.tablelabel.age}"></th>
+						<th class="center" th:text="#{view.tablelabel.sender}"></th>
+						<th class="center" th:text="#{view.tablelabel.subject}"></th>
+						<th></th>
+					</tr>
+				</thead>
+				<!-- DB内の表示、ここも可変になるように後々はしたい -->
+				<tbody>
+					<tr th:each="list : ${sResults}" th:object="${list}">
+						<td th:text="*{date}"></td>
+						<td th:text="*{cost}"></td>
+						<td th:text="*{age}"></td>
+						<td th:text="*{sender}"></td>
+						<td th:text="*{subject}"></td>
+						<td style="text-align: center;">
+							<button type="submit" name="hidden" class="mini ui button"
+								th:value="*{text}">
+								<p th:text="#{view.btn.details}"></p>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="6">
+							<div class="ui pagination small menu">
+								<a class="icon item"
+									th:classappend="!${paging.canGoFirst} ? 'disabled'"
+									th:href="${paging.firstHref}"><i
+									class="angle double left icon"></i></a> <a class="icon item"
+									th:classappend="!${paging.canGoPrevious} ? 'disabled'"
+									th:href="${paging.previousHref}"><i class="angle left icon"></i></a>
+								<a class="item" th:each="element : ${paging.pagingViewElements}"
+									th:href="${element.href}" th:text="${element.name}"
+									th:classappend="${element.name} == ${paging.currentPageNum} ? 'disabled'">1</a>
+								<!--/*-->
+								<a href="#" class="disabled item">2</a> <a href="#" class="item">3</a>
+								<a href="#" class="item">4</a> <a href="#" class="item">5</a>
+								<!--*/-->
+								<a href="#" class="icon item"
+									th:classappend="!${paging.canGoNext} ? 'disabled'"
+									th:href="${paging.nextHref}"><i class="angle right icon"></i></a>
+								<a class="icon item"
+									th:classappend="!${paging.canGoLast} ? 'disabled'"
+									th:href="${paging.lastHref}"><i
+									class="angle double right icon"></i></a>
+							</div>
+						</th>
+					</tr>
+				</tfoot>
+			</table>
+			<div th:if="${paging.currentPageNum == null}">
+				<input type="hidden" name="page" th:value="1">
+			</div>
+			<div th:if="${paging.currentPageNum != null}">
+				<input type="hidden" name="page" th:value="${paging.currentPageNum}">
+			</div>
+			<div th:if="${sword != null}">
+				<input type="hidden" name="keepword" th:value="${sword}">
+			</div>
+		</form>
 	</div>
 </body>
 </html>

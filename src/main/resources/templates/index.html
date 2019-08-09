@@ -19,7 +19,7 @@ a.disabled {
 			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
 				alt="シャンテリーロゴ"></a>
 			<div class="content">
-			<p th:text="#{view.label.searchtitle}">
+				<p th:text="#{view.label.searchtitle}">
 				<div class="sub header" th:text="#{view.label.casefacter}"></div>
 			</div>
 		</div>
@@ -28,33 +28,48 @@ a.disabled {
 ${paging.totalRecordNum} + '件中'
 + ${paging.fromRecordNum} + '～'
 + ${paging.toRecordNum} + '件表示中'"></p>
-		<p th:text="#{view.label.freeword}"></th:text>
+		<p th:text="#{view.label.freeword}">
+			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
 				<input name=sWord type="text" placeholder="検索ワードを入力">
 			</div>
-			<button type="submit" name="search" class="ui primary button"><p th:text="#{view.btn.search}"></p></button>
+			<button type="submit" name="search" class="ui primary button">
+				<p th:text="#{view.btn.search}"></p>
+			</button>
 		</form>
 		<div style="display: inline-flex">
 			<form th:action="@{/ascdate}" th:object="${ascdating}" method="post">
-				<button type="submit" name="ascdate" class="mini ui button"><p th:text="#{view.btn.ascdate}"></p></button>
+				<button type="submit" name="ascdate" class="mini ui button">
+					<p th:text="#{view.btn.ascdate}"></p>
+				</button>
 			</form>
 			<form th:action="@{/descdate}" th:object="${descdating}"
 				method="post">
-				<button type="submit" name="descdate" class="mini ui button"><p th:text="#{view.btn.descdate}"></p></button>
+				<button type="submit" name="descdate" class="mini ui button">
+					<p th:text="#{view.btn.descdate}"></p>
+				</button>
 			</form>
 			<form th:action="@{/asccost}" th:object="${ascosting}" method="post">
-				<button type="submit" name="asccost" class="mini ui button"><p th:text="#{view.btn.asccost}"></p></button>
+				<button type="submit" name="asccost" class="mini ui button">
+					<p th:text="#{view.btn.asccost}"></p>
+				</button>
 			</form>
 			<form th:action="@{/desccost}" th:object="${descosting}"
 				method="post">
-				<button type="submit" name="desccost" class="mini ui button"><p th:text="#{view.btn.desccost}"></p></button>
+				<button type="submit" name="desccost" class="mini ui button">
+					<p th:text="#{view.btn.desccost}"></p>
+				</button>
 			</form>
 			<form th:action="@{/ascage}" th:object="${ascageing}" method="post">
-				<button type="submit" name="ascage" class="mini ui button"><p th:text="#{view.btn.ascage}"></p></button>
+				<button type="submit" name="ascage" class="mini ui button">
+					<p th:text="#{view.btn.ascage}"></p>
+				</button>
 			</form>
 			<form th:action="@{/descage}" th:object="${descageing}" method="post">
-				<button type="submit" name="descage" class="mini ui button"><p th:text="#{view.btn.descage}"></p></button>
+				<button type="submit" name="descage" class="mini ui button">
+					<p th:text="#{view.btn.descage}"></p>
+				</button>
 			</form>
 		</div>
 
@@ -82,7 +97,9 @@ ${paging.totalRecordNum} + '件中'
 						<td th:text="*{subject}"></td>
 						<td style="text-align: center;">
 							<button type="submit" name="hidden" class="mini ui button"
-								th:value="*{text}"><p th:text="#{view.btn.details}"></p></button>
+								th:value="*{text}">
+								<p th:text="#{view.btn.details}"></p>
+							</button>
 						</td>
 					</tr>
 				</tbody>

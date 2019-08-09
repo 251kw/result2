@@ -19,7 +19,6 @@ class Result2Controller {
 
 	@Value("${app.recordperpage}")
 	private int recordPerPage;	// 1ページあたりの表示件数
-	//private static final int LENGTH = 5;	// << < (1 2 3 4 5)←これの表示数 > >>
 
 	@Autowired
 	private Result2Service r2Service;

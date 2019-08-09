@@ -32,7 +32,7 @@ class SortService {
 	 */
 	public List<Result2> find(int page, int recordPerPage) throws ParseException {
 		int offset = page - 1; // 開始位置
-		return sRepository.findAllOrderByDate(PageRequest.of(offset, recordPerPage));//SortControllerに返す。
+		return sRepository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //SortControllerに返す。
 	}
 
 	/**
@@ -55,10 +55,10 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByDateDESCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByDateDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
-		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - 1);//開始ページの初期化
-		return sRepository.findAllOrderByDateDESC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
+		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
+		int offset = (currentPage - 1); //開始ページの初期化
+		return sRepository.findAllOrderByDateDESC(word, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
 	/**
@@ -68,10 +68,10 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByCostASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByCostASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
-		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - 1);//開始ページの初期化
-		return sRepository.findAllOrderByCostASC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
+		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
+		int offset = (currentPage - 1); //開始ページの初期化
+		return sRepository.findAllOrderByCostASC(word, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
 	/**
@@ -81,10 +81,10 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByCostDESCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByCostDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
-		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - 1);//開始ページの初期化
-		return sRepository.findAllOrderByCostDESC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
+		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
+		int offset = (currentPage - 1); //開始ページの初期化
+		return sRepository.findAllOrderByCostDESC(word, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
 	/**
@@ -94,10 +94,10 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByAgeASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByAgeASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
-		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - 1);//開始ページの初期化
-		return sRepository.findAllOrderByAgeASC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
+		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
+		int offset = (currentPage - 1); //開始ページの初期化
+		return sRepository.findAllOrderByAgeASC(word, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
 	/**
@@ -107,9 +107,9 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByAgeDESCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByAgeDESC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
-		String word = Result2Util.getSearchWord(sWord);//getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - 1);//開始ページの初期化
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
+		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
+		int offset = (currentPage - 1); //開始ページの初期化
 		return sRepository.findAllOrderByAgeDESC(word, PageRequest.of(offset, recordPerPage));//SortControllerに返す
 	}
 
@@ -120,14 +120,14 @@ class SortService {
 	 * @return PagingUtilのgeneratePagingViewのページングの機能をSortControllerに返す
 	 */
 	public PagingView Paging(String sWord,String page) {
-		int currentPage = Result2Util.getCurrentPage(page);//getCurrentPageメソッドを呼び、今いるページ数が返される。
-		int totalRecordNum = count(Result2Util.getSearchWord(sWord));//検索ワードが返され、検索結果の総数が数えられる。
+		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、検索結果の総数が数えられる。
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
 				recordPerPage,
 				pagingLength,
-				new HashMap<>());//SortControllerに返す
+				new HashMap<>()); //SortControllerに返す
 	}
 
 	/**
@@ -136,6 +136,6 @@ class SortService {
 	 * @return sRepositoryのcountAllメソッドを呼び、SortControllerにデータの総件数を返す。
 	 */
 	public int count(String sWord) {
-		return sRepository.countAll(sWord);//SortControllerにデータの総件数を返す
+		return sRepository.countAll(sWord); //SortControllerに返す
 	}
 }
