@@ -76,16 +76,9 @@ ${paging.totalRecordNum} + '件中'
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
 			<table class="ui compact celled table" style="font-size: 9.5pt;">
-				<!-- 見出し。ここも可変になるように後々はしたい -->
 				<thead>
 					<tr>
 						<th:bloack th:each="list, stat: ${head}">
-						<!-- <th class="center" th:text="#{view.tablelabel.date}"></th>
-						<th class="center" th:text="#{view.tablelabel.cost}"></th>
-						<th class="center" th:text="#{view.tablelabel.age}"></th>
-						<th class="center" th:text="#{view.tablelabel.sender}"></th>
-						<th class="center" th:text="#{view.tablelabel.subject}"></th>
-						<th></th> -->
 						<th th:text="${list}"></th>
 					</tr>
 				</thead>
@@ -93,7 +86,12 @@ ${paging.totalRecordNum} + '件中'
 				<tbody>
 					<tr th:each="list : ${test}" th:object="${list}">
 						<th:block th:each="nakami, stat: ${list}">
-							<td th:if="${nakami != null}" th:text="${nakami}"></td>
+							<td th:if="${nakami != null && stat.last != true}" th:text="${nakami}"></td>
+							<td th:if="${stat.last == true}" style="text-align: center;">
+							<button type="submit" name="hidden" class="mini ui button"
+								th:value="${nakami}">
+								<p th:text="#{view.btn.details}"></p>
+							</button>
 						</th:block>
 						<!-- <td th:text="*{date}"></td>
 						<td th:text="*{cost}"></td>
@@ -105,8 +103,8 @@ ${paging.totalRecordNum} + '件中'
 								th:value="*{text}">
 								<p th:text="#{view.btn.details}"></p>
 							</button>
-						</td>
-					</tr> -->
+						</td> -->
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
