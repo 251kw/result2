@@ -82,28 +82,18 @@ ${paging.totalRecordNum} + '件中'
 						<th th:text="${list}"></th>
 					</tr>
 				</thead>
-				<!-- DB内の表示、ここも可変になるように後々はしたい -->
 				<tbody>
 					<tr th:each="list : ${test}" th:object="${list}">
 						<th:block th:each="nakami, stat: ${list}">
-							<td th:if="${nakami != null && stat.last != true}" th:text="${nakami}"></td>
+							<td th:if="${stat.index < columnlength}" th:text="${nakami}"></td>
 							<td th:if="${stat.last == true}" style="text-align: center;">
 							<button type="submit" name="hidden" class="mini ui button"
 								th:value="${nakami}">
 								<p th:text="#{view.btn.details}"></p>
 							</button>
+							</td>
 						</th:block>
-						<!-- <td th:text="*{date}"></td>
-						<td th:text="*{cost}"></td>
-						<td th:text="*{age}"></td>
-						<td th:text="*{sender}"></td>
-						<td th:text="*{subject}"></td>
-						<td style="text-align: center;">
-							<button type="submit" name="hidden" class="mini ui button"
-								th:value="*{text}">
-								<p th:text="#{view.btn.details}"></p>
-							</button>
-						</td> -->
+						</th:block>
 					</tr>
 				</tbody>
 				<tfoot>
