@@ -93,7 +93,7 @@ ${paging.totalRecordNum} + '件中'
 				<tbody>
 					<tr th:each="list : ${test}" th:object="${list}">
 						<th:block th:each="nakami, stat: ${list}">
-							<td th:text="${nakami}"></td>
+							<td th:if="${nakami != null}" th:text="${nakami}"></td>
 						</th:block>
 						<!-- <td th:text="*{date}"></td>
 						<td th:text="*{cost}"></td>
