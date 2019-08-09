@@ -7,9 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.shantery.result2.paging.PagingView;
-
 import com.shantery.result2.Result2;
+import com.shantery.result2.paging.PagingView;
 
 /**
  * Result2システムで使用する共通クラス
@@ -22,29 +21,6 @@ public class Result2Util {
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
 
-	/* クラス内定数 */
-	private static final String   DATE                     = "日時";
-	private static final String   NATIONALITY              = "国";
-	private static final String   EMPLOYMENT               = "雇";
-	private static final String   COMMERCIAL_DISTRIBUTION  = "商";
-	private static final String   COST                     = "単金";
-	private static final String   AGE                      = "年齢";
-	private static final String   CLOSEST_STATION          = "最寄駅";
-	private static final String   SUBJECT                  = "L/S";
-	private static final String   TEXT                     = "件名";
-	private static final String   SENDER                   = "送信者";
-	private static final String[] COLUMNS = {
-			DATE,
-			NATIONALITY,
-			EMPLOYMENT,
-			COMMERCIAL_DISTRIBUTION,
-			COST,
-			AGE,
-			CLOSEST_STATION,
-			SUBJECT,
-			TEXT,
-			SENDER
-	};
 	/**
 	 * 現在のページを返却します。
 	 * @param page 遷移先のページ番号
@@ -86,8 +62,10 @@ public class Result2Util {
 	 */
 	public static List<String> getColumnName(String columns) {
 
-		List<String> columnList = new ArrayList<>();
-		String[] columnArrays = columns.split(",");
+		// プロパティファイルから取得した項目をカンマで分割
+		String[]     columnArrays = columns.split(",");
+		// 表示する見出しリスト
+		List<String> columnList   = new ArrayList<>();
 		// 表示する件数分繰り返す
 		Arrays.stream(columnArrays).forEach(columnList::add);
 		// 表示する見出しを返却
@@ -98,48 +76,13 @@ public class Result2Util {
 	 * DBから取得したListの内容を変換する（Result2型->List型）
 	 * 理由：Thymeleafで項目を可変にする為に実装
 	 * @param list DBから取得したリスト
-	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
 	 * @return 変換後のリスト
 	 */
-	public static List<List<String>> convBeanToList(List<Result2> list, String columns) {
-
-		List<List<String>> listResult2 = new ArrayList<>(); // 表示内容がすべて入ったリスト
-		List<String>       result2     = new ArrayList<>(); // 1行分の表示内容
+	public static List<List<String>> convBeanToList(List<Result2> list) {
 
 		// Result2の内容をListに変換
-		/*result2 = list.stream().map(Result2 -> Result2.getId().toString()).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getDate).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getNationality).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getEmployment).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getCommercial_distribution).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getCost).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getAge).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getClosest_station).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getSubject).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getText).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getSender).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp1).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp2).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp3).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp4).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp5).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp6).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp7).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp8).collect(Collectors.toList());
-		result2 = list.stream().map(Result2::getTemp9).collect(Collectors.toList());*/
-
-
-		// サンプルデータ
-		String[] smp1 = {"1", "2019-07-08 15:52:32", "JPN", "派遣", "商流", "100", "28", "新宿駅", "件名", "本文", "田中"};
-		String[] smp2 = {"2", "2019-07-16 14:18:58", "USA", "常駐", "商流", "1500", "35", "Grand Central Station", "お腹すいた", "初めまして", "ボンジュール鈴木"};
-		String[] smp3 = {"3", "2019-07-16 14:24:47", "JPN", "フリー", "商流", "5000", "33", "東京駅", "携帯について", "いつもお世話になっております。", "胡桃沢"};
-		List<String> smpList1 = Arrays.asList(smp1);
-		List<String> smpList2 = Arrays.asList(smp2);
-		List<String> smpList3 = Arrays.asList(smp3);
-
-		listResult2.add(smpList1);
-		listResult2.add(smpList2);
-		listResult2.add(smpList3);
+		List<List<String>> listResult2 = new ArrayList<>();
+		list.stream().map(Result2::getResult2List).forEach(listResult2::add);
 
 		// 表示内容がすべて入ったリストを返却
 		return listResult2;
