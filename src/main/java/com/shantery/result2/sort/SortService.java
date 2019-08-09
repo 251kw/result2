@@ -17,12 +17,12 @@ import com.shantery.result2.util.Result2Util;
 @Service
 class SortService {
 	@Autowired
-	SortRepository sRepository;
+	SortRepository sRepository; //呼び出すクラス
 
 	@Value("${app.recordperpage}")
 	private int recordPerPage; // 1ページあたりの表示件数
-	@Value("${app.paginglength}") // << < (1 2 3 4 5)←これの表示数 > >>
-	private int pagingLength;
+	@Value("${app.paginglength}")
+	private int pagingLength; // ページの表示数
 
 	/**
 	 * 日付昇順にソートした今いるページと開始ページを返す
@@ -42,9 +42,9 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByDateASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByDateASC(String page, String sWord) throws ParseException {
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - 1);	//開始ページの初期化
+		int offset = (currentPage - 1); //開始ページの初期化
 		return sRepository.findAllOrderByDateASC(word, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
@@ -119,7 +119,7 @@ class SortService {
 	 * @param page
 	 * @return PagingUtilのgeneratePagingViewのページングの機能をSortControllerに返す
 	 */
-	public PagingView Paging(String sWord,String page) {
+	public PagingView Paging(String sWord, String page) {
 		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、検索結果の総数が数えられる。
 		return PagingUtil.generatePagingView(

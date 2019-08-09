@@ -8,7 +8,8 @@ package com.shantery.result2.util;
 public class Result2Constants {
 
 	/** インスタンス生成禁止 **/
-	private Result2Constants() {}
+	private Result2Constants() {
+	}
 
 	// URLのパラメータを示す変数
 	/** 起動時やTOPページに戻るときに使う変数 **/
