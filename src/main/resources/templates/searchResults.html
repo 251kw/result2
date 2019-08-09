@@ -14,7 +14,7 @@ a.disabled {
 </style>
 </head>
 <body>
-	<div class="ui text container">
+	<div class="ui container">
 		<div class="ui header">
 			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
 				alt="シャンテリーロゴ"></a>
@@ -38,6 +38,7 @@ ${paging.totalRecordNum} + '件中'
 				<p th:text="#{view.btn.search}">
 			</button>
 		</form>
+		<div class="ui hidden divider"></div>
 		<div style="display: inline-flex">
 			<form th:action="@{/ascdate}" th:object="${ascdating}"
 				style="margin: 0px" method="post">
