@@ -78,6 +78,20 @@ public class Result2Util {
 	}
 
 	/**
+	 * 表示する見出しの数を返却する
+	 * 列数名はapplication.propertiesより取得
+	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
+	 * @return 表示する見出しの個数
+	 */
+	public static int getColumnCount(String columns) {
+
+		// プロパティファイルから取得した項目をカンマで分割
+		String[]     columnArrays = columns.split(",");
+		// 表示する見出しの数を返却
+		return columnArrays.length;
+	}
+
+	/**
 	 * DBから取得したListの内容を変換する（Result2型->List型）
 	 * 理由：Thymeleafで項目を可変にする為に実装
 	 * @param list DBから取得したリスト
