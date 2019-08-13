@@ -115,8 +115,8 @@ class SortService {
 
 	/**
 	 * ページングの機能を実装
+	 * @param page 今いるページ
 	 * @param sWord 検索ワード
-	 * @param page
 	 * @return PagingUtilのgeneratePagingViewのページングの機能をSortControllerに返す
 	 */
 	public PagingView Paging(String sWord, String page) {

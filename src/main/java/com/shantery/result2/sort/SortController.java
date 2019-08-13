@@ -42,6 +42,8 @@ class SortController {
 		}
 	}
 
+
+
 	/**
 	 * 日付を降順にソート(POST送信以外の時)
 	 * @param page	今いるページ

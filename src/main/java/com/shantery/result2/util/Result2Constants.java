@@ -47,7 +47,7 @@ public class Result2Constants {
 	/** ページング機能のキー **/
 	public static final String PAGING = "paging";
 	/** データベースからとってきたリストのキー **/
-	public static final String LIST = "test";
+	public static final String LIST = "Indexs";
 	/** 検索ワードを元にデータベースからとってきたリストのキー **/
 	public static final String SEARCH_LIST = "sResults";
 	/** 本文のキー **/
