@@ -45,7 +45,7 @@ public class Result2Util {
 		//ページの総数
 		int tpn = PagingView.getTotalPageNum();
 		//もし現在いるページ番号がページの総数より小さいまたは、1より小さい時
-		if(tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
+		if (tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
 			tmpPage = "1";
 		}
 		return Integer.parseInt(tmpPage);
