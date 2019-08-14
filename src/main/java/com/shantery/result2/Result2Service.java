@@ -17,8 +17,8 @@ import com.shantery.result2.util.Result2Util;
 public class Result2Service {
 
 	@Value("${app.recordperpage}")
-	private int recordPerPage;	// 1ページあたりの表示件数
-	@Value("${app.paginglength}")	// << < (1 2 3 4 5)←これの表示数 > >>
+	private int recordPerPage; // 1ページあたりの表示件数
+	@Value("${app.paginglength}") // << < (1 2 3 4 5)←これの表示数 > >>
 	private int pagingLength;
 
 	@Autowired
@@ -30,8 +30,8 @@ public class Result2Service {
 	 * @param recordPerPage	1ページ当たりの表示件数
 	 * @return	r2RepositoryのfindAllOrderByDateのListをResult2Controllerに返す
 	 */
-	public List<Result2> find(String page, int recordPerPage) throws ParseException{
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページが返される。
+	public List<Result2> find(String page, int recordPerPage) throws ParseException {
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページが返される。
 		int offset = (currentPage - 1); //開始ページの初期化
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Controllerに返す
 	}
@@ -42,15 +42,15 @@ public class Result2Service {
 	 * @param page 今いるページ
 	 * @return PagingUtilのgeneratePagingViewのページングの機能をResult2Controllerに返す
 	 */
-	public PagingView r2Paging(String sWord,String page) {
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
+	public PagingView r2Paging(String sWord, String page) {
+		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		int totalRecordNum = count(Result2Util.getSearchWord(sWord)); //検索ワードが返され、検索結果の総数が数えられる。
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
 				recordPerPage,
 				pagingLength,
-				new HashMap<>());	//Result2Controllerに返す。
+				new HashMap<>()); //Result2Controllerに返す。
 	}
 
 	/**
@@ -60,11 +60,11 @@ public class Result2Service {
 	 * @param recordPerPage	1ページ当たりの表示件数
 	 * @return	r2Repositoryのsearchメソッドを呼び,ListをResult2Controllerに返す。
 	 */
-	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException{
-		int currentPage = Result2Util.getCurrentPageForDatabase(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
+	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException {
+		int currentPage = Result2Util.getCurrentPageForDatabase(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);
-		int offset = (currentPage -1);	//開始ページの初期化
-		return r2Repository.search(word,PageRequest.of(offset, recordPerPage));	//searchメソッドを呼び、検索ワードと開始ページ、1ページに表示するレコード数をr2Repositoryに返す。
+		int offset = (currentPage - 1); //開始ページの初期化
+		return r2Repository.search(word, PageRequest.of(offset, recordPerPage)); //searchメソッドを呼び、検索ワードと開始ページ、1ページに表示するレコード数をr2Repositoryに返す。
 	}
 
 	/**
@@ -73,6 +73,6 @@ public class Result2Service {
 	 * @return	r2RepositoryのcountAllメソッドを呼び、Result2Controllerにデータの総件数を返す。
 	 */
 	public int count(String sWord) {
-		return r2Repository.countAll(sWord);	//countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。
+		return r2Repository.countAll(sWord); //countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。
 	}
 }

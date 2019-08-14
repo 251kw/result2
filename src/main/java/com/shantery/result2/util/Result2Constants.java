@@ -53,6 +53,10 @@ public class Result2Constants {
 	public static final String TEXT = "text";
 	/** 何ページ目かを保存するキー **/
 	public static final String KEEP_SET_PAGE = "page";
+	/** 表題を保存するキー **/
+	public static final String COLUMN_HEAD = "head";
+	/** 表の長さを保存するキー **/
+	public static final String COLUMN_LENGTH = "columnlength";
 
 	// @RequestParamのname属性
 	/** 検索ワードが入っているname属性 **/
