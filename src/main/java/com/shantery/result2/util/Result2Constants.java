@@ -46,7 +46,7 @@ public class Result2Constants {
 	/** ページング機能のキー **/
 	public static final String PAGING = "paging";
 	/** データベースからとってきたリストのキー **/
-	public static final String LIST = "test";
+	public static final String LIST = "result2_list";
 	/** 検索ワードを元にデータベースからとってきたリストのキー **/
 	public static final String SEARCH_LIST = "sResults";
 	/** 本文のキー **/
@@ -62,7 +62,7 @@ public class Result2Constants {
 	/** 検索ワードが入っているname属性 **/
 	public static final String SEARCH_WORD = "sWord";
 	/** 本文が入っているname属性 **/
-	public static final String HONBUN = "hidden";
+	public static final String HONBUN = "honbun";
 	/** 本文詳細ページに飛ぶときに何ページ目にいたかが入っているname属性 **/
 	public static final String KEEP_GET_PAGE = "fromdisplay";
 

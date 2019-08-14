@@ -68,11 +68,11 @@ ${paging.totalRecordNum} + '件中'
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list : ${test}" th:object="${list}">
+					<tr th:each="list : ${result2_list}" th:object="${list}">
 						<th:block th:each="nakami, stat: ${list}">
 							<td th:if="${stat.index < columnlength}" th:text="${nakami}"></td>
 							<td th:if="${stat.last == true}" style="text-align: center;">
-							<button type="submit" name="hidden" class="mini ui button"
+							<button type="submit" name="honbun" class="mini ui button"
 								th:value="${nakami}">
 								<p th:text="#{view.btn.details}"></p>
 							</button>
