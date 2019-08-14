@@ -39,50 +39,29 @@ ${paging.totalRecordNum} + '件中'
 			</button>
 		</form>
 		<div class="ui hidden divider"></div>
-		<div style="display: inline-flex">
-			<form th:action="@{/ascdate}" th:object="${ascdating}"
-				style="margin: 0px" method="post">
-				<button type="submit" name="ascdate" class="mini ui button">
-					<p th:text="#{view.btn.ascdate}"></p>
-				</button>
-			</form>
-			<form th:action="@{/descdate}" th:object="${descdating}"
-				method="post">
-				<button type="submit" name="descdate" class="mini ui button">
-					<p th:text="#{view.btn.descdate}"></p>
-				</button>
-			</form>
-			<form th:action="@{/asccost}" th:object="${ascosting}" method="post">
-				<button type="submit" name="asccost" class="mini ui button">
-					<p th:text="#{view.btn.asccost}"></p>
-				</button>
-			</form>
-			<form th:action="@{/desccost}" th:object="${descosting}"
-				method="post">
-				<button type="submit" name="desccost" class="mini ui button">
-					<p th:text="#{view.btn.desccost}"></p>
-				</button>
-			</form>
-			<form th:action="@{/ascage}" th:object="${ascageing}" method="post">
-				<button type="submit" name="ascage" class="mini ui button">
-					<p th:text="#{view.btn.ascage}"></p>
-				</button>
-			</form>
-			<form th:action="@{/descage}" th:object="${descageing}" method="post">
-				<button type="submit" name="descage" class="mini ui button">
-					<p th:text="#{view.btn.descage}"></p>
-				</button>
-			</form>
-		</div>
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
 			<table class="ui compact celled table" style="font-size: 9.5pt;">
 				<!-- 見出し。ここも可変になるように後々はしたい -->
 				<thead>
 					<tr>
-						<th:bloack th:each="list, stat: ${head}">
-						<th th:text="${list}"></th>
-						</th:bloack>
+						<th:block th:each="list, stat: ${head}">
+							<th:block th:if="${stat.index == 0}">
+								<th><th:block th:text="${list}"></th:block><a th:href="@{'descdate'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<a th:href="@{'/ascdate'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
+							</th:block>
+							<th:block th:if="${stat.index == 4}">
+								<th><th:block th:text="${list}"></th:block><a th:href="@{'desccost'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<a th:href="@{'/asccost'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
+							</th:block>
+							<th:block th:if="${stat.index == 5}">
+								<th><th:block th:text="${list}"></th:block><a th:href="@{'descage'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<a th:href="@{'/ascage'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
+							</th:block>
+							<th:block th:if="${stat.index != 0 && stat.index != 4 && stat.index != 5}">
+								<th th:text="${list}"></th>
+							</th:block>
+						</th:block>
 						<th></th>
 					</tr>
 				</thead>
@@ -102,7 +81,7 @@ ${paging.totalRecordNum} + '件中'
 				</tbody>
 				<tfoot>
 					<tr>
-						<th colspan="6">
+						<th th:colspan="${columnlength + 1}">
 							<div class="ui pagination small menu">
 								<a class="icon item"
 									th:classappend="!${paging.canGoFirst} ? 'disabled'"
