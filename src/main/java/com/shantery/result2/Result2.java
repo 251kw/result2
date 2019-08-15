@@ -126,6 +126,9 @@ public class Result2 implements Serializable {
 	}
 
 	public String getSubject() {
+		if(subject.length() > 5) {
+			subject = subject.substring(0, 5) + "…";
+		}
 		return subject;
 	}
 
