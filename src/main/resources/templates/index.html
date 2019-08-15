@@ -45,9 +45,9 @@ a.disabled {
 		</div>
 		<p
 			th:text="
-${paging.totalRecordNum} + '件中'
-+ ${paging.fromRecordNum} + '～'
-+ ${paging.toRecordNum} + '件表示中'"></p>
+${paging.totalRecordNum} + #{view.label.incase}
++ ${paging.fromRecordNum} + #{view.label.tilde}
++ ${paging.toRecordNum} + #{view.label.preview}"></p>
 		<p th:text="#{view.label.freeword}">
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
