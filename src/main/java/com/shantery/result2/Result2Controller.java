@@ -45,8 +45,8 @@ class Result2Controller {
 		model.addAttribute(
 				PAGING,r2Service.r2Paging(EMPTY,page));
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
-		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns));
-		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
 		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));	// ServiceでSQL文の実行している
 		return TO_TOP;
 	}
@@ -88,8 +88,8 @@ class Result2Controller {
 			 //testをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));
 		}
-		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns));
-		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの長さを返す
 		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
 			return TO_TOP;
 		} else {	// そうでなければsearchResultsに戻す
@@ -119,8 +119,8 @@ class Result2Controller {
 			 //testをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));
 		}
-		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns));
-		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの長さを返す
 		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
 			return TO_TOP;
 		} else {	// そうでなければsearchResultsに戻す
@@ -143,8 +143,9 @@ class Result2Controller {
 				PAGING,
 				r2Service.r2Paging(sWord,page));
 		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns));
-		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
+		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
 		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
@@ -163,8 +164,9 @@ class Result2Controller {
 				PAGING,
 				r2Service.r2Paging(sWord,page));
 		 //sResultsをキーとしてvalueをList型にしたものを返す
-		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns));
-		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));//表の長さをキーとして、表示する見出しの数を返す
+		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
 		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
