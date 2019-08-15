@@ -66,7 +66,7 @@ class Result2Controller {
 	/**
 	 *displayのページから戻るとき
 	 * @param page 今いるページ
-	 * @param model
+	 * @param model	データを管理するためのクラス
 	 * @return	検索を行っていなければr2Serviceのfindで処理したLIST、r2Serviceのr2Pagingで処理したページング機能をindexに返す。
 	 * @return	検索を行っていればr2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearcResultsに返す。
 	 */
@@ -130,7 +130,7 @@ class Result2Controller {
 	 * フリーワードの検索ボタンが押されたとき
 	 * @param sWord 検索ワード
 	 * @param page	今いるページ
-	 * @param model
+	 * @param model	データを管理するためのクラス
 	 * @return r2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
@@ -150,7 +150,7 @@ class Result2Controller {
 	/**
 	 * 文字を検索し、そのページをページングしたとき
 	 * @param page	今いるページ
-	 * @param model
+	 * @param model	データを管理するためのクラス
 	 * @return r2Serviceのsearchで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をsearchResultsに返す。
 	 */
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき

@@ -28,14 +28,14 @@ a.disabled {
 		</div>
 		<p
 			th:text="
-${paging.totalRecordNum} + '件中'
-+ ${paging.fromRecordNum} + '～'
-+ ${paging.toRecordNum} + '件表示中'"></p>
+${paging.totalRecordNum} + #{view.label.incase}
++ ${paging.fromRecordNum} + #{view.label.tilde}
++ ${paging.toRecordNum} + #{view.label.display}"></p>
 		<p th:text="#{view.label.freeword}">
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
-				<input name=sWord type="text" placeholder="検索ワードを入力">
+				<input name=sWord type="text" placeholder="検索ワードを入力" maxlength="64">
 			</div>
 			<button type="submit" name="search" class="ui primary button">
 				<p th:text="#{view.btn.search}"></p>
