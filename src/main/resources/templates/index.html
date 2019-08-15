@@ -14,6 +14,23 @@ a.disabled {
 .demo1{
   float: right;
 }
+.sampleTable {
+	width: 600px;
+	margin-bottom: 15px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.sampleTable th,
+.sampleTable td {
+	border: 1px solid #CCCCCC;
+	padding: 5px 10px;
+	text-align: left;
+	font-size: 12px;
+}
+.sampleTable th {
+	background-color: #FFCCCC;
+}
+
 </style>
 </head>
 <body>
@@ -49,7 +66,7 @@ ${paging.totalRecordNum} + '件中'
 					<tr>
 						<th:block th:each="list, stat: ${head}">
 							<th:block th:if="${stat.index == 0}">
-								<th><th:block th:text="${list}"></th:block><a th:href="@{'descdate'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<th width="150"><th:block th:text="${list}"></th:block><a th:href="@{'descdate'}" th:text="#{view.btn.desc}" style="float: right"></a>
 								<a th:href="@{'/ascdate'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index == 4}">
@@ -61,7 +78,7 @@ ${paging.totalRecordNum} + '件中'
 								<a th:href="@{'/ascage'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index != 0 && stat.index != 4 && stat.index != 5}">
-								<th th:text="${list}"></th>
+								<th width="100" th:text="${list}"></th>
 							</th:block>
 						</th:block>
 						<th></th>

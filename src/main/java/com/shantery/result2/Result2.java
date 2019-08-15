@@ -111,6 +111,9 @@ public class Result2 implements Serializable {
 		this.closest_station = closest_station;
 	}
 	public String getSubject() {
+		if(subject.length() > 5) {
+			subject = subject.substring(0, 5) + "…";
+		}
 		return subject;
 	}
 	public void setSubject(String subject) {
