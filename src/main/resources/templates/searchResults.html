@@ -11,6 +11,22 @@
 a.disabled {
 	pointer-events: none;
 }
+.sampleTable {
+	width: 1125px;
+	margin-bottom: 15px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.sampleTable th,
+.sampleTable td {
+	border: 1px solid #CCCCCC;
+	padding: 10px 10px;
+	text-align: left;
+	/* font-size: 12px; */
+}
+.sampleTable th {
+	background-color: #F9FAFB;
+}
 </style>
 </head>
 <body>
@@ -41,28 +57,28 @@ ${paging.totalRecordNum} + '件中'
 		<div class="ui hidden divider"></div>
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
-			<table class="ui compact celled table" style="font-size: 9.5pt;">
+			<table class="sampleTable" style="font-size: 9.5pt;">
 				<!-- 見出し。ここも可変になるように後々はしたい -->
 				<thead>
 					<tr>
 						<th:block th:each="list, stat: ${head}">
 							<th:block th:if="${stat.index == 0}">
-								<th><th:block th:text="${list}"></th:block><a th:href="@{'descdate'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<th width="145"><th:block th:text="${list}"></th:block><a th:href="@{'descdate'}" th:text="#{view.btn.desc}" style="float: right"></a>
 								<a th:href="@{'/ascdate'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index == 4}">
-								<th><th:block th:text="${list}"></th:block><a th:href="@{'desccost'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<th width="80"><th:block th:text="${list}"></th:block><a th:href="@{'desccost'}" th:text="#{view.btn.desc}" style="float: right"></a>
 								<a th:href="@{'/asccost'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index == 5}">
-								<th><th:block th:text="${list}"></th:block><a th:href="@{'descage'}" th:text="#{view.btn.desc}" style="float: right"></a>
+								<th width="80"><th:block th:text="${list}"></th:block><a th:href="@{'descage'}" th:text="#{view.btn.desc}" style="float: right"></a>
 								<a th:href="@{'/ascage'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index != 0 && stat.index != 4 && stat.index != 5}">
-								<th th:text="${list}"></th>
+								<th width="100" th:text="${list}"></th>
 							</th:block>
 						</th:block>
-						<th></th>
+						<th width="200"></th>
 					</tr>
 				</thead>
 				<!-- DB内の表示、ここも可変になるように後々はしたい -->
