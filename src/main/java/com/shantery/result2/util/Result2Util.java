@@ -21,7 +21,6 @@ public class Result2Util {
 	/** インスタンス生成禁止 **/
 	private Result2Util() {
 	}
-
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
 	/** 表の表示列数 **/

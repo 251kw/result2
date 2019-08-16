@@ -18,7 +18,6 @@ import com.shantery.result2.util.Result2Util;
 class SortService {
 	@Autowired
 	SortRepository sRepository; //呼び出すクラス
-
 	@Value("${app.recordperpage}")
 	private int recordPerPage; // 1ページあたりの表示件数
 	@Value("${app.paginglength}")

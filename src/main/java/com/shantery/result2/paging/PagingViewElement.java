@@ -1,5 +1,6 @@
 package com.shantery.result2.paging;
 
+//htmlのページングで使用するBeanクラス
 public class PagingViewElement {
 	private String name; // ページ番号の名前
 	private String href; // ページのURLの文字列
