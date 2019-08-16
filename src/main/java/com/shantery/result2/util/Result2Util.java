@@ -19,7 +19,9 @@ import com.shantery.result2.paging.PagingView;
 public class Result2Util {
 
 	/** インスタンス生成禁止 **/
-	private Result2Util() {}
+	private Result2Util() {
+	}
+
 	/** ページ番号の初期値 **/
 	private static final String DEFAULT_PEGE = "1";
 	/** 表の表示列数 **/
@@ -34,19 +36,50 @@ public class Result2Util {
 	public static int getCurrentPage(String page) {
 		// 現在いるページ番号の初期化
 		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
-		return Integer.parseInt(tmpPage);
-	}
-
-	public static int getCurrentPageForDatabase(String page) {
-		// 現在いるページ番号の初期化
-		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
+		// 空白削除
+		tmpPage = tmpPage.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "");
+		// 小数点以下切り捨て
+		String tmp = EMPTY;
+		// 小数点があるかどうかのflag
+		boolean flag = false;
+		// for文を数える変数
+		int count = 0;
+		// 小数点を探すための繰り返し文
+		for (int i = 0; i < tmpPage.length(); i++) {
+			// もし小数点が見つかったならflagを立ててこのループ文を抜け出す
+			if ('.' == tmpPage.charAt(i) || '．' == tmpPage.charAt(i)) {
+				flag = true;
+				break;
+			} else { // そうじゃなければtmpに文字を追加する
+				count++;
+				// countが10になった時、これ以上はNumberExceptionが起きる可能性があるのでループを抜け出す
+				if(count > 9) {
+					break;
+				}
+				tmp += tmpPage.charAt(i);
+			}
+		}
+		// もし小数点が見つかっていたらtmpPageをtmpに変える
+		if (flag) {
+			tmpPage = tmp;
+		}
+		// 文字列が大きすぎる場合1ページ目にする。
+		if (tmpPage.length() > 9 || tmpPage.length() < 1) {
+			tmpPage = DEFAULT_PEGE;
+		}
+		// 全角数字を半角数字に直す
+		tmpPage = zenNumToHanNum(tmpPage);
 		//ページの総数
 		int tpn = PagingView.getTotalPageNum();
-		//もし現在いるページ番号がページの総数より小さいまたは、1より小さい時
-		if(tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
-			tmpPage = "1";
+		//もし現在いるページ番号がページの総数より小さいまたは、1より小さい時は1ページ目を返す
+		try {
+			if (tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
+				tmpPage = DEFAULT_PEGE;
+			}
+			return Integer.parseInt(tmpPage);
+		} catch (Exception e) { // 数字以外の文字が入っていたらキャッチして1ページ目を返す。
+			return Integer.parseInt(DEFAULT_PEGE);
 		}
-		return Integer.parseInt(tmpPage);
 	}
 
 	/**
@@ -70,9 +103,9 @@ public class Result2Util {
 	public static List<String> getColumnName(String columns) {
 
 		// プロパティファイルから取得した項目をカンマで分割
-		String[]     columnArrays = columns.split(",");
+		String[] columnArrays = columns.split(",");
 		// 表示する見出しリスト
-		List<String> columnList   = new ArrayList<>();
+		List<String> columnList = new ArrayList<>();
 		// 表示する件数分繰り返す
 		Arrays.stream(columnArrays).forEach(columnList::add);
 		// 表示する見出しを返却
@@ -88,7 +121,7 @@ public class Result2Util {
 	public static int getColumnCount(String columns) {
 
 		// プロパティファイルから取得した項目をカンマで分割
-		String[]     columnArrays = columns.split(",");
+		String[] columnArrays = columns.split(",");
 		// 表示する見出しの数を返却
 		return columnArrays.length;
 	}
@@ -107,5 +140,21 @@ public class Result2Util {
 
 		// 表示内容がすべて入ったリストを返却
 		return listResult2;
+	}
+
+	/**
+	 * 全角数字を半角数字に直すメソッド
+	 * @param num pageの文字列
+	 * @return 全角数字を半角数字に直した文字列
+	 */
+	private static String zenNumToHanNum(String num) {
+		StringBuffer sb = new StringBuffer(num);
+		for(int i = 0; i < num.length(); i++) {
+			char c = sb.charAt(i);
+			if('０' <= c && c <= '９') {
+				sb.setCharAt(i, (char)(c - '０' + '0'));
+			}
+		}
+		return sb.toString();
 	}
 }
