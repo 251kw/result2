@@ -15,8 +15,11 @@ import org.springframework.stereotype.Repository;
 public interface Result2Repository extends JpaRepository<Result2, Long> {
 	//ページングの機能を受け取り、データを日付昇順に並べたLISTを返す。
 	public List<Result2> findAllOrderByDate(Pageable pageable);
-	//検索ワードを受け取り、検索結果データの総数のLISTを返す。>>>>>>> dddbe2c とりあえず再度コミット
+
+	//検索ワードを受け取り、検索結果データの総数のLISTを返す。
 	public int countAll(@Param("sWord") String sWord);
+
 	//検索ワードとページングの機能を受け取り、検索結果のLISTを返す。
 	public List<Result2> search(@Param("sWord") String sWord, Pageable pageable);
+
 }
