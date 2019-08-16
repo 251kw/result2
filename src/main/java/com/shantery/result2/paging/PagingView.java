@@ -2,6 +2,7 @@ package com.shantery.result2.paging;
 
 import java.util.List;
 
+//ページングの内部処理で使用するBeanクラス
 public class PagingView {
 	private int totalRecordNum; //データの総件数
 	private int fromRecordNum; // ○件~×件の○の値

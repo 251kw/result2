@@ -58,7 +58,6 @@ ${paging.totalRecordNum} + #{view.label.incase}
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
 			<table class="sampleTable" style="font-size: 9.5pt;">
-				<!-- 見出し。ここも可変になるように後々はしたい -->
 				<thead>
 					<tr>
 						<th:block th:each="list, stat: ${head}">

@@ -20,7 +20,6 @@ public class Result2Service {
 	private int recordPerPage; // 1ページあたりの表示件数
 	@Value("${app.paginglength}")
 	private int pagingLength; //ページの表示数
-
 	@Autowired
 	Result2Repository r2Repository; //呼び出すクラス
 

@@ -82,10 +82,9 @@ class Result2Controller {
 				r2Service.r2Paging(sWord,page));
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
-			 //sResultsをキーとしてvalueをList型にしたものを返す
+			//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
-		} else {	// 検索を行っていないのなら
-			 //testをキーとしてvalueをList型にしたものを返す
+		} else {	// 検索を行っていないのなら項目を可変にする為に変換し、変換後のリストを返す
 		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));
 		}
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
@@ -113,10 +112,8 @@ class Result2Controller {
 				r2Service.r2Paging(sWord,page));
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
-			 //sResultsをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord,page, recordPerPage)));
-		} else {	// 検索を行っていないのなら
-			 //testをキーとしてvalueをList型にしたものを返す
+		} else {	// 検索を行っていないのなら項目を可変にする為に変換し、変換後のリストを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));
 		}
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
@@ -142,7 +139,6 @@ class Result2Controller {
 		model.addAttribute(
 				PAGING,
 				r2Service.r2Paging(sWord,page));
-		 //sResultsをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
 		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
@@ -163,7 +159,6 @@ class Result2Controller {
 		model.addAttribute(
 				PAGING,
 				r2Service.r2Paging(sWord,page));
-		 //sResultsをキーとしてvalueをList型にしたものを返す
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));//表の長さをキーとして、表示する見出しの数を返す
 		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す

@@ -25,10 +25,8 @@ class SortController {
 	SortRepository sortRep; //呼び出すクラス
 	@Autowired
 	HttpSession session; //呼び出すクラス
-
 	@Value("${app.columns}")
 	private String columns; // 1ページあたりの表示件数
-
 	@Value("${app.recordperpage}")
 	private int recordPerPage; // 1ページあたりの表示件数
 
@@ -46,10 +44,12 @@ class SortController {
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
 		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換
-		if (wordOpt.isPresent()) { //もしwordOptに
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -68,13 +68,14 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word)));
 			return TO_SEARCH_RESULTS;
-
-		} else {
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word)));
 			return TO_TOP;
 		}
 	}
@@ -92,14 +93,15 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
-
 		}
 	}
 
@@ -116,11 +118,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -139,11 +143,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -162,11 +168,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -185,11 +193,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -208,12 +218,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -232,11 +243,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -255,11 +268,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -278,11 +293,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
@@ -301,11 +318,13 @@ class SortController {
 		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word);
-		if (wordOpt.isPresent()) {
+		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
+			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
-		} else {
+		} else { //もしwordOptに中身が存在しなければ
+			//LISTをキーとしてvalueをList型にしたものを返す
 			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
