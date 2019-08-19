@@ -56,7 +56,7 @@ class SortController {
 	}
 
 	/**
-	 * 日付を降順にソート(POST送信以外の時)
+	 * 日付を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
 	 * @param model 利用するデータを管理するためのクラス
 	 * @return	検索を行っていなければ、sortServiceのfindAllOrderByDateASCで処理したLISTをindexに返す。
@@ -255,6 +255,7 @@ class SortController {
 		}
 	}
 
+
 	/**
 	 * 年齢を昇順にソート(POST送信以外の時)
 	 * @param page	今いるページ
@@ -271,11 +272,11 @@ class SortController {
 		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}

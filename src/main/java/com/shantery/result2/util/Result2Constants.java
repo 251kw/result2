@@ -74,4 +74,33 @@ public class Result2Constants {
 	public static final String END_PERCENT = "%'";
 	/** 空文字 **/
 	public static final String EMPTY = "";
+	/** ページングに使う 0 **/
+	public static final int ZERO = 0;
+	/** ページングに使う 1 **/
+	public static final int ONE = 1;
+	/** ページングに使う 2 **/
+	public static final int TWO = 2;
+	/** ページングに使う 9 **/
+	public static final int NINE = 9;
+	/**URLの後ろの&page**/
+	public static final String PREPAGE = "&page=";
+	/**クエリ文字**/
+	public static final String Query = "?";
+	/**＆**/
+	public static final String AND = "&";
+	/**カンマ**/
+	public static final String COMMA = ",";
+	/** 空白で始まる正規表現 **/
+	public static final String STARTEMPTY = "^[\\\\h]+";
+	/** 空白で終わる正規表現 **/
+	public static final String FINISHEMPTY ="[\\\\h]+$";
+
+
+	//全角文字から半角文字に直すメソッドの変数
+	/** 全角0 **/
+	public static final char FULLWIDTHZERO = '０';
+	/** 全角9 **/
+	public static final char FULLWIDTHNINE = '９';
+	/** 半角0 **/
+	public static final char HAIFSIZEZERO = '0';
 }
