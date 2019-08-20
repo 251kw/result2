@@ -102,7 +102,7 @@ public class Result2Constants {
 	/** 全角9 **/
 	public static final char FULLWIDTHNINE = '９';
 	/** 半角0 **/
-	public static final char HAIFSIZEZERO = '0';
+	public static final char HALFSIZEZERO = '0';
 
 	// 区分
 	/** 人材情報 **/
