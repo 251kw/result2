@@ -30,7 +30,10 @@ a.disabled {
 .sampleTable th {
 	background-color: #F9FAFB;
 }
-
+.header {
+	font-size: 50px;
+	padding: 5px 5px;
+}
 </style>
 </head>
 <body>
@@ -39,8 +42,7 @@ a.disabled {
 			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
 				th:alt="#{view.shanterylog}"></a>
 			<div class="content">
-				<p th:text="#{view.label.searchtitle}">
-				<div class="sub header" th:text="#{view.label.casefacter}"></div>
+				<p class="header" th:text="#{view.label.searchtitle}">
 			</div>
 		</div>
 		<p

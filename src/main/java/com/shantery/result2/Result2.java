@@ -120,6 +120,9 @@ public class Result2 implements Serializable {
 	}
 
 	public String getClosest_station() {
+		if(closest_station.length() > 5) {
+			closest_station = closest_station.substring(0, 5) + "…";
+		}
 		return closest_station;
 	}
 
@@ -147,6 +150,9 @@ public class Result2 implements Serializable {
 	}
 
 	public String getSender() {
+		if(sender.length() > 5) {
+			sender = sender.substring(0, 5) + "…";
+		}
 		return sender;
 	}
 
