@@ -1,4 +1,5 @@
 package com.shantery.result2;
+import static com.shantery.result2.util.Result2Constants.*;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class Result2Service {
 	 */
 	public List<Result2> find(String page, int recordPerPage) throws ParseException {
 		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページが返される。
-		int offset = (currentPage - 1); //開始ページの初期化
+		int offset = (currentPage - ONE); //開始ページの初期化
 		return r2Repository.findAllOrderByDate(PageRequest.of(offset, recordPerPage)); //Result2Controllerに返す
 	}
 
@@ -62,7 +63,7 @@ public class Result2Service {
 	public List<Result2> search(String sWord, String page, int recordPerPage) throws ParseException {
 		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord);
-		int offset = (currentPage - 1); //開始ページの初期化
+		int offset = (currentPage - ONE); //開始ページの初期化
 		return r2Repository.search(word, PageRequest.of(offset, recordPerPage)); //searchメソッドを呼び、検索ワードと開始ページ、1ページに表示するレコード数をr2Repositoryに返す。
 	}
 

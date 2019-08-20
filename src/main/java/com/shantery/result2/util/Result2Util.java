@@ -36,7 +36,7 @@ public class Result2Util {
 		// 現在いるページ番号の初期化
 		var tmpPage = Optional.ofNullable(page).orElse(DEFAULT_PEGE);
 		// 空白削除
-		tmpPage = tmpPage.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "");
+		tmpPage = tmpPage.replaceFirst(STARTEMPTY, EMPTY).replaceFirst(FINISHEMPTY, EMPTY);
 		// 小数点以下切り捨て
 		String tmp = EMPTY;
 		// 小数点があるかどうかのflag
@@ -52,7 +52,7 @@ public class Result2Util {
 			} else { // そうじゃなければtmpに文字を追加する
 				count++;
 				// countが10になった時、これ以上はNumberExceptionが起きる可能性があるのでループを抜け出す
-				if(count > 9) {
+				if(count > NINE) {
 					break;
 				}
 				tmp += tmpPage.charAt(i);
@@ -63,7 +63,7 @@ public class Result2Util {
 			tmpPage = tmp;
 		}
 		// 文字列が大きすぎる場合1ページ目にする。
-		if (tmpPage.length() > 9 || tmpPage.length() < 1) {
+		if (tmpPage.length() > NINE || tmpPage.length() < ONE) {
 			tmpPage = DEFAULT_PEGE;
 		}
 		// 全角数字を半角数字に直す
@@ -72,7 +72,7 @@ public class Result2Util {
 		int tpn = PagingView.getTotalPageNum();
 		//もし現在いるページ番号がページの総数より小さいまたは、1より小さい時は1ページ目を返す
 		try {
-			if (tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < 1) {
+			if (tpn < Integer.parseInt(tmpPage) || Integer.parseInt(tmpPage) < ONE) {
 				tmpPage = DEFAULT_PEGE;
 			}
 			return Integer.parseInt(tmpPage);
@@ -102,7 +102,7 @@ public class Result2Util {
 	public static List<String> getColumnName(String columns) {
 
 		// プロパティファイルから取得した項目をカンマで分割
-		String[] columnArrays = columns.split(",");
+		String[] columnArrays = columns.split(COMMA);
 		// 表示する見出しリスト
 		List<String> columnList = new ArrayList<>();
 		// 表示する件数分繰り返す
@@ -120,7 +120,7 @@ public class Result2Util {
 	public static int getColumnCount(String columns) {
 
 		// プロパティファイルから取得した項目をカンマで分割
-		String[] columnArrays = columns.split(",");
+		String[] columnArrays = columns.split(COMMA);
 		// 表示する見出しの数を返却
 		return columnArrays.length;
 	}
@@ -150,8 +150,8 @@ public class Result2Util {
 		StringBuffer sb = new StringBuffer(num);
 		for(int i = 0; i < num.length(); i++) {
 			char c = sb.charAt(i);
-			if('０' <= c && c <= '９') {
-				sb.setCharAt(i, (char)(c - '０' + '0'));
+			if(FULLWIDTHZERO <= c && c <= FULLWIDTHNINE) {
+				sb.setCharAt(i, (char)(c - FULLWIDTHZERO + HAIFSIZEZERO));
 			}
 		}
 		return sb.toString();
