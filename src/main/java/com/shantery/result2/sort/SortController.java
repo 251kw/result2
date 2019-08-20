@@ -39,18 +39,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_DATEASC_BUTTON, method = RequestMethod.POST)
 	public String postascdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); // 検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); // 検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -64,18 +65,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_DATEASC_BUTTON, method = RequestMethod.GET)
 	public String getascdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); // 検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); // 検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word)));
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, sWord)));
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, word)));
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateASC(page, sWord)));
 			return TO_TOP;
 		}
 	}
@@ -89,18 +91,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_DATEDESC_BUTTON, method = RequestMethod.POST)
 	public String postdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -114,18 +117,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_DATEDESC_BUTTON, method = RequestMethod.GET)
 	public String getdescdate(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByDateDESC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -139,18 +143,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_COSTASC_BUTTON, method = RequestMethod.POST)
 	public String postasccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); // 検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); // 検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -164,18 +169,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_COSTASC_BUTTON, method = RequestMethod.GET)
 	public String getasccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostASC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -189,18 +195,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_COSTDESC_BUTTON, method = RequestMethod.POST)
 	public String postdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -214,18 +221,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_COSTDESC_BUTTON, method = RequestMethod.GET)
 	public String getdesccost(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByCostDESC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -239,18 +247,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_AGEASC_BUTTON, method = RequestMethod.POST)
 	public String postascage(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -265,18 +274,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_AGEASC_BUTTON, method = RequestMethod.GET)
 	public String getascage(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeASC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -290,18 +300,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_AGEDESC_BUTTON, method = RequestMethod.POST)
 	public String postdescage(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
@@ -315,18 +326,19 @@ class SortController {
 	 */
 	@RequestMapping(value = FROM_AGEDESC_BUTTON, method = RequestMethod.GET)
 	public String getdescage(@RequestParam(required = false) final String page, Model model) throws ParseException {
-		String word = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
-		model.addAttribute(PAGING, sortService.Paging(word, page)); //検索ワードを使ってページングの設定
+		String sWord = (String) session.getAttribute(SESSION_FORM_ID); //検索ワードを取る
+		model.addAttribute(PAGING, sortService.Paging(sWord, page)); //検索ワードを使ってページングの設定
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		Optional<String> wordOpt = Optional.ofNullable(word); //Optional型に変換する
+		Optional<String> wordOpt = Optional.ofNullable(sWord); //Optional型に変換する
 		if (wordOpt.isPresent()) { //もしwordOptに中身が存在すれば
 			//SEARCH_LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, sWord))); //SEARCH_LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		} else { //もしwordOptに中身が存在しなければ
 			//LISTをキーとしてvalueをList型にしたものを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, word))); //LISTをキーとしてvalueをList型にしたものを返す
+			model.addAttribute(LIST, Result2Util.convBeanToList(sortService.findAllOrderByAgeDESC(page, sWord))); //LISTをキーとしてvalueをList型にしたものを返す
 			return TO_TOP;
 		}
 	}
