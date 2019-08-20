@@ -103,4 +103,10 @@ public class Result2Constants {
 	public static final char FULLWIDTHNINE = '９';
 	/** 半角0 **/
 	public static final char HAIFSIZEZERO = '0';
+
+	// 区分
+	/** 人材情報 **/
+	public static final int KBN_SEARCH_HUMANRESOURCE = 1;
+	/** 案件情報 **/
+	public static final int KBN_SEARCH_WORK          = 2;
 }
