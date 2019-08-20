@@ -90,7 +90,7 @@ public class Result2Util {
 	public static String getSearchWord(String word) {
 		// 検索ワードの初期化
 		var tmpWord = Optional.ofNullable(word).orElse(EMPTY);
-		tmpWord = tmpWord.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "");
+		tmpWord = tmpWord.replaceFirst(STARTEMPTY, EMPTY).replaceFirst(FINISHEMPTY, EMPTY);
 		return tmpWord;
 	}
 
