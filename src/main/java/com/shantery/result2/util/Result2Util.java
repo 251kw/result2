@@ -154,7 +154,7 @@ public class Result2Util {
 			char c = sb.charAt(i);
 			// もしchar型の変数名cが全角数字なら半角数字に直す
 			if(FULLWIDTHZERO <= c && c <= FULLWIDTHNINE) {
-				sb.setCharAt(i, (char)(c - FULLWIDTHZERO + HAIFSIZEZERO));
+				sb.setCharAt(i, (char)(c - FULLWIDTHZERO + HALFSIZEZERO));
 			}
 		}
 		// StringBuffer型をString型に直したものを返す
