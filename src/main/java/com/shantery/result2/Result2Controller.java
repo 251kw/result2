@@ -122,6 +122,7 @@ class Result2Controller {
 		if(flag == false) {	// もしflagが立っていない(=検索を行っていない)のであればindexに戻す
 			return TO_TOP;
 		} else {	// そうでなければsearchResultsに戻す
+			model.addAttribute(SEARCH_WORD,sWord);
 			return TO_SEARCH_RESULTS;
 		}
 	}
@@ -164,6 +165,7 @@ class Result2Controller {
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));//表の長さをキーとして、表示する見出しの数を返す
 		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
 		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
+		model.addAttribute(SEARCH_WORD,sWord);
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
 }

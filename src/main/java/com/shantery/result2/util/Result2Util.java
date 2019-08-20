@@ -147,13 +147,18 @@ public class Result2Util {
 	 * @return 全角数字を半角数字に直した文字列
 	 */
 	private static String zenNumToHanNum(String num) {
+		// StringBuffer型の変数名sbを宣言し、中身をpageの文字列にする
 		StringBuffer sb = new StringBuffer(num);
+		// pageの文字列文繰り返す
 		for(int i = 0; i < num.length(); i++) {
+			// char型の変数名cにsbの文字列のi番目を代入する。
 			char c = sb.charAt(i);
+			// もしchar型の変数名cが全角数字なら半角数字に直す
 			if(FULLWIDTHZERO <= c && c <= FULLWIDTHNINE) {
 				sb.setCharAt(i, (char)(c - FULLWIDTHZERO + HAIFSIZEZERO));
 			}
 		}
+		// StringBuffer型をString型に直したものを返す
 		return sb.toString();
 	}
 }
