@@ -56,7 +56,8 @@ ${paging.totalRecordNum} + #{view.label.incase}
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
-				<input name=sWord type="text" th:placeholder="#{view.searchword}" maxlength="64">
+
+				<input name=sWord type="text" th:value="${sWord}" th:placeholder="#{view.searchword}" maxlength="64">
 			</div>
 			<button type="submit" name="search" class="ui primary button">
 				<p th:text="#{view.btn.search}">
