@@ -91,9 +91,9 @@ public class Result2Constants {
 	/**カンマ**/
 	public static final String COMMA = ",";
 	/** 空白で始まる正規表現 **/
-	public static final String STARTEMPTY = "^[\\\\h]+";
+	public static final String STARTEMPTY = "^[\\h]+";
 	/** 空白で終わる正規表現 **/
-	public static final String FINISHEMPTY ="[\\\\h]+$";
+	public static final String FINISHEMPTY ="[\\h]+$";
 
 
 	//全角文字から半角文字に直すメソッドの変数
