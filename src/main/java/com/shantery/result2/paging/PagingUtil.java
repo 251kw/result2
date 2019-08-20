@@ -1,5 +1,7 @@
 package com.shantery.result2.paging;
 
+import static com.shantery.result2.util.Result2Constants.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -75,7 +77,7 @@ public class PagingUtil {
 	 * @return 生成されたクエリストリング
 	 */
 	protected static String toQueryString(Map<String, String> params) {
-		return "?" + params.entrySet().stream().map(Object::toString).collect(Collectors.joining("&"));
+		return "?" + params.entrySet().stream().map(Object::toString).collect(Collectors.joining(AND));
 	}
 
 	/**

@@ -74,4 +74,8 @@ public class Result2Constants {
 	public static final String END_PERCENT = "%'";
 	/** 空文字 **/
 	public static final String EMPTY = "";
+	/** & **/
+	public static final String AND = "&";
+	/** 1 **/
+	public static final int ONE = 1;
 }
