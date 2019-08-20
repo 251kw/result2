@@ -56,13 +56,7 @@ ${paging.totalRecordNum} + #{view.label.incase}
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
-
-<<<<<<< Upstream, based on origin/430_20190820_01
 				<input name=sWord type="text" th:value="${sWord}" th:placeholder="#{view.searchword}" maxlength="64">
-=======
-				<input name=sWord type="text" th:value="${sWord}" th:placeholder="#{view.searchword}" maxlength="64">
-
->>>>>>> 122b7a8 2019/08/20 ページングしたとき検索文字保持修正。
 			</div>
 			<button type="submit" name="search" class="ui primary button">
 				<p th:text="#{view.btn.search}">
