@@ -33,7 +33,7 @@ a.disabled {
 	<div class="ui container">
 		<div class="ui header">
 			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
-				alt="シャンテリーロゴ"></a>
+				th:alt="#{view.shanterylog}"></a>
 			<div class="content">
 				<p th:text="#{view.label.searchtitle}">
 				<div class="sub header" th:text="#{view.label.casefacter}"></div>
@@ -48,7 +48,9 @@ ${paging.totalRecordNum} + #{view.label.incase}
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
-				<input name=sWord type="text" th:value="${sWord}" placeholder="検索ワードを入力" maxlength="64">
+
+				<input name=sWord type="text" th:value="${sWord}" placeholder="#{view.searchword}" maxlength="64">
+
 			</div>
 			<button type="submit" name="search" class="ui primary button">
 				<p th:text="#{view.btn.search}">
