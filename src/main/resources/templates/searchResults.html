@@ -27,6 +27,14 @@ a.disabled {
 .sampleTable th {
 	background-color: #F9FAFB;
 }
+.header {
+	font-size: 50px;
+	padding: 5px 5px;
+}
+.alert {
+	font-size: 18px;
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -35,11 +43,11 @@ a.disabled {
 			<a class="logo" href="/"><img src="./img/ShanteryLogo.jpg"
 				alt="シャンテリーロゴ"></a>
 			<div class="content">
-				<p th:text="#{view.label.searchtitle}">
-				<div class="sub header" th:text="#{view.label.casefacter}"></div>
+				<p class="header" th:text="#{view.label.searchtitle}">
 			</div>
 		</div>
-		<p
+		<div class="alert"><p th:if="${paging.totalRecordNum == 0}" th:text="#{view.no.results}"></p></div>
+		<p th:if="${paging.totalRecordNum != 0}"
 			th:text="
 ${paging.totalRecordNum} + #{view.label.incase}
 + ${paging.fromRecordNum} + #{view.label.tilde}
@@ -57,7 +65,7 @@ ${paging.totalRecordNum} + #{view.label.incase}
 		<div class="ui hidden divider"></div>
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
-			<table class="sampleTable" style="font-size: 9.5pt;">
+			<table th:if="${paging.totalRecordNum != 0}" class="sampleTable" style="font-size: 9.5pt;">
 				<thead>
 					<tr>
 						<th:block th:each="list, stat: ${head}">
