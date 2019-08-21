@@ -41,13 +41,14 @@ class Result2Controller {
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// もしsessionスコープ内にデータがあるなら削除する
 			session.removeAttribute(SESSION_FORM_ID);
 		}
+		session.setAttribute(SESSION_FORM_KEY, KBN_SEARCH_HUMANRESOURCE);
 		/* ページングの機能としてキーの値をpageにしたものをセットする */
 		model.addAttribute(
-				PAGING,r2Service.r2Paging(EMPTY,page));
+				PAGING,r2Service.r2Paging(EMPTY,page,KBN_SEARCH_HUMANRESOURCE));
 		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
-		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));	// ServiceでSQL文の実行している
+		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage, KBN_SEARCH_HUMANRESOURCE)));	// ServiceでSQL文の実行している
 		return TO_TOP;
 	}
 
@@ -76,16 +77,18 @@ class Result2Controller {
 	public String postbackIndex(@RequestParam(name = KEEP_GET_PAGE) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);
+		// 人材情報か案件情報かを調べるためのセッション
+		String search_kbn = (String) session.getAttribute(SESSION_FORM_KEY);
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
+				r2Service.r2Paging(sWord,page,search_kbn));
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
 			//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage, search_kbn)));
 		} else {	// 検索を行っていないのなら項目を可変にする為に変換し、変換後のリストを返す
-		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));
+		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage, search_kbn)));
 		}
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの長さを返す
@@ -107,15 +110,17 @@ class Result2Controller {
 	public String getbackIndex(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		boolean flag = false;	// フリーワード検索を行っているどうかのフラグ
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 検索されているワードを取る
+		// 人材情報か案件情報かを調べるためのセッション
+		String search_kbn = (String) session.getAttribute(SESSION_FORM_KEY);
 		 //ページングの機能としてキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
+				r2Service.r2Paging(sWord,page,search_kbn));
 		if(session.getAttribute(SESSION_FORM_ID) != null) {	// 検索を行っているなら
 			flag = true;	// フラグを立てる
-			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord,page, recordPerPage)));
+			model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord,page, recordPerPage,search_kbn)));
 		} else {	// 検索を行っていないのなら項目を可変にする為に変換し、変換後のリストを返す
-			model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage)));
+			model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage,search_kbn)));
 		}
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの長さを返す
@@ -137,14 +142,16 @@ class Result2Controller {
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.POST)	// フリーワードの検索ボタンが押されたとき
 	public String postsearchResults(@RequestParam(name = SEARCH_WORD,required = false) String sWord, @RequestParam(required = false) final String page, Model model) throws ParseException{
 		session.setAttribute(SESSION_FORM_ID, sWord);	// 検索ワードをsessionスコープに保持
+		// 人材情報か案件情報かを調べるためのセッション
+		String search_kbn = (String) session.getAttribute(SESSION_FORM_KEY);
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
+				r2Service.r2Paging(sWord,page,search_kbn));
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
 		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
-		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
+		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage,search_kbn)));
 		model.addAttribute(SEARCH_WORD,sWord);
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
@@ -157,15 +164,43 @@ class Result2Controller {
 	@RequestMapping(value = FROM_SEARCH_BUTTON, method = RequestMethod.GET)	// 検索した結果のページでページングを行うとき
 	public String getsearchResults(@RequestParam(required = false) final String page, Model model) throws ParseException{
 		String sWord = (String) session.getAttribute(SESSION_FORM_ID);	// 保持した検索ワードを取ってくる
+		// 人材情報か案件情報かを調べるためのセッション
+		String search_kbn = (String) session.getAttribute(SESSION_FORM_KEY);
 		 //ページングの機能してキーをpageとしたものをセットする
 		model.addAttribute(
 				PAGING,
-				r2Service.r2Paging(sWord,page));
+				r2Service.r2Paging(sWord,page,search_kbn));
 		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
 		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns));//表の長さをキーとして、表示する見出しの数を返す
 		//Thymeleafで項目を可変にする為に変換し、変換後のリストを返す
-		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage)));
+		model.addAttribute(SEARCH_LIST, Result2Util.convBeanToList(r2Service.search(sWord, page, recordPerPage,search_kbn)));
 		model.addAttribute(SEARCH_WORD,sWord);
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
+	}
+
+	@RequestMapping(value = FROM_HUMAMRESOURCE_BUTTON, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
+	public String fromHumanResource(@RequestParam(required = false) final String page, Model model) throws ParseException {
+		session.setAttribute(SESSION_FORM_KEY, KBN_SEARCH_HUMANRESOURCE);
+		/* ページングの機能としてキーの値をpageにしたものをセットする */
+		model.addAttribute(
+				PAGING,r2Service.r2Paging(EMPTY,page,KBN_SEARCH_HUMANRESOURCE));
+		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
+		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage, KBN_SEARCH_HUMANRESOURCE)));	// ServiceでSQL文の実行している
+		return TO_TOP;
+	}
+
+	@RequestMapping(value = FROM_WORK_BUTTON, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
+	public String fromWork(@RequestParam(required = false) final String page, Model model) throws ParseException {
+		session.setAttribute(SESSION_FORM_KEY, KBN_SEARCH_WORK);
+		/* ページングの機能としてキーの値をpageにしたものをセットする */
+		model.addAttribute(
+				PAGING,r2Service.r2Paging(EMPTY,page,KBN_SEARCH_WORK));
+		/* キーの値をtestにし、valueをSQL文で返したList型のResult2でセットする。*/
+		model.addAttribute(COLUMN_HEAD, Result2Util.getColumnName(columns)); //表題をキーとして、表示する見出しを返す
+		model.addAttribute(COLUMN_LENGTH, Result2Util.getColumnCount(columns)); //表の長さをキーとして、表示する見出しの数を返す
+		model.addAttribute(LIST, Result2Util.convBeanToList(r2Service.find(page, recordPerPage, KBN_SEARCH_WORK)));	// ServiceでSQL文の実行している
+		return TO_TOP;
 	}
 }

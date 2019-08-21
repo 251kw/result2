@@ -43,6 +43,8 @@ public class Result2 implements Serializable {
 	private String text;
 	/** 送信者 **/
 	private String sender;
+	/** 人材・案件 **/
+	private String human_resource_or_work;
 	/** テンポラリー１ **/
 	private String temp1;
 	/** テンポラリー２ **/
@@ -152,6 +154,14 @@ public class Result2 implements Serializable {
 		this.sender = sender;
 	}
 
+	public String getHuman_resource_or_work() {
+		return human_resource_or_work;
+	}
+
+	public void setHuman_resource_or_work(String human_resource_or_work) {
+		this.human_resource_or_work = human_resource_or_work;
+	}
+
 	public String getTemp1() {
 		return temp1;
 	}
@@ -239,6 +249,7 @@ public class Result2 implements Serializable {
 		result2List.add(getClosest_station());
 		result2List.add(getSubject());
 		result2List.add(getSender());
+		result2List.add(getHuman_resource_or_work());
 		result2List.add(getTemp1());
 		result2List.add(getTemp2());
 		result2List.add(getTemp3());

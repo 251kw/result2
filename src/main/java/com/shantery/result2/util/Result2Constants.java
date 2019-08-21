@@ -32,6 +32,10 @@ public class Result2Constants {
 	public static final String FROM_AGEASC_BUTTON = "/ascage";
 	/** 年齢降順ボタンが押されたとき **/
 	public static final String FROM_AGEDESC_BUTTON = "/descage";
+	/** 人材情報が押されたとき **/
+	public static final String FROM_HUMAMRESOURCE_BUTTON = "/humanresource";
+	/** 案件情報が押されたとき **/
+	public static final String FROM_WORK_BUTTON = "/work";
 
 	// 遷移先を示す変数
 	/** TOPページの遷移先 **/
@@ -44,6 +48,8 @@ public class Result2Constants {
 	// キーを示す変数
 	/** セッションのキー **/
 	public static final String SESSION_FORM_ID = "searchForm";
+	/** 人材か案件かを保存するセッションのキー **/
+	public static final String SESSION_FORM_KEY = "human_resource_or_work";
 	/** ページング機能のキー **/
 	public static final String PAGING = "paging";
 	/** データベースからとってきたリストのキー **/
@@ -94,6 +100,8 @@ public class Result2Constants {
 	public static final String STARTEMPTY = "^[\\h]+";
 	/** 空白で終わる正規表現 **/
 	public static final String FINISHEMPTY ="[\\h]+$";
+	/** ページ番号の初期値 **/
+	public static final String DEFAULT_PEGE = "1";
 
 
 	//全角文字から半角文字に直すメソッドの変数
@@ -106,7 +114,7 @@ public class Result2Constants {
 
 	// 区分
 	/** 人材情報 **/
-	public static final int KBN_SEARCH_HUMANRESOURCE = 1;
+	public static final String KBN_SEARCH_HUMANRESOURCE = "1";
 	/** 案件情報 **/
-	public static final int KBN_SEARCH_WORK          = 2;
+	public static final String KBN_SEARCH_WORK          = "2";
 }

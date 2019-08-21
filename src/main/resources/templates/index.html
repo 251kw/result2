@@ -58,6 +58,8 @@ ${paging.totalRecordNum} + #{view.label.incase}
 				<p th:text="#{view.btn.search}"></p>
 			</button>
 		</form>
+		<a th:href="@{'/humanresource'}" th:text="#{view.btn.humanresource}"></a>
+		<a th:href="@{'/work'}" th:text="#{view.btn.work}"></a>
 		<div class="ui hidden divider"></div>
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">

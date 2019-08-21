@@ -21,8 +21,6 @@ public class Result2Util {
 	/** インスタンス生成禁止 **/
 	private Result2Util() {
 	}
-	/** ページ番号の初期値 **/
-	private static final String DEFAULT_PEGE = "1";
 	/** 表の表示列数 **/
 	@Value("${app.columnsize}")
 	private static int columnSize;
@@ -90,7 +88,7 @@ public class Result2Util {
 	public static String getSearchWord(String word) {
 		// 検索ワードの初期化
 		var tmpWord = Optional.ofNullable(word).orElse(EMPTY);
-		tmpWord = tmpWord.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "");
+		tmpWord = tmpWord.replaceFirst(STARTEMPTY, EMPTY).replaceFirst(FINISHEMPTY, EMPTY);
 		return tmpWord;
 	}
 
