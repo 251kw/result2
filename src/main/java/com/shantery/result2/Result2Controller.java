@@ -191,6 +191,7 @@ class Result2Controller {
 		return TO_TOP;
 	}
 
+
 	@RequestMapping(value = FROM_WORK_BUTTON, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
 	public String fromWork(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		session.setAttribute(SESSION_FORM_KEY, KBN_SEARCH_WORK);
