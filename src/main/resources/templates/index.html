@@ -98,7 +98,15 @@ ${paging.totalRecordNum} + #{view.label.incase}
 									<td th:title="${nakami}" th:text="${nakami}"></td>
 								</th:block>
 								<th:block th:if="${stat.index != 6 && stat.index != 7 && stat.index != 8}">
+									<th:block th:if="${stat.index == 4}">
+									<td th:text="#{view.tablelabel.costman(${nakami})}"></td>
+									</th:block>
+									<th:block th:if="${stat.index == 5}">
+									<td th:text="#{view.tablelabel.ageage(${nakami})}"></td>
+									</th:block>
+									<th:block th:if="${stat.index != 4 && stat.index != 5}">
 									<td th:text="${nakami}"></td>
+									</th:block>
 								</th:block>
 							</th:block>
 							<td th:if="${stat.last == true}" style="text-align: center;">
