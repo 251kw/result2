@@ -20,7 +20,10 @@ a.disabled {
 	border: 1px solid #CCCCCC;
 	padding: 10px 10px;
 	text-align: left;
-	/* font-size: 12px; */
+	max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .sampleTable th {
 	background-color: #F9FAFB;
@@ -91,7 +94,15 @@ ${paging.totalRecordNum} + #{view.label.incase}
 				<tbody>
 					<tr th:each="list : ${sResults}" th:object="${list}">
 						<th:block th:each="nakami, stat: ${list}">
-							<td th:if="${stat.index < columnlength}" th:text="${nakami}"></td>
+							<!-- <td th:if="${stat.index < columnlength}" th:title="${nakami}" th:text="${nakami}"></td> -->
+							<th:block th:if="${stat.index < columnlength}">
+								<th:block th:if="${stat.index == 6 || stat.index == 7 || stat.index == 8}">
+									<td th:title="${nakami}" th:text="${nakami}"></td>
+								</th:block>
+								<th:block th:if="${stat.index != 6 && stat.index != 7 && stat.index != 8}">
+									<td th:text="${nakami}"></td>
+								</th:block>
+							</th:block>
 							<td th:if="${stat.last == true}" style="text-align: center;">
 							<button type="submit" name="honbun" class="mini ui button"
 								th:value="${nakami}">
