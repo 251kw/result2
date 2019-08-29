@@ -39,6 +39,9 @@ a.disabled {
 	font-size: 50px;
 	padding: 5px 5px;
 }
+.mgr-20{
+	margin-right : 20px;
+}
 </style>
 </head>
 <body>
@@ -55,6 +58,9 @@ a.disabled {
 ${paging.totalRecordNum} + #{view.label.incase}
 + ${paging.fromRecordNum} + #{view.label.tilde}
 + ${paging.toRecordNum} + #{view.label.preview}"></p>
+		<a th:href="@{'/humanresource'}" th:text="#{view.btn.humanresource}"></a><span class="mgr-20"></span>
+		<a th:href="@{'/work'}" th:text="#{view.btn.work}"></a>
+		<p></p>
 		<p th:text="#{view.label.freeword}">
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
@@ -66,13 +72,10 @@ ${paging.totalRecordNum} + #{view.label.incase}
 				<p th:text="#{view.btn.search}"></p>
 			</button>
 		</form>
-		<a th:href="@{'/humanresource'}" th:text="#{view.btn.humanresource}"></a>
-		<a th:href="@{'/work'}" th:text="#{view.btn.work}"></a>
 		<div class="ui hidden divider"></div>
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
 			<table class="sampleTable" style="font-size: 9.5pt;">
-				<!-- class="ui compact celled table" -->
 				<thead>
 					<tr>
 						<th:block th:each="list, stat: ${head}">
@@ -105,7 +108,6 @@ ${paging.totalRecordNum} + #{view.label.incase}
 				<tbody>
 					<tr th:each="list : ${result2_list}" th:object="${list}">
 						<th:block th:each="nakami, stat: ${list}">
-							<!-- <td th:if="${stat.index < columnlength}" th:title="${nakami}" th:text="${nakami}"></td> -->
 							<th:block th:if="${stat.index < columnlength}">
 								<th:block
 									th:if="${stat.index == 6 || stat.index == 7 || stat.index == 8}">
