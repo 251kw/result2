@@ -9,28 +9,32 @@
 a.disabled {
 	pointer-events: none;
 }
-.demo1{
-  float: right;
+
+.demo1 {
+	float: right;
 }
+
 .sampleTable {
 	width: 1125px;
 	margin-bottom: 15px;
 	border-collapse: collapse;
 	table-layout: fixed;
 }
-.sampleTable th,
-.sampleTable td {
+
+.sampleTable th, .sampleTable td {
 	border: 1px solid #CCCCCC;
 	padding: 10px 10px;
 	text-align: left;
 	max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
+
 .sampleTable th {
 	background-color: #F9FAFB;
 }
+
 .header {
 	font-size: 50px;
 	padding: 5px 5px;
@@ -55,7 +59,8 @@ ${paging.totalRecordNum} + #{view.label.incase}
 			</th:text>
 		<form th:action="@{/sresults}" th:object="${searching}" method="post">
 			<div class="ui input focus">
-				<input name=sWord type="text" th:placeholder="#{view.searchword}" maxlength="64">
+				<input name=sWord type="text" th:placeholder="#{view.searchword}"
+					maxlength="64">
 			</div>
 			<button type="submit" name="search" class="ui primary button">
 				<p th:text="#{view.btn.search}"></p>
@@ -66,23 +71,31 @@ ${paging.totalRecordNum} + #{view.label.incase}
 		<div class="ui hidden divider"></div>
 		<div class="ui divider"></div>
 		<form th:action="@{/result}" th:object="${test}" method="post">
-			<table class="sampleTable" style="font-size: 9.5pt;"><!-- class="ui compact celled table" -->
+			<table class="sampleTable" style="font-size: 9.5pt;">
+				<!-- class="ui compact celled table" -->
 				<thead>
 					<tr>
 						<th:block th:each="list, stat: ${head}">
 							<th:block th:if="${stat.index == 0}">
-								<th width="145"><th:block th:text="${list}"></th:block><a th:href="@{'descdate'}" th:text="#{view.btn.desc}" style="float: right"></a>
-								<a th:href="@{'/ascdate'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
+								<th width="145"><th:block th:text="${list}"></th:block><a
+									th:href="@{'descdate'}" th:text="#{view.btn.desc}"
+									style="float: right"></a> <a th:href="@{'/ascdate'}"
+									th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index == 4}">
-								<th width="80"><th:block th:text="${list}"></th:block><a th:href="@{'desccost'}" th:text="#{view.btn.desc}" style="float: right"></a>
-								<a th:href="@{'/asccost'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
+								<th width="80"><th:block th:text="${list}"></th:block><a
+									th:href="@{'desccost'}" th:text="#{view.btn.desc}"
+									style="float: right"></a> <a th:href="@{'/asccost'}"
+									th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
 							<th:block th:if="${stat.index == 5}">
-								<th width="80"><th:block th:text="${list}"></th:block><a th:href="@{'descage'}" th:text="#{view.btn.desc}" style="float: right"></a>
-								<a th:href="@{'/ascage'}" th:text="#{view.btn.asc}" style="float: right"></a></th>
+								<th width="80"><th:block th:text="${list}"></th:block><a
+									th:href="@{'descage'}" th:text="#{view.btn.desc}"
+									style="float: right"></a> <a th:href="@{'/ascage'}"
+									th:text="#{view.btn.asc}" style="float: right"></a></th>
 							</th:block>
-							<th:block th:if="${stat.index != 0 && stat.index != 4 && stat.index != 5}">
+							<th:block
+								th:if="${stat.index != 0 && stat.index != 4 && stat.index != 5}">
 								<th width="100" th:text="${list}"></th>
 							</th:block>
 						</th:block>
@@ -94,26 +107,28 @@ ${paging.totalRecordNum} + #{view.label.incase}
 						<th:block th:each="nakami, stat: ${list}">
 							<!-- <td th:if="${stat.index < columnlength}" th:title="${nakami}" th:text="${nakami}"></td> -->
 							<th:block th:if="${stat.index < columnlength}">
-								<th:block th:if="${stat.index == 6 || stat.index == 7 || stat.index == 8}">
+								<th:block
+									th:if="${stat.index == 6 || stat.index == 7 || stat.index == 8}">
 									<td th:title="${nakami}" th:text="${nakami}"></td>
 								</th:block>
-								<th:block th:if="${stat.index != 6 && stat.index != 7 && stat.index != 8}">
+								<th:block
+									th:if="${stat.index != 6 && stat.index != 7 && stat.index != 8}">
 									<th:block th:if="${stat.index == 4}">
-									<td th:text="#{view.tablelabel.costman(${nakami})}"></td>
+										<td th:text="#{view.tablelabel.costman(${nakami})}"></td>
 									</th:block>
 									<th:block th:if="${stat.index == 5}">
-									<td th:text="#{view.tablelabel.ageage(${nakami})}"></td>
+										<td th:text="#{view.tablelabel.ageage(${nakami})}"></td>
 									</th:block>
 									<th:block th:if="${stat.index != 4 && stat.index != 5}">
-									<td th:text="${nakami}"></td>
+										<td th:text="${nakami}"></td>
 									</th:block>
 								</th:block>
 							</th:block>
 							<td th:if="${stat.last == true}" style="text-align: center;">
-							<button type="submit" name="honbun" class="mini ui button"
-								th:value="${nakami}">
-								<p th:text="#{view.btn.details}"></p>
-							</button>
+								<button type="submit" name="honbun" class="mini ui button"
+									th:value="${nakami}">
+									<p th:text="#{view.btn.details}"></p>
+								</button>
 							</td>
 						</th:block>
 					</tr>
