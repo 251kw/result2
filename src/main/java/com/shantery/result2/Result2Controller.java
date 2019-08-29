@@ -178,6 +178,13 @@ class Result2Controller {
 		return TO_SEARCH_RESULTS;	// searchResultsに返す
 	}
 
+	/**
+	 * 人材情報が押されたとき、また人材情報が押されてページングするとき
+	 * @param page 今いるページ
+	 * @param model データを管理するためのクラス
+	 * @return　r2Serviceのfindで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をtopに返す。
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = FROM_HUMAMRESOURCE_BUTTON, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
 	public String fromHumanResource(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		session.setAttribute(SESSION_FORM_KEY, KBN_SEARCH_HUMANRESOURCE);
@@ -191,7 +198,13 @@ class Result2Controller {
 		return TO_TOP;
 	}
 
-
+	/**
+	 * 案件情報が押されたとき、また案件情報が押されてページングするとき
+	 * @param page 今いるページ
+	 * @param model データを管理するためのクラス
+	 * @return r2Serviceのfindで処理したSEARCH_LIST、r2Serviceのr2Pagingで処理したページング機能をtopに返す。
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = FROM_WORK_BUTTON, method = RequestMethod.GET)	// アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
 	public String fromWork(@RequestParam(required = false) final String page, Model model) throws ParseException {
 		session.setAttribute(SESSION_FORM_KEY, KBN_SEARCH_WORK);
