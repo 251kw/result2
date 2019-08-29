@@ -40,8 +40,9 @@ a.disabled {
 	font-size: 18px;
 	color: red;
 }
-.mgr-20{
-	margin-right : 20px;
+
+.mgr-20 {
+	margin-right: 20px;
 }
 </style>
 </head>
@@ -62,8 +63,9 @@ a.disabled {
 ${paging.totalRecordNum} + #{view.label.incase}
 + ${paging.fromRecordNum} + #{view.label.tilde}
 + ${paging.toRecordNum} + #{view.label.preview}"></p>
-		<a th:href="@{'/humanresource'}" th:text="#{view.btn.humanresource}"></a><span class="mgr-20"></span>
-		<a th:href="@{'/work'}" th:text="#{view.btn.work}"></a>
+		<a th:href="@{'/humanresource'}" th:text="#{view.btn.humanresource}"></a><span
+			class="mgr-20"></span> <a th:href="@{'/work'}"
+			th:text="#{view.btn.work}"></a>
 		<p></p>
 		<p th:text="#{view.label.freeword}">
 			</th:text>

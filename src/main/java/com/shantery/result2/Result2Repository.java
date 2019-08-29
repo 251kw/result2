@@ -20,6 +20,7 @@ public interface Result2Repository extends JpaRepository<Result2, Long> {
 	public int countAll(@Param("sWord") String sWord, @Param("searchKubun") String searchKubun);
 
 	//検索ワードとページングの機能を受け取り、検索結果のLISTを返す。
-	public List<Result2> search(@Param("sWord") String sWord, @Param("searchKubun") String searchKubun, Pageable pageable);
+	public List<Result2> search(@Param("sWord") String sWord, @Param("searchKubun") String searchKubun,
+			Pageable pageable);
 
 }

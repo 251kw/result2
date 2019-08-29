@@ -1,4 +1,5 @@
 package com.shantery.result2.sort;
+
 import static com.shantery.result2.util.Result2Constants.*;
 
 import java.text.ParseException;
@@ -42,10 +43,10 @@ class SortService {
 	 * @return sRepositoryのfindAllOrderByDateASCで処理したListをSortControllerに返す
 	 */
 	public List<Result2> findAllOrderByDateASC(String page, String sWord, String search_kbn) throws ParseException {
-		int currentPage = Result2Util.getCurrentPage(page);	//getCurrentPageメソッドを呼び、今いるページ数が返される。
+		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
-		int offset = (currentPage - ONE);	//開始ページの初期化
-		return sRepository.findAllOrderByDateASC(word, search_kbn,PageRequest.of(offset, recordPerPage)); //SortControllerに返す
+		int offset = (currentPage - ONE); //開始ページの初期化
+		return sRepository.findAllOrderByDateASC(word, search_kbn, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
 	/**
@@ -71,7 +72,7 @@ class SortService {
 		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
 		String word = Result2Util.getSearchWord(sWord); //getSearchWordメソッドを呼び検索ワードを渡す。
 		int offset = (currentPage - ONE); //開始ページの初期化
-		return sRepository.findAllOrderByCostASC(word, search_kbn,PageRequest.of(offset, recordPerPage)); //SortControllerに返す
+		return sRepository.findAllOrderByCostASC(word, search_kbn, PageRequest.of(offset, recordPerPage)); //SortControllerに返す
 	}
 
 	/**

@@ -12,17 +12,18 @@
 	border-collapse: collapse;
 	table-layout: fixed;
 }
-.sampleTable th,
-.sampleTable td {
+
+.sampleTable th, .sampleTable td {
 	border: 1px solid #CCCCCC;
 	padding: 10px 10px;
 	text-align: left;
 	max-width: 700px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-	word-wrap:break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-wrap: break-word;
 }
+
 .sampleTable th {
 	background-color: #F9FAFB;
 }
@@ -31,22 +32,21 @@
 <body>
 	<div class="ui hidden divider"></div>
 	<div class="ui text container">
-			<table class="sampleTable">
-				<thead>
-					<tr>
-						<th width="700" th:text="#{view.btn.details}"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td th:text="${text}"></td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="hidden" name="keepword" th:value="${word}">
-			<button class="ui button" type="button" onclick="history.back()">
-				<p th:text="#{view.btn.return}"></p>
-			</button>
+		<table class="sampleTable">
+			<thead>
+				<tr>
+					<th width="700" th:text="#{view.btn.details}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${text}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="ui button" type="button" onclick="history.back()">
+			<p th:text="#{view.btn.return}"></p>
+		</button>
 	</div>
 </body>
 </html>

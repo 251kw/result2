@@ -1,4 +1,5 @@
 package com.shantery.result2;
+
 import static com.shantery.result2.util.Result2Constants.*;
 
 import java.text.ParseException;
@@ -44,7 +45,7 @@ public class Result2Service {
 	 */
 	public PagingView r2Paging(String sWord, String page, String search_kbn) {
 		int currentPage = Result2Util.getCurrentPage(page); //getCurrentPageメソッドを呼び、今いるページ数が返される。
-		int totalRecordNum = count(Result2Util.getSearchWord(sWord),search_kbn); //検索ワードが返され、検索結果の総数が数えられる。
+		int totalRecordNum = count(Result2Util.getSearchWord(sWord), search_kbn); //検索ワードが返され、検索結果の総数が数えられる。
 		return PagingUtil.generatePagingView(
 				currentPage,
 				totalRecordNum,
@@ -73,6 +74,6 @@ public class Result2Service {
 	 * @return	r2RepositoryのcountAllメソッドを呼び、Result2Controllerにデータの総件数を返す。
 	 */
 	public int count(String sWord, String search_kbn) {
-		return r2Repository.countAll(sWord,search_kbn); //countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。
+		return r2Repository.countAll(sWord, search_kbn); //countAllメソッドを呼び、r2Repositoryにデータの総件数を返す。
 	}
 }

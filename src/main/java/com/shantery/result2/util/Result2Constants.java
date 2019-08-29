@@ -99,10 +99,9 @@ public class Result2Constants {
 	/** 空白で始まる正規表現 **/
 	public static final String STARTEMPTY = "^[\\h]+";
 	/** 空白で終わる正規表現 **/
-	public static final String FINISHEMPTY ="[\\h]+$";
+	public static final String FINISHEMPTY = "[\\h]+$";
 	/** ページ番号の初期値 **/
 	public static final String DEFAULT_PEGE = "1";
-
 
 	//全角文字から半角文字に直すメソッドの変数
 	/** 全角0 **/
@@ -116,5 +115,5 @@ public class Result2Constants {
 	/** 人材情報 **/
 	public static final String KBN_SEARCH_HUMANRESOURCE = "1";
 	/** 案件情報 **/
-	public static final String KBN_SEARCH_WORK          = "2";
+	public static final String KBN_SEARCH_WORK = "2";
 }
